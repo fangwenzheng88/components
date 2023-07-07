@@ -1,0 +1,29 @@
+{
+  "name": "@devops-web/stylelint-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "scss/index.js"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "postcss": "^8.4.24",
+    "postcss-html": "^1.5.0",
+    "postcss-less": "^6.0.0",
+    "postcss-scss": "^4.0.6",
+    "stylelint-config-recess-order": "^4.2.0",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-config-recommended": "^12.0.0",
+    "stylelint-config-recommended-less": "^1.0.4",
+    "stylelint-config-recommended-scss": "^12.0.0"
+  },
+  "devDependencies": {
+    "stylelint": "^15.9.0"
+  },
+  "peerDependencies": {
+    "stylelint": ">=15"
+  }
+}
