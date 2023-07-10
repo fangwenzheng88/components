@@ -13,6 +13,8 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
+    'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
+    'no-param-reassign': 'off',
     // eslint-plugin-import
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
@@ -21,6 +23,13 @@ module.exports = {
     // eslint-plugin-vue
     'vue/no-v-html': 'off',
     'vue/require-v-for-key': 'off',
+    'vue/multi-word-component-names': [
+      'error',
+      {
+        ignores: ['index']
+      }
+    ],
+    'vue/multi-word-component-names': 'off',
     // typescript-eslint
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
