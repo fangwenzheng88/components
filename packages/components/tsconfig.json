@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "es",
+    "allowJs": true,
+    "noImplicitThis": true
+  },
+  "include": [
+    "src/**/*",
+    "docs/**/*",
+    "test/**/*"
+  ]
+}

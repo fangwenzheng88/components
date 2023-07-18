@@ -13,7 +13,8 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    'no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
+    'no-shadow':'off',
+    'no-use-before-define': ['error', { functions: false, classes: false, variables: false }],
     'no-param-reassign': 'off',
     // eslint-plugin-import
     'import/extensions': 'off',
