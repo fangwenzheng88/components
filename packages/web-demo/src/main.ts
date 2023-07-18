@@ -2,7 +2,7 @@ import './assets/main.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import Components from '@devops-web/components'
-import '@devops-web/components/src/scrollbar/style/index.less'
+import '@devops-web/components/es/index.css'
 import router from './router'
 import App from './App.vue'
 

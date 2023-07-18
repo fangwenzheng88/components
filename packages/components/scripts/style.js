@@ -1,12 +1,12 @@
 import path from 'path'
-import fs from 'fs-extra'
+import fs from 'node:fs'
 import less from 'less'
 import { glob } from 'glob'
 // import ora from 'ora';
 import paths from './paths.js'
 import config from './vite.prod.style.js'
-import CleanCSS from 'clean-css';
-import { build } from 'vite';
+import CleanCSS from 'clean-css'
+import { build } from 'vite'
 
 const run = async () => {
   // 更新index.less文件
@@ -19,7 +19,7 @@ const run = async () => {
       lessContent += `@import './${value}';\n`
     })
 
-    fs.outputFileSync(path.resolve(paths.components, 'index.less'), lessContent)
+    fs.writeFileSync(path.resolve(paths.components, 'index.less'), lessContent)
 
     console.log('generate index.less success')
   }
@@ -33,8 +33,32 @@ const run = async () => {
 
   for (const filename of files) {
     const absolute = paths.resolvePath(`src/${filename}`)
-    fs.copySync(absolute, paths.resolvePath(`es/${filename}`))
-    fs.copySync(absolute, paths.resolvePath(`lib/${filename}`))
+    if (
+      !fs.existsSync(
+        `es${path.sep}${filename}`.substring(0, `es${path.sep}${filename}`.lastIndexOf(path.sep))
+      )
+    ) {
+      fs.mkdirSync(
+        `es${path.sep}${filename}`.substring(0, `es${path.sep}${filename}`.lastIndexOf(path.sep)),
+        {
+          recursive: true
+        }
+      )
+    }
+    fs.copyFileSync(absolute, paths.resolvePath(`es/${filename}`))
+    if (
+      !fs.existsSync(
+        `lib${path.sep}${filename}`.substring(0, `lib${path.sep}${filename}`.lastIndexOf(path.sep))
+      )
+    ) {
+      fs.mkdirSync(
+        `lib${path.sep}${filename}`.substring(0, `lib${path.sep}${filename}`.lastIndexOf(path.sep)),
+        {
+          recursive: true
+        }
+      )
+    }
+    fs.copyFileSync(absolute, paths.resolvePath(`lib/${filename}`))
 
     if (/index\.less$/.test(filename)) {
       console.log(`building ${filename}`)
@@ -63,15 +87,17 @@ const run = async () => {
   // 拷贝并编译less入口文件
   console.log('build target css')
   const indexLessPath = paths.resolvePath('src/index.less')
-  fs.copySync(indexLessPath, paths.resolvePath('es/index.less'))
-  fs.copySync(indexLessPath, paths.resolvePath('lib/index.less'))
+  fs.copyFileSync(indexLessPath, paths.resolvePath('es/index.less'))
+  fs.copyFileSync(indexLessPath, paths.resolvePath('lib/index.less'))
 
   const indexLess = fs.readFileSync(indexLessPath, 'utf8')
   const result = await less.render(indexLess, {
     paths: [paths.components]
   })
 
-  fs.ensureDirSync(paths.resolvePath('dist'))
+  if (!fs.existsSync(paths.resolvePath('dist'))) {
+    fs.mkdirSync(paths.resolvePath('dist'))
+  }
 
   fs.writeFileSync(paths.resolvePath('dist/arco.less'), "@import '../es/index.less';\n\n")
 

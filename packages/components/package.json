@@ -7,11 +7,23 @@
   "module": "es/index.js",
   "types": "es/index.d.ts",
   "scripts": {
-    "build": "npm run clean && vite build --config ./scripts/build.ts",
+    "build": "npm run clean && pnpm run build:components && pnpm run build:style && pnpm run build:dts",
+    "build:components": "vite build --config ./scripts/build.ts",
     "build:style": "node ./scripts/style.js",
     "build:dts": "node ./scripts/dts.js",
-    "clean": "rimraf ./lib ./es"
+    "clean": "rimraf ./lib ./es ./dist"
   },
+  "files": [
+    "es",
+    "lib",
+    "dist"
+  ],
+  "sideEffects": [
+    "dist/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
