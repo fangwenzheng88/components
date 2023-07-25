@@ -1,0 +1,38 @@
+{
+  "name": "@devops-web/utils",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "",
+  "main": "es/index.js",
+  "types": "es/index.d.ts",
+  "scripts": {
+    "dev": "rollup --watch -c rollup.config.js",
+    "build": "rollup -c rollup.config.js",
+    "test:unit": "vitest --ui --coverage",
+    "doc": "typedoc --options typedoc.json"
+  },
+  "files": [
+    "es",
+    "src"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@devops-web/eslint-config": "workspace:*",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@vitest/coverage-istanbul": "^0.33.0",
+    "@vitest/ui": "^0.33.0",
+    "eslint": "^8.39.0",
+    "rollup": "^3.26.3",
+    "rollup-plugin-dts": "^5.3.0",
+    "typedoc": "^0.24.8",
+    "typescript": "^5.0.4",
+    "vitest": "^0.32.0",
+    "vue": "^3.3.4"
+  }
+}

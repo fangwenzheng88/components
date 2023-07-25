@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "outDir": "es",
+    "allowJs": true,
+    "noImplicitThis": true,
+    "declaration": false
+  },
+  "include": [
+    "src/**/*",
+    "docs/**/*",
+    "test/**/*"
+  ],
+  "exclude": [
+    "src/**/__tests__/*"
+  ],
+}
