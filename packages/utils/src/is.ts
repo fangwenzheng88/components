@@ -32,7 +32,7 @@ export function isBoolean(obj: unknown): obj is boolean {
  * @param obj 要判断的对象
  * @returns 如果是普通对象类型，则返回true；否则返回false
  */
-export function isObject(obj: unknown): obj is Record<string, unknown> {
+export function isObject(obj: unknown): obj is object {
   return opt.call(obj) === '[object Object]'
 }
 
@@ -64,18 +64,6 @@ export function isNumber(obj: unknown): obj is number {
 }
 
 /**
- * 判断给定的字符串是否可以转换为数字
- * @param val 要判断的字符串
- * @returns 如果可以转换为数字，则返回true；否则返回false
- */
-export const isStringNumber = (val: string): boolean => {
-  if (!isString(val)) {
-    return false
-  }
-  return !Number.isNaN(Number(val))
-}
-
-/**
  * 判断给定的对象是否为正则表达式类型
  * @param obj 要判断的对象
  * @returns 如果是正则表达式类型，则返回true；否则返回false
@@ -94,6 +82,24 @@ export function isDate(obj: unknown) {
 }
 
 /**
+ * 判断给定的对象是否为函数类型
+ * @param obj 要判断的对象
+ * @returns 如果是函数类型，则返回true；否则返回false
+ */
+export function isFunction(obj: unknown): obj is (...args: any[]) => any {
+  return typeof obj === 'function'
+}
+
+/**
+ * 判断给定的对象是否为浏览器窗口对象
+ * @param obj 要判断的对象
+ * @returns 如果是浏览器窗口对象，则返回true；否则返回false
+ */
+export function isWindow(obj: unknown): obj is Window {
+  return obj === window
+}
+
+/**
  * 判断给定的对象是否为undefined类型
  * @param obj 要判断的对象
  * @returns 如果是undefined类型，则返回true；否则返回false
@@ -103,12 +109,15 @@ export function isUndefined(obj: unknown): obj is undefined {
 }
 
 /**
- * 判断给定的对象是否为函数类型
- * @param obj 要判断的对象
- * @returns 如果是函数类型，则返回true；否则返回false
+ * 判断给定的字符串是否可以转换为数字
+ * @param val 要判断的字符串
+ * @returns 如果可以转换为数字，则返回true；否则返回false
  */
-export function isFunction(obj: unknown): obj is (...args: any[]) => any {
-  return typeof obj === 'function'
+export const isStringNumber = (val: string): boolean => {
+  if (!isString(val)) {
+    return false
+  }
+  return !Number.isNaN(Number(val))
 }
 
 /**
@@ -148,10 +157,10 @@ export function isUnDef(obj: unknown): obj is undefined | null {
 }
 
 /**
- * 判断给定的对象是否为浏览器窗口对象
+ * 判断给定的对象是否不为undefined或null或空字符串
  * @param obj 要判断的对象
- * @returns 如果是浏览器窗口对象，则返回true；否则返回false
+ * @returns ''、undefined、null返回true，其他返回false
  */
-export function isWindow(obj: unknown): obj is Window {
-  return obj === window
+export function isEmptyString(obj: unknown): boolean {
+  return obj === undefined || obj === null || obj === ''
 }
