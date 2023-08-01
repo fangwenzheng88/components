@@ -16,8 +16,7 @@ import {
   isExist,
   isDef,
   isUnDef,
-  isWindow,
-  isEmptyString
+  isWindow
 } from '../index'
 
 describe('isArray', () => {
@@ -224,6 +223,10 @@ describe('isString', () => {
 describe('isNumber', () => {
   test('should return true for a number', () => {
     expect(isNumber(123)).toBe(true)
+  })
+
+  test('should return true for NaN value', () => {
+    expect(isNumber(NaN)).toBe(true)
   })
 
   test('should return false for undefined value', () => {
@@ -594,30 +597,5 @@ describe('isWindow', () => {
     expect(isWindow(undefined)).toBe(false)
     expect(isWindow('window')).toBe(false)
     expect(isWindow(123)).toBe(false)
-  })
-})
-
-describe('isEmptyString', () => {
-  test('should return true for an undefined value', () => {
-    expect(isEmptyString(undefined)).toBe(true)
-  })
-
-  test('should return true for a null value', () => {
-    expect(isEmptyString(null)).toBe(true)
-  })
-
-  test('should return true for an empty string', () => {
-    expect(isEmptyString(null)).toBe(true)
-  })
-
-  test('should return false for a defined value', () => {
-    expect(isEmptyString('Hello')).toBe(false)
-    expect(isEmptyString(123)).toBe(false)
-    expect(isEmptyString([])).toBe(false)
-    expect(isEmptyString({ a: 1 })).toBe(false)
-    expect(isEmptyString(true)).toBe(false)
-    expect(isEmptyString(0)).toBe(false)
-    expect(isEmptyString(false)).toBe(false)
-    expect(isEmptyString(' ')).toBe(false)
   })
 })

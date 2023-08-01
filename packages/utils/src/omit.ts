@@ -3,6 +3,7 @@
  * @param source 要从中省略字段的对象
  * @param fields 要省略的字段数组
  * @returns 不包含指定字段的新对象
+ * @category omit/pick
  */
 function omit<T extends object, K extends keyof T>(source: T, fields: K[]): Omit<T, K> {
   const shallowCopy = Object.assign({}, source)

@@ -3,6 +3,7 @@
  * @param source 源对象
  * @param fields 要摘取的字段数组
  * @returns 返回包含摘取字段的新对象
+ * @category omit/pick
  */
 export default function pick<T extends object, K extends keyof T>(source: T, fields: K[]) {
   const result = {} as Pick<T, K>
