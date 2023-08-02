@@ -1,6 +1,6 @@
 {
   "name": "@devops-web/eslint-config",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "files": [
@@ -19,5 +19,9 @@
   },
   "peerDependencies": {
     "eslint": ">=8"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
