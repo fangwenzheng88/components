@@ -16,7 +16,7 @@ describe('pick', () => {
 
   test('pick - 选择不存在的字段', () => {
     const obj = { a: 1, b: 2, c: 3 }
-    //@ts-ignore
+    // @ts-ignore
     const result = pick(obj, ['d', 'e'])
     expect(result).toStrictEqual({})
   })

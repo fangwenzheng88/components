@@ -13,8 +13,10 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    'no-shadow':'off',
-    'no-use-before-define': ['error', { functions: false, classes: false, variables: false }],
+    'no-shadow': 'off',
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    'no-use-before-define': 'off',
     'no-param-reassign': 'off',
     // eslint-plugin-import
     'import/extensions': 'off',
@@ -40,6 +42,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: false, variables: false }],
   }
 }

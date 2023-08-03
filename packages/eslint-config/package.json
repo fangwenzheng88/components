@@ -1,6 +1,6 @@
 {
   "name": "@devops-web/eslint-config",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "files": [
@@ -12,7 +12,8 @@
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-vue": "^9.11.0"
+    "eslint-plugin-vue": "^9.11.0",
+    "eslint-config-airbnb-base": "^15.0.0"
   },
   "devDependencies": {
     "eslint": "^8.39.0"

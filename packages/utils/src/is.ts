@@ -70,7 +70,7 @@ export function isString(obj: unknown): obj is string {
  * // true
  * isNumber(NaN)
  * isNumber(123)
- * 
+ *
  * // false
  * isNumber(true)
  * isNumber(undefined)
@@ -139,13 +139,13 @@ export function isUndefined(obj: unknown): obj is undefined {
  * @example
  * ```ts
  * // true
- * isStringNumber('123') 
- * isStringNumber('-456') 
- * isStringNumber('3.14') 
- * isStringNumber('') 
- * isStringNumber(' 789 ') 
- * isStringNumber('00123') 
- * isStringNumber('+456') 
+ * isStringNumber('123')
+ * isStringNumber('-456')
+ * isStringNumber('3.14')
+ * isStringNumber('')
+ * isStringNumber(' 789 ')
+ * isStringNumber('00123')
+ * isStringNumber('+456')
  *
  * // false
  * isStringNumber('Hello')
@@ -184,12 +184,12 @@ export function isEmptyObject(obj: unknown): boolean {
  * @example
  * ```ts
  * // true
- * isExist('Hello') 
- * isExist(123) 
- * isExist([]) 
- * isExist({ a: 1 }) 
- * isExist(true) 
- * isExist(0) 
+ * isExist('Hello')
+ * isExist(123)
+ * isExist([])
+ * isExist({ a: 1 })
+ * isExist(true)
+ * isExist(0)
  *
  * // false
  * isExist(null)

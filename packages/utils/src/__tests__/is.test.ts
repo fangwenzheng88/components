@@ -145,7 +145,9 @@ describe('isObject', () => {
 
 describe('isPromise', () => {
   test('should return true for a Promise object', () => {
-    const promise = new Promise((resolve) => resolve(undefined))
+    const promise = new Promise((resolve) => {
+      resolve(undefined)
+    })
     expect(isPromise(promise)).toBe(true)
   })
 

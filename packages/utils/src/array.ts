@@ -42,7 +42,7 @@ export function removeAll<T>(array: T[], value: T): number {
   for (let i = array.length - 1; i >= 0; i--) {
     if (array[i] === value) {
       array.splice(i, 1)
-      removedCount++
+      removedCount += 1
     }
   }
   return removedCount
@@ -60,7 +60,7 @@ export function removeAllBy<T>(array: T[], predicate: (item: T) => boolean): num
   for (let i = array.length - 1; i >= 0; i--) {
     if (predicate(array[i])) {
       array.splice(i, 1)
-      removedCount++
+      removedCount += 1
     }
   }
   return removedCount
