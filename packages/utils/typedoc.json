@@ -3,6 +3,5 @@
         "./src"
     ],
     "includeVersion": true,
-    "disableSources": true,
     "out": "docs"
 }

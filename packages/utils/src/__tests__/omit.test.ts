@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'vitest'
-import omit from '../omit'
+import { omit } from '../omit'
 
 describe('omit', () => {
   test('omit - 省略单个字段', () => {

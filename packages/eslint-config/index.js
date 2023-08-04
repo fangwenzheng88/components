@@ -26,6 +26,7 @@ module.exports = {
     // eslint-plugin-vue
     'vue/no-v-html': 'off',
     'vue/require-v-for-key': 'off',
+    'vue/require-default-prop': 'off',
     'vue/multi-word-component-names': [
       'error',
       {
@@ -43,6 +44,9 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: false, variables: false }],
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { functions: false, classes: false, variables: false }
+    ]
   }
 }

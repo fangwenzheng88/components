@@ -11,7 +11,7 @@
     "test:unit": "vitest --ui --coverage",
     "docs": "typedoc --options typedoc.json",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "publish": "pnpm run build && npm publish"
+    "prepublishOnly": "vitest run && pnpm run build"
   },
   "files": [
     "es",

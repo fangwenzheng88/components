@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'vitest'
-import pick from '../pick'
+import { pick } from '../pick'
 
 describe('pick', () => {
   test('pick - 选择一个字段', () => {
@@ -25,9 +25,21 @@ describe('pick', () => {
     expect(pick({}, [])).toStrictEqual({})
   })
 
-  test('omit - 返回值和原始对象比较', () => {
+  test('pick - 返回值和原始对象比较', () => {
     const obj = { a: 1, b: 2, c: 3, d: 4, e: 5 }
     const result = pick(obj, ['b', 'd', 'e'])
     expect(result).not.toBe(obj)
+  })
+
+  test('pick - 参数类型可能为null', () => {
+    const obj = null as { a: number } | null
+    const result = pick(obj, ['a'])
+    expect(result).toEqual({})
+  })
+
+  test('pick - null和空数组', () => {
+    const obj = null
+    const result = pick(obj, [])
+    expect(result).toEqual({ a: 1 })
   })
 })

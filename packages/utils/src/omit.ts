@@ -5,7 +5,19 @@
  * @returns 不包含指定字段的新对象
  * @category omit/pick
  */
-function omit<T extends object, K extends keyof T>(source: T, fields: K[]): Omit<T, K> {
+export function omit<T extends object, K extends keyof T>(source: T, fields: K[]): Omit<T, K>
+export function omit<T extends object, K extends keyof T>(
+  source: T | undefined | null,
+  fields: K[]
+): Partial<Omit<T, K>>
+
+export function omit<T extends object, K extends keyof T>(
+  source: T | undefined | null,
+  fields: K[]
+): Omit<T, K> | Partial<Omit<T, K>> {
+  if (source === null || source === undefined) {
+    return {} as Partial<Omit<T, K>>
+  }
   const shallowCopy = { ...source }
   for (let i = 0; i < fields.length; i += 1) {
     const key = fields[i]
@@ -13,4 +25,3 @@ function omit<T extends object, K extends keyof T>(source: T, fields: K[]): Omit
   }
   return shallowCopy
 }
-export default omit
