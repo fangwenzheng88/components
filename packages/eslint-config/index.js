@@ -27,12 +27,6 @@ module.exports = {
     'vue/no-v-html': 'off',
     'vue/require-v-for-key': 'off',
     'vue/require-default-prop': 'off',
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: ['index']
-      }
-    ],
     'vue/multi-word-component-names': 'off',
     // typescript-eslint
     '@typescript-eslint/camelcase': 'off',
