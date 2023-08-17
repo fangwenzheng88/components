@@ -6,15 +6,9 @@
  * @category omit/pick
  */
 export function omit<T extends object, K extends keyof T>(source: T, fields: K[]): Omit<T, K>
-export function omit<T extends object, K extends keyof T>(
-  source: T | undefined | null,
-  fields: K[]
-): Partial<Omit<T, K>>
+export function omit<T extends object, K extends keyof T>(source: T | undefined | null, fields: K[]): Partial<Omit<T, K>>
 
-export function omit<T extends object, K extends keyof T>(
-  source: T | undefined | null,
-  fields: K[]
-): Omit<T, K> | Partial<Omit<T, K>> {
+export function omit<T extends object, K extends keyof T>(source: T | undefined | null, fields: K[]): Omit<T, K> | Partial<Omit<T, K>> {
   if (source === null || source === undefined) {
     return {} as Partial<Omit<T, K>>
   }

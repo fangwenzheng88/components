@@ -1,9 +1,6 @@
 export function pick<T extends object, K extends keyof T>(source: T, fields: K[]): Pick<T, K>
 
-export function pick<T extends object, K extends keyof T>(
-  source: T | undefined | null,
-  fields: K[]
-): Partial<Pick<T, K>>
+export function pick<T extends object, K extends keyof T>(source: T | undefined | null, fields: K[]): Partial<Pick<T, K>>
 
 /**
  * 根据参数类型返回相应的结果
@@ -12,10 +9,7 @@ export function pick<T extends object, K extends keyof T>(
  * @returns 选择的字段组成的新对象，如果源对象为空值，则返回一个空对象
  * @category omit/pick
  */
-export function pick<T extends object, K extends keyof T>(
-  source: T | undefined | null,
-  fields: K[]
-): Pick<T, K> | Partial<Pick<T, K>> {
+export function pick<T extends object, K extends keyof T>(source: T | undefined | null, fields: K[]): Pick<T, K> | Partial<Pick<T, K>> {
   if (source === null || source === undefined) {
     return {}
   }

@@ -40,6 +40,6 @@ describe('pick', () => {
   test('pick - null和空数组', () => {
     const obj = null
     const result = pick(obj, [])
-    expect(result).toEqual({ a: 1 })
+    expect(result).toEqual({})
   })
 })
