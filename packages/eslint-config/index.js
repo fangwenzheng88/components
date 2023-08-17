@@ -1,10 +1,5 @@
 module.exports = {
-  extends: [
-    'airbnb-base',
-    'plugin:vue/vue3-recommended',
-    '@vue/eslint-config-typescript',
-    '@vue/eslint-config-prettier'
-  ],
+  extends: ['airbnb-base', 'plugin:vue/vue3-recommended', '@vue/eslint-config-typescript', '@vue/eslint-config-prettier'],
   env: {
     browser: true,
     node: true
@@ -13,11 +8,13 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
+    'prettier/prettier': ['error', { printWidth: 200 }],
     'no-shadow': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
     'no-use-before-define': 'off',
     'no-param-reassign': 'off',
+    'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
     // eslint-plugin-import
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
@@ -38,9 +35,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-use-before-define': [
-      'error',
-      { functions: false, classes: false, variables: false }
-    ]
+    '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: false, variables: false }]
   }
 }
