@@ -9,11 +9,16 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': ['error', { printWidth: 200 }],
+    // 重置airbnb-base中的规则
     'no-shadow': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+    // 重置airbnb-base中的规则，允许在for循环中使用 `++` 和 `--`
     'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
+    // 与@typescript-eslint/no-use-before-define规则重复
     'no-use-before-define': 'off',
-    'no-param-reassign': 'off',
+    // 重置airbnb-base中的规则，允许对函数参数的属性进行修改
+    'no-param-reassign': ['error', { props: false }],
+    // 重置airbnb-base中的规则，允许使用ForOfStatement、ForInStatement语法
     'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
     // eslint-plugin-import
     'import/extensions': 'off',
