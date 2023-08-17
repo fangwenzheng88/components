@@ -1,8 +1,8 @@
 import { test, expect, describe } from 'vitest'
-import { remove, removeBy, removeAll, removeAllBy, addIfNotExists } from '../index'
+import { remove, removeBy, removeAll, removeAllBy, addIfNotExists, partition } from '../index'
 
 describe('remove', () => {
-  test('should remove the value from the array and return true', () => {
+  test('从数组中删除指定的值并返回true', () => {
     const array = [1, 2, 3, 4, 5]
     expect(remove(array, 3)).toBe(true)
     expect(array).toEqual([1, 2, 4, 5])
@@ -12,7 +12,7 @@ describe('remove', () => {
     expect(array2).toEqual(['a', 'b', 'd'])
   })
 
-  test('should return false if the value is not found in the array', () => {
+  test('如果值在数组中未找到，返回false', () => {
     const array = [1, 2, 3]
     expect(remove(array, 4)).toBe(false)
     expect(array).toEqual([1, 2, 3])
@@ -24,7 +24,7 @@ describe('remove', () => {
 })
 
 describe('removeBy', () => {
-  test('should remove the item from the array and return true', () => {
+  test('从数组中删除满足条件的项并返回true', () => {
     const array = [1, 2, 3, 4, 5]
     expect(removeBy(array, (item) => item === 3)).toBe(true)
     expect(array).toEqual([1, 2, 4, 5])
@@ -34,7 +34,7 @@ describe('removeBy', () => {
     expect(array2).toEqual(['a', 'b', 'd'])
   })
 
-  test('should return false if no item matches the predicate', () => {
+  test('如果没有项满足条件，返回false', () => {
     const array = [1, 2, 3]
     expect(removeBy(array, (item) => item === 4)).toBe(false)
     expect(array).toEqual([1, 2, 3])
@@ -46,7 +46,7 @@ describe('removeBy', () => {
 })
 
 describe('removeAll', () => {
-  test('should remove all occurrences of the value from the array and return the count', () => {
+  test('从数组中删除所有出现的指定值并返回计数', () => {
     const array = [1, 2, 3, 4, 3, 5, 3]
     expect(removeAll(array, 3)).toBe(3)
     expect(array).toEqual([1, 2, 4, 5])
@@ -56,7 +56,7 @@ describe('removeAll', () => {
     expect(array2).toEqual(['a', 'b', 'd'])
   })
 
-  test('should return 0 if the value is not found in the array', () => {
+  test('如果值在数组中未找到，返回0', () => {
     const array = [1, 2, 3]
     expect(removeAll(array, 4)).toBe(0)
     expect(array).toEqual([1, 2, 3])
@@ -68,7 +68,7 @@ describe('removeAll', () => {
 })
 
 describe('removeAllBy', () => {
-  test('should remove all items that match the predicate from the array and return the count', () => {
+  test('从数组中删除所有满足条件的项并返回计数', () => {
     const array = [1, 2, 3, 4, 5]
     expect(removeAllBy(array, (item) => item % 2 === 0)).toBe(2)
     expect(array).toEqual([1, 3, 5])
@@ -78,7 +78,7 @@ describe('removeAllBy', () => {
     expect(array2).toEqual(['cherry'])
   })
 
-  test('should return 0 if no item matches the predicate', () => {
+  test('如果没有项满足条件，返回0', () => {
     const array = [1, 2, 3]
     expect(removeAllBy(array, (item) => item === 4)).toBe(0)
     expect(array).toEqual([1, 2, 3])
@@ -90,7 +90,7 @@ describe('removeAllBy', () => {
 })
 
 describe('addIfNotExists', () => {
-  test('should add the value to the array if it does not exist and return true', () => {
+  test('如果值不存在于数组中，则将其添加到数组并返回true', () => {
     const array = [1, 2, 3]
     expect(addIfNotExists(array, 4)).toBe(true)
     expect(array).toEqual([1, 2, 3, 4])
@@ -100,7 +100,7 @@ describe('addIfNotExists', () => {
     expect(array2).toEqual(['a', 'b', 'c', 'd'])
   })
 
-  test('should not add the value to the array if it already exists and return false', () => {
+  test('如果值已存在于数组中，则不添加并返回false', () => {
     const array = [1, 2, 3]
     expect(addIfNotExists(array, 3)).toBe(false)
     expect(array).toEqual([1, 2, 3])
@@ -108,5 +108,13 @@ describe('addIfNotExists', () => {
     const array2 = ['a', 'b', 'c']
     expect(addIfNotExists(array2, 'c')).toBe(false)
     expect(array2).toEqual(['a', 'b', 'c'])
+  })
+})
+
+describe('partition', () => {
+  test('将数组按奇偶数进行分组', () => {
+    const [odd, even] = partition([1, 2, 3, 4], (i) => i % 2 !== 0)
+    expect(odd).toEqual([1, 3])
+    expect(even).toEqual([2, 4])
   })
 })

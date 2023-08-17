@@ -38,4 +38,16 @@ describe('omit', () => {
     const result = omit(obj, ['b', 'd', 'e'])
     expect(result).not.toBe(obj)
   })
+
+  test('omit - 参数类型可能为null', () => {
+    const obj = null as { a: number } | null
+    const result = omit(obj, ['a'])
+    expect(result).toEqual({})
+  })
+
+  test('omit - null和空数组', () => {
+    const obj = null
+    const result = omit(obj, [])
+    expect(result).toEqual({})
+  })
 })
