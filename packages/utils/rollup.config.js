@@ -9,6 +9,18 @@ export default [
     external: [/lodash-es/],
     output: [
       {
+        format: 'umd',
+        file: 'dist/index.umd.js',
+        name: 'utils'
+      }
+    ],
+    plugins: [resolve(), typescript()]
+  },
+  {
+    input,
+    external: [/lodash-es/],
+    output: [
+      {
         format: 'es',
         dir: 'es',
         entryFileNames: '[name].js',
