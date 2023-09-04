@@ -21,13 +21,20 @@ export type TreeDataStandard<T = Record<string, string>, P = {}> = {
   level: number
 } & P
 
-export function convertToStandardTreeData<T extends Record<string, any>, P extends Record<string, any> = {}>(treeData: T[], config: TreeDataStandardConfig<T, P>): TreeDataStandard<T, P>[] {
+/**
+ * 将树形数据转换为标准的树形数据结构
+ * @category tree/convertToStandardTreeData
+ * @param treeData 原始树形数据
+ * @param config 转换配置
+ * @returns 标准的树形数据结构
+ */
+export function convertToStandardTreeData<T extends Record<string, any>, P extends Record<string, any> = {}>(treeData: readonly T[], config?: TreeDataStandardConfig<T, P>): TreeDataStandard<T, P>[] {
   return convert(treeData, config)
 }
 
-export function convert<T extends Record<string, any>, P extends Record<string, any> = {}>(
-  treeData: T[],
-  config: TreeDataStandardConfig<T, P>,
+function convert<T extends Record<string, any>, P extends Record<string, any> = {}>(
+  treeData: readonly T[],
+  config?: TreeDataStandardConfig<T, P>,
   parentKey: string | undefined = undefined,
   level: number = 0
 ): TreeDataStandard<T, P>[] {

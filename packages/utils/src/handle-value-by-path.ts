@@ -4,7 +4,7 @@ type Data = Record<string, any>
 
 /**
  * 通过路径获取对象中的值
- * @category get-value-by-path
+ * @category handle-value-by-path
  * @param obj 对象
  * @param path 路径
  * @returns 返回路径对应的值
@@ -43,7 +43,7 @@ export const getValueByPath = <T = any>(obj: Data | undefined, path: string | un
 /**
  * 通过路径设置对象中的值
  * 会修改原始对象obj
- * @category get-value-by-path
+ * @category handle-value-by-path
  * @param obj 对象
  * @param path 路径
  * @param value 值

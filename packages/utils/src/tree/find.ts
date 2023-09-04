@@ -2,6 +2,7 @@ import type { TreeNode } from './types'
 
 /**
  * 查找单个节点的函数
+ * @category tree/find
  * @param nodes 节点数组
  * @param callback 回调函数，判断节点是否满足条件
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
@@ -27,6 +28,7 @@ export function findTreeNode<T extends TreeNode<T>>(nodes: T[], callback: (node:
 
 /**
  * 查找多个节点的函数
+ * @category tree/find
  * @param nodes 节点数组
  * @param callback 回调函数，判断节点是否满足条件
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
@@ -52,12 +54,13 @@ export function findTreeNodes<T extends TreeNode<T>>(nodes: T[], callback: (node
 
 /**
  * 查找符合条件节点的父节点及祖先节点
+ * @category tree/find
  * @param nodes 节点数组
  * @param callback 回调函数，判断节点是否满足条件，确保只有一个节点符合条件，如果多个节点符合条件，会返回多个节点的父节点及祖先节点
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
  * @returns 满足条件的父节点数组
  */
-export function findTreeParents<T extends TreeNode<T>>(nodes: T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T[] {
+export function findTreeParents<T extends TreeNode<T>>(nodes: readonly T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T[] {
   const parents: T[] = []
 
   for (const node of nodes) {
@@ -79,12 +82,13 @@ export function findTreeParents<T extends TreeNode<T>>(nodes: T[], callback: (no
 
 /**
  * 查找符合条件节点的父节点
+ * @category tree/find
  * @param nodes 节点数组
  * @param callback 回调函数，判断节点是否满足条件，确保只有一个节点符合条件，如果多个节点符合条件，会返回多个节点的父节点
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
  * @returns 满足条件的父节点数组
  */
-export function findTreeParent<T extends TreeNode<T>>(nodes: T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T | undefined {
+export function findTreeParent<T extends TreeNode<T>>(nodes: readonly T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T | undefined {
   const parents: T[] = findTreeParents(nodes, callback, childrenFieldName)
 
   return parents.length > 0 ? parents[parents.length - 1] : undefined
