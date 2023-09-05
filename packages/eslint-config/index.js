@@ -20,6 +20,8 @@ module.exports = {
     'no-param-reassign': ['error', { props: false }],
     // 重置airbnb-base中的规则，允许使用ForOfStatement、ForInStatement语法
     'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
+    // 重置airbnb-base中的规则
+    'no-restricted-exports': 'off',
     // eslint-plugin-import
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
