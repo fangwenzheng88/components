@@ -1,5 +1,5 @@
 import { test, describe, expect } from 'vitest'
-import { getValueByPath, setValueByPath } from '../handle-value-by-path'
+import { getValueByPath, setValueByPath } from '../handleValueByPath'
 
 describe('getValueByPath', () => {
   test('getValueByPath', () => {

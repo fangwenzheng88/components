@@ -1,4 +1,4 @@
-export interface TreeDataStandardConfig<T = Record<string, string>, P = {}> {
+export interface TreeDataStandardConfig<T = Record<string, any>, P = {}> {
   key?: string
   parentKey?: string
   title?: string
@@ -12,7 +12,7 @@ export interface TreeDataStandardConfig<T = Record<string, string>, P = {}> {
   extra?: (node: T, level: number) => P
 }
 
-export type TreeDataStandard<T = Record<string, string>, P = {}> = {
+export type TreeDataStandard<T = Record<string, any>, P = {}> = {
   key: string
   title: string
   parentKey?: string
