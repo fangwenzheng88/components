@@ -1,4 +1,4 @@
-import { isArray, isString } from './is'
+import { isArray, isNumber, isString, isStringNumber, isUnDef } from './is'
 
 /**
  * 返回具有回退（fallback）行为的数组
@@ -36,4 +36,37 @@ export function fallbackArray<T>(array: T[] | undefined | null, fallback: T[] = 
  */
 export function fallbackString(str: string | undefined | null, fallback: string = ''): string {
   return isString(str) && str.length > 0 ? str : fallback
+}
+
+/**
+ * 返回具有回退（fallback）行为的数字
+ * @category fallback
+ * @param str 原字数字格式的符串或数字
+ * @param fallback 回退字符串
+ * @returns 如果不为数字或数字格式的字符串，否则返回回退字符串
+ *
+ * @example
+ * ```ts
+ * fallbackNumber(100) // 100
+ * fallbackNumber('100') // 100
+ * fallbackNumber(undefined) // 0
+ * fallbackNumber(null) // 0
+ * fallbackNumber('') // 0
+ *
+ * fallbackNumber(100, 1) // 100
+ * fallbackNumber('100', 1) // 100
+ * fallbackNumber(NaN, 1) // 1
+ * fallbackNumber(undefined, 1) // 1
+ * fallbackNumber(null, 1) // 1
+ * fallbackNumber('', 1) // 1
+ * ```
+ */
+export function fallbackNumber(str: string | number | null | undefined, fallback: number = 0): number {
+  if (isUnDef(str) || str === '' || Number.isNaN(str)) {
+    return fallback
+  }
+  if (isNumber(str)) {
+    return str
+  }
+  return isStringNumber(str) ? Number(str) : fallback
 }

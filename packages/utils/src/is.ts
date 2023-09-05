@@ -157,6 +157,7 @@ export function isUndefined(obj: unknown): obj is undefined {
  * isStringNumber(true)
  * isStringNumber({})
  * isStringNumber([])
+ * isStringNumber(NaN)
  * ```
  */
 export function isStringNumber(val: string): boolean {

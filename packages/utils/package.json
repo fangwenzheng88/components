@@ -1,7 +1,7 @@
 {
   "name": "@devops-web/utils",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "es/index.js",
   "types": "es/index.d.ts",

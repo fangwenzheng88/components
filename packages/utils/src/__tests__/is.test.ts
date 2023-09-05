@@ -318,6 +318,8 @@ describe('isStringNumber', () => {
     expect(isStringNumber({})).toBe(false)
     // @ts-ignore
     expect(isStringNumber([])).toBe(false)
+    // @ts-ignore
+    expect(isStringNumber(NaN)).toBe(false)
   })
 })
 
