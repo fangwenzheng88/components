@@ -1,10 +1,6 @@
 <template>
   <transition>
-    <div
-      ref="trackRef"
-      :class="[`${prefixCls}-track`, `${prefixCls}-track-direction-${direction}`]"
-      @mousedown.self="handleTrackClick"
-    >
+    <div ref="trackRef" :class="[`${prefixCls}-track`, `${prefixCls}-track-direction-${direction}`]" @mousedown.self="handleTrackClick">
       <div ref="thumbRef" :class="thumbCls" :style="thumbStyle" @mousedown="handleThumbMouseDown">
         <div :class="`${prefixCls}-thumb-bar`" />
       </div>
@@ -16,6 +12,7 @@
 import { computed, defineComponent, PropType, ref } from 'vue'
 import { off, on } from '../utils/dom'
 import { ThumbData, ThumbMap } from './interface'
+import { Prefix } from '../utils'
 
 export const DIRECTIONS = ['horizontal', 'vertical'] as const
 export type Direction = (typeof DIRECTIONS)[number]
@@ -42,7 +39,7 @@ export default defineComponent({
   },
   emits: ['scroll'],
   setup(props, { emit }) {
-    const prefixCls = 'arco-scrollbar'
+    const prefixCls = `${Prefix}-scrollbar`
 
     const visible = ref(false)
     const trackRef = ref<HTMLElement>()
@@ -81,9 +78,7 @@ export default defineComponent({
       ev.preventDefault()
 
       if (thumbRef.value) {
-        mouseOffset.value =
-          ev[thumbMap.value.client] -
-          thumbRef.value.getBoundingClientRect()[thumbMap.value.direction]
+        mouseOffset.value = ev[thumbMap.value.client] - thumbRef.value.getBoundingClientRect()[thumbMap.value.direction]
         isDragging.value = true
         // eslint-disable-next-line no-use-before-define
         on(window, 'mousemove', handleMouseMove)
@@ -111,10 +106,7 @@ export default defineComponent({
       if (thumbRef.value) {
         // eslint-disable-next-line no-underscore-dangle
         const _offset = getLegalOffset(
-          ev[thumbMap.value.client] >
-            thumbRef.value.getBoundingClientRect()[thumbMap.value.direction]
-            ? offset.value + (props.data?.thumbSize ?? 0)
-            : offset.value - (props.data?.thumbSize ?? 0)
+          ev[thumbMap.value.client] > thumbRef.value.getBoundingClientRect()[thumbMap.value.direction] ? offset.value + (props.data?.thumbSize ?? 0) : offset.value - (props.data?.thumbSize ?? 0)
         )
         if (_offset !== offset.value) {
           offset.value = _offset
@@ -126,11 +118,7 @@ export default defineComponent({
     const handleMouseMove = (ev: MouseEvent) => {
       if (trackRef.value && thumbRef.value) {
         // eslint-disable-next-line no-underscore-dangle
-        const _offset = getLegalOffset(
-          ev[thumbMap.value.client] -
-            trackRef.value.getBoundingClientRect()[thumbMap.value.direction] -
-            mouseOffset.value
-        )
+        const _offset = getLegalOffset(ev[thumbMap.value.client] - trackRef.value.getBoundingClientRect()[thumbMap.value.direction] - mouseOffset.value)
         if (_offset !== offset.value) {
           offset.value = _offset
           emit('scroll', _offset)
@@ -146,6 +134,7 @@ export default defineComponent({
 
     const setOffset = (_offset: number) => {
       if (!isDragging.value) {
+        // eslint-disable-next-line no-param-reassign
         _offset = getLegalOffset(_offset)
         if (_offset !== offset.value) {
           offset.value = _offset

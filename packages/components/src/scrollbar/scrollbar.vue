@@ -1,39 +1,21 @@
 <template>
   <div :class="cls" :style="style">
-    <div
-      ref="containerRef"
-      :class="`${prefixCls}-container`"
-      v-bind="$attrs"
-      @scroll="handleScroll"
-    >
+    <div ref="containerRef" :class="`${prefixCls}-container`" v-bind="$attrs" @scroll="handleScroll">
       <slot ref="resizeRef" />
     </div>
-    <thumb
-      v-if="!hide && hasHorizontalScrollbar"
-      ref="horizontalThumbRef"
-      :data="horizontalData"
-      direction="horizontal"
-      :both="isBoth"
-      @scroll="handleHorizontalScroll"
-    />
-    <thumb
-      v-if="!hide && hasVerticalScrollbar"
-      ref="verticalThumbRef"
-      :data="verticalData"
-      direction="vertical"
-      :both="isBoth"
-      @scroll="handleVerticalScroll"
-    />
+    <thumb v-if="!hide && hasHorizontalScrollbar" ref="horizontalThumbRef" :data="horizontalData" direction="horizontal" :both="isBoth" @scroll="handleHorizontalScroll" />
+    <thumb v-if="!hide && hasVerticalScrollbar" ref="verticalThumbRef" :data="verticalData" direction="vertical" :both="isBoth" @scroll="handleVerticalScroll" />
   </div>
 </template>
 
 <script lang="ts">
 import { computed, CSSProperties, defineComponent, onMounted, PropType, ref, StyleValue } from 'vue'
 import { useResizeObserver } from '@vueuse/core'
+import { isObject } from '@devops-web/utils'
 import { ThumbData } from './interface'
+import { Prefix } from '../utils'
 
 import Thumb from './thumb.vue'
-import { isObject } from '../utils/is'
 
 const THUMB_MIN_SIZE = 20
 const TRACK_SIZE = 15
@@ -87,7 +69,7 @@ export default defineComponent({
     scroll: (ev: Event) => !!ev
   },
   setup(props, { emit }) {
-    const prefixCls = 'arco-scrollbar'
+    const prefixCls = `${Prefix}-scrollbar`
 
     const containerRef = ref<HTMLElement>()
     const resizeRef = ref<HTMLElement>()
@@ -99,44 +81,23 @@ export default defineComponent({
     const _hasHorizontalScrollbar = ref(false)
     // eslint-disable-next-line no-underscore-dangle
     const _hasVerticalScrollbar = ref(false)
-    const hasHorizontalScrollbar = computed(
-      () => _hasHorizontalScrollbar.value && !props.disableHorizontal
-    )
-    const hasVerticalScrollbar = computed(
-      () => _hasVerticalScrollbar.value && !props.disableVertical
-    )
+    const hasHorizontalScrollbar = computed(() => _hasHorizontalScrollbar.value && !props.disableHorizontal)
+    const hasVerticalScrollbar = computed(() => _hasVerticalScrollbar.value && !props.disableVertical)
     const isBoth = ref(false)
 
     const getContainerSize = () => {
       if (containerRef.value) {
-        const {
-          clientWidth,
-          clientHeight,
-          offsetWidth,
-          offsetHeight,
-          scrollWidth,
-          scrollHeight,
-          scrollTop,
-          scrollLeft
-        } = containerRef.value
+        const { clientWidth, clientHeight, offsetWidth, offsetHeight, scrollWidth, scrollHeight, scrollTop, scrollLeft } = containerRef.value
         _hasHorizontalScrollbar.value = scrollWidth > clientWidth
         _hasVerticalScrollbar.value = scrollHeight > clientHeight
         isBoth.value = hasHorizontalScrollbar.value && hasVerticalScrollbar.value
-        const horizontalTrackWidth =
-          props.type === 'embed' && isBoth.value ? offsetWidth - TRACK_SIZE : offsetWidth
-        const verticalTrackHeight =
-          props.type === 'embed' && isBoth.value ? offsetHeight - TRACK_SIZE : offsetHeight
+        const horizontalTrackWidth = props.type === 'embed' && isBoth.value ? offsetWidth - TRACK_SIZE : offsetWidth
+        const verticalTrackHeight = props.type === 'embed' && isBoth.value ? offsetHeight - TRACK_SIZE : offsetHeight
 
-        const horizontalThumbWidth = Math.round(
-          horizontalTrackWidth /
-            Math.min(scrollWidth / clientWidth, horizontalTrackWidth / THUMB_MIN_SIZE)
-        )
+        const horizontalThumbWidth = Math.round(horizontalTrackWidth / Math.min(scrollWidth / clientWidth, horizontalTrackWidth / THUMB_MIN_SIZE))
         const maxHorizontalOffset = horizontalTrackWidth - horizontalThumbWidth
         const horizontalRatio = (scrollWidth - clientWidth) / maxHorizontalOffset
-        const verticalThumbHeight = Math.round(
-          verticalTrackHeight /
-            Math.min(scrollHeight / clientHeight, verticalTrackHeight / THUMB_MIN_SIZE)
-        )
+        const verticalThumbHeight = Math.round(verticalTrackHeight / Math.min(scrollHeight / clientHeight, verticalTrackHeight / THUMB_MIN_SIZE))
         const maxVerticalOffset = verticalTrackHeight - verticalThumbHeight
         const verticalRatio = (scrollHeight - clientHeight) / maxVerticalOffset
 
@@ -172,15 +133,11 @@ export default defineComponent({
     const handleScroll = (ev: Event) => {
       if (containerRef.value) {
         if (hasHorizontalScrollbar.value && !props.disableHorizontal) {
-          const horizontalOffset = Math.round(
-            containerRef.value.scrollLeft / (horizontalData.value?.ratio ?? 1)
-          )
+          const horizontalOffset = Math.round(containerRef.value.scrollLeft / (horizontalData.value?.ratio ?? 1))
           horizontalThumbRef.value?.setOffset(horizontalOffset)
         }
         if (hasVerticalScrollbar.value && !props.disableVertical) {
-          const verticalOffset = Math.round(
-            containerRef.value.scrollTop / (verticalData.value?.ratio ?? 1)
-          )
+          const verticalOffset = Math.round(containerRef.value.scrollTop / (verticalData.value?.ratio ?? 1))
           verticalThumbRef.value?.setOffset(verticalOffset)
         }
       }

@@ -36,6 +36,7 @@
   "devDependencies": {
     "@devops-web/eslint-config": "workspace:*",
     "@devops-web/stylelint-config": "workspace:*",
+    "@devops-web/utils": "workspace:*",
     "@types/node": "^18.16.17",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

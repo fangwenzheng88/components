@@ -12,6 +12,4 @@ const install = (app: App) => {
   }
 }
 
-export default {
-  install
-}
+export default install
