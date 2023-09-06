@@ -1,11 +1,12 @@
 {
   "name": "@devops-web/utils",
   "type": "module",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "",
   "main": "es/index.js",
   "types": "es/index.d.ts",
   "unpkg": "dist/index.umd.js",
+  "jsdelivr": "dist/index.umd.js",
   "scripts": {
     "dev": "rollup --watch -c rollup.config.js",
     "clean": "rimraf ./dist ./es",
@@ -19,8 +20,7 @@
   "files": [
     "dist",
     "lib",
-    "es",
-    "src"
+    "es"
   ],
   "keywords": [],
   "author": "",

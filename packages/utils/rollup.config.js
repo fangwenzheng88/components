@@ -11,7 +11,7 @@ export default [
       {
         format: 'umd',
         file: 'dist/index.umd.js',
-        name: 'utils'
+        name: 'DevopsUtils'
       }
     ],
     plugins: [resolve(), typescript()]
