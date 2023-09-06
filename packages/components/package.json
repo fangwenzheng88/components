@@ -37,7 +37,7 @@
   "license": "ISC",
   "peerDependencies": {
     "vue": "^3.0.0",
-    "@devops/utils": "*",
+    "@devops-web/utils": "*",
     "@vueuse/core": ">=10"
   },
   "devDependencies": {

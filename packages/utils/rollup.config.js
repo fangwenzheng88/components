@@ -1,12 +1,13 @@
-import typescript from '@rollup/plugin-typescript'
+import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import dts from 'rollup-plugin-dts'
+import commonjs from '@rollup/plugin-commonjs'
 
 const input = 'src/index.ts'
 export default [
   {
     input,
-    external: [/lodash-es/],
+    external: [],
     output: [
       {
         format: 'umd',
@@ -14,11 +15,39 @@ export default [
         name: 'DevopsUtils'
       }
     ],
-    plugins: [resolve(), typescript()]
+    plugins: [resolve(), commonjs(), typescript()]
   },
   {
     input,
-    external: [/lodash-es/],
+    external: [],
+    output: [
+      {
+        format: 'cjs',
+        dir: 'lib',
+        entryFileNames: '[name].js',
+        preserveModules: true,
+        preserveModulesRoot: 'src'
+      }
+    ],
+    plugins: [resolve(), commonjs(), typescript()]
+  },
+  {
+    external: [],
+    input,
+    output: [
+      {
+        format: 'es',
+        dir: 'lib',
+        entryFileNames: '[name].d.ts',
+        preserveModules: true,
+        preserveModulesRoot: 'src'
+      }
+    ],
+    plugins: [dts({ respectExternal: true })]
+  },
+  {
+    input,
+    external: [],
     output: [
       {
         format: 'es',
@@ -28,7 +57,7 @@ export default [
         preserveModulesRoot: 'src'
       }
     ],
-    plugins: [resolve(), typescript()]
+    plugins: [resolve(), commonjs(), typescript()]
   },
   {
     external: [],

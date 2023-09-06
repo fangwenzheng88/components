@@ -1,15 +1,16 @@
 {
   "name": "@devops-web/utils",
   "type": "module",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "",
-  "main": "es/index.js",
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "types": "es/index.d.ts",
   "unpkg": "dist/index.umd.js",
   "jsdelivr": "dist/index.umd.js",
   "scripts": {
     "dev": "rollup --watch -c rollup.config.js",
-    "clean": "rimraf ./dist ./es",
+    "clean": "rimraf ./dist ./es ./lib",
     "build": "npm run clean && rollup -c rollup.config.js",
     "test:unit": "vitest --ui --coverage",
     "docs": "typedoc --options typedoc.json",
@@ -23,26 +24,23 @@
     "es"
   ],
   "keywords": [],
-  "author": "",
+  "author": "fangwenzheng",
   "license": "ISC",
-  "peerDependencies": {
-    "vue": "^3.0.0"
-  },
   "devDependencies": {
     "@devops-web/eslint-config": "workspace:*",
+    "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.1.0",
-    "@rollup/plugin-typescript": "^11.1.2",
     "@vitest/coverage-istanbul": "^0.33.0",
     "@vitest/ui": "^0.33.0",
     "eslint": "^8.39.0",
     "rimraf": "^5.0.1",
     "rollup": "^3.26.3",
     "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.35.0",
     "tslib": "^2.6.2",
     "typedoc": "^0.24.8",
     "typescript": "^5.0.4",
-    "vitest": "^0.32.0",
-    "vue": "^3.3.4"
+    "vitest": "^0.32.0"
   },
   "publishConfig": {
     "access": "public",
