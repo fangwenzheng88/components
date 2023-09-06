@@ -6,13 +6,18 @@
   "scripts": {
     "build": "pnpm -F @devops-web/components run build",
     "build:style": "pnpm -F @devops-web/components run build:style",
-    "test:unit": "pnpm -F @devops-web/utils run test:unit"
+    "test:unit": "pnpm -F @devops-web/utils run test:unit",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "~5.0.4",
-    "prettier": "^2.8.8"
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "prettier": "^2.8.8",
+    "typescript": "~5.0.4"
   }
 }

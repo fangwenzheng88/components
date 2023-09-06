@@ -45,6 +45,7 @@ export function removeAll<T>(array: T[], value: T): number {
       removedCount += 1
     }
   }
+
   return removedCount
 }
 

@@ -19,7 +19,11 @@
     "build:components": "vite build --config ./scripts/build.ts",
     "build:style": "node ./scripts/style.js",
     "build:dts": "node ./scripts/dts.js",
-    "clean": "rimraf ./lib ./es ./dist"
+    "clean": "rimraf ./lib ./es ./dist",
+    "lint-staged": "npx lint-staged",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "prettier": "prettier --write .",
+    "type:check": "vue-tsc --noEmit --skipLibCheck"
   },
   "files": [
     "es",
@@ -58,5 +62,20 @@
     "typescript": "^5.0.4",
     "vite": "^4.3.9",
     "vue": "^3.3.4"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.vue": [
+      "stylelint --fix",
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{less,css}": [
+      "stylelint --fix",
+      "prettier --write"
+    ]
   }
 }

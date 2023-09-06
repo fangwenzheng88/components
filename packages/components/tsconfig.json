@@ -5,9 +5,5 @@
     "allowJs": true,
     "noImplicitThis": true
   },
-  "include": [
-    "src/**/*",
-    "docs/**/*",
-    "test/**/*"
-  ]
+  "include": ["src/**/*", "docs/**/*", "test/**/*"]
 }

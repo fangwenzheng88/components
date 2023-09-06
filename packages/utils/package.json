@@ -16,7 +16,9 @@
     "docs": "typedoc --options typedoc.json",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .eslintignore",
     "prepublishOnly": "vitest run && pnpm run build",
-    "prettier": "prettier --write src/**/*.ts"
+    "prettier": "prettier --write src/**/*.ts",
+    "lint-staged": "npx lint-staged",
+    "type:check": "npx tsc --noEmit --skipLibCheck"
   },
   "files": [
     "dist",
@@ -45,5 +47,11 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

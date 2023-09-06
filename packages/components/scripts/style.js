@@ -21,7 +21,7 @@ const run = async () => {
 
     fs.writeFileSync(path.resolve(paths.components, 'index.less'), lessContent)
 
-    console.log('generate index.less success')
+    console.warn('generate index.less success')
   }
 
   lessgen()
@@ -47,7 +47,7 @@ const run = async () => {
     fs.copyFileSync(absolute, paths.resolvePath(`lib/${filename}`))
 
     if (/index\.less$/.test(filename)) {
-      console.log(`building ${filename}`)
+      console.warn(`building ${filename}`)
 
       const lessContent = fs.readFileSync(absolute, 'utf8')
       less.render(
@@ -58,12 +58,12 @@ const run = async () => {
         },
         (err, result) => {
           if (err) {
-            console.log(err)
+            console.error(err)
           } else if (result && result.css) {
             const cssFilename = filename.replace('.less', '.css')
             fs.writeFileSync(paths.resolvePath(`es/${cssFilename}`), result.css)
             fs.writeFileSync(paths.resolvePath(`lib/${cssFilename}`), result.css)
-            console.log(`${filename} build success`)
+            console.error(`${filename} build success`)
           }
         }
       )
@@ -71,7 +71,7 @@ const run = async () => {
   }
 
   // 拷贝并编译less入口文件
-  console.log('build target css')
+  console.warn('build target css')
   const indexLessPath = paths.resolvePath('src/index.less')
   fs.copyFileSync(indexLessPath, paths.resolvePath('es/index.less'))
   fs.copyFileSync(indexLessPath, paths.resolvePath('lib/index.less'))
@@ -93,7 +93,7 @@ const run = async () => {
 
   fs.writeFileSync(paths.resolvePath('dist/devops-web.min.css'), compress.styles)
 
-  console.log(`target build success`)
+  console.warn(`target build success`)
 
   // 构建style/index.ts
   const indexFiles = glob.sync('src/**/style/index.ts', {
