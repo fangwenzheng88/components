@@ -3,10 +3,10 @@ import fs from 'node:fs'
 import less from 'less'
 import { glob } from 'glob'
 // import ora from 'ora';
-import paths from './paths.js'
-import config from './vite.prod.style.js'
 import CleanCSS from 'clean-css'
 import { build } from 'vite'
+import paths from './paths.js'
+import config from './vite.prod.style.js'
 
 const run = async () => {
   // 更新index.less文件
@@ -33,30 +33,16 @@ const run = async () => {
 
   for (const filename of files) {
     const absolute = paths.resolvePath(`src/${filename}`)
-    if (
-      !fs.existsSync(
-        `es${path.sep}${filename}`.substring(0, `es${path.sep}${filename}`.lastIndexOf(path.sep))
-      )
-    ) {
-      fs.mkdirSync(
-        `es${path.sep}${filename}`.substring(0, `es${path.sep}${filename}`.lastIndexOf(path.sep)),
-        {
-          recursive: true
-        }
-      )
+    if (!fs.existsSync(`es${path.sep}${filename}`.substring(0, `es${path.sep}${filename}`.lastIndexOf(path.sep)))) {
+      fs.mkdirSync(`es${path.sep}${filename}`.substring(0, `es${path.sep}${filename}`.lastIndexOf(path.sep)), {
+        recursive: true
+      })
     }
     fs.copyFileSync(absolute, paths.resolvePath(`es/${filename}`))
-    if (
-      !fs.existsSync(
-        `lib${path.sep}${filename}`.substring(0, `lib${path.sep}${filename}`.lastIndexOf(path.sep))
-      )
-    ) {
-      fs.mkdirSync(
-        `lib${path.sep}${filename}`.substring(0, `lib${path.sep}${filename}`.lastIndexOf(path.sep)),
-        {
-          recursive: true
-        }
-      )
+    if (!fs.existsSync(`lib${path.sep}${filename}`.substring(0, `lib${path.sep}${filename}`.lastIndexOf(path.sep)))) {
+      fs.mkdirSync(`lib${path.sep}${filename}`.substring(0, `lib${path.sep}${filename}`.lastIndexOf(path.sep)), {
+        recursive: true
+      })
     }
     fs.copyFileSync(absolute, paths.resolvePath(`lib/${filename}`))
 
@@ -99,13 +85,13 @@ const run = async () => {
     fs.mkdirSync(paths.resolvePath('dist'))
   }
 
-  fs.writeFileSync(paths.resolvePath('dist/arco.less'), "@import '../es/index.less';\n\n")
+  fs.writeFileSync(paths.resolvePath('dist/devops-web.less'), "@import '../es/index.less';\n\n")
 
-  fs.writeFileSync(paths.resolvePath('dist/arco.css'), result.css)
+  fs.writeFileSync(paths.resolvePath('dist/devops-web.css'), result.css)
 
   const compress = new CleanCSS().minify(result.css)
 
-  fs.writeFileSync(paths.resolvePath('dist/arco.min.css'), compress.styles)
+  fs.writeFileSync(paths.resolvePath('dist/devops-web.min.css'), compress.styles)
 
   console.log(`target build success`)
 

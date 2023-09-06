@@ -1,11 +1,19 @@
 {
   "name": "@devops-web/components",
   "type": "module",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "unpkg": "dist/devops-web.js",
+  "jsdelivr": "dist/devops-web.js",
+  "publishConfig": {
+    "main": "es/index.js",
+    "module": "es/index.js",
+    "types": "es/index.d.ts",
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "npm run clean && pnpm run build:components && pnpm run build:style && pnpm run build:dts",
     "build:components": "vite build --config ./scripts/build.ts",
@@ -28,12 +36,12 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "vue": "^3.0.0"
-  },
-  "dependencies": {
-    "@vueuse/core": "^10.2.1"
+    "vue": "^3.0.0",
+    "@devops/utils": "*",
+    "@vueuse/core": ">=10"
   },
   "devDependencies": {
+    "@vueuse/core": "^10.2.1",
     "@devops-web/eslint-config": "workspace:*",
     "@devops-web/stylelint-config": "workspace:*",
     "@devops-web/utils": "workspace:*",

@@ -2,6 +2,7 @@ import type { InlineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { fileURLToPath, URL } from 'node:url'
+
 const config: InlineConfig = {
   mode: 'production',
   build: {
@@ -10,7 +11,7 @@ const config: InlineConfig = {
     emptyOutDir: false,
     minify: false,
     rollupOptions: {
-      external: ['vue', '@arco-design/web-vue'],
+      external: ['vue', '@arco-design/web-vue', '@devops-web/utils', '@vueuse/core'],
       input: ['src/index.ts'],
       output: [
         {
@@ -20,7 +21,9 @@ const config: InlineConfig = {
           entryFileNames: `devops-web.js`,
           globals: {
             vue: 'Vue',
-            '@arco-design/web-vue': 'ArcoVue'
+            '@arco-design/web-vue': 'ArcoVue',
+            '@vueuse/core': 'VueUse',
+            '@devops-web/utils': 'DevopsUtils'
           }
         },
         {

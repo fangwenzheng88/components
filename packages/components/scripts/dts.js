@@ -53,10 +53,7 @@ async function build(input, options) {
             scriptContent += script.content
             if (script.lang === 'tsx') isTSX = true
           }
-          const sourceFile = project.createSourceFile(
-            path.relative(root, file).replace('.vue', isTSX ? '.tsx' : '.ts'),
-            scriptContent
-          )
+          const sourceFile = project.createSourceFile(path.relative(root, file).replace('.vue', isTSX ? '.tsx' : '.ts'), scriptContent)
           if (sourceFile) {
             removeVueSpecifier(sourceFile)
             sourceFiles.push(sourceFile)
@@ -94,7 +91,9 @@ async function build(input, options) {
         )
       })
     )
-  } catch {}
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 const removeVueSpecifier = (sourceFile) => {
