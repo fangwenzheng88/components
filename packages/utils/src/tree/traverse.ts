@@ -20,7 +20,12 @@ export function traverseTreeDFS<T extends TreeNode<T>>(data: T[], callback?: (no
  * @param parentNodes 父节点数组
  * @returns 数组
  */
-function traverseDFS<T extends TreeNode<T>>(data: T[], callback?: (node: T, parentNodes: T[]) => void, childrenFieldName: keyof T = 'children', parentNodes: T[] = []): T[] {
+function traverseDFS<T extends TreeNode<T>>(
+  data: T[],
+  callback?: (node: T, parentNodes: T[]) => void,
+  childrenFieldName: keyof T = 'children',
+  parentNodes: T[] = []
+): T[] {
   const result: T[] = []
 
   function traverse(node: T) {
@@ -65,7 +70,12 @@ export function traverseTreeBFS<T extends TreeNode<T>>(data: T[], callback?: (no
  * @param parentNodes 父节点数组
  * @returns 数组
  */
-function traverseBFS<T extends TreeNode<T>>(data: T[], callback?: (node: T, parentNodes: T[]) => void, childrenFieldName: keyof T = 'children', parentNodes: T[] = []): T[] {
+function traverseBFS<T extends TreeNode<T>>(
+  data: T[],
+  callback?: (node: T, parentNodes: T[]) => void,
+  childrenFieldName: keyof T = 'children',
+  parentNodes: T[] = []
+): T[] {
   const result: T[] = []
   const queue: { node: T; parents: T[] }[] = []
 

@@ -93,7 +93,13 @@ export type PartitionFilter<T> = (i: T, idx: number, arr: readonly T[]) => any
 export function partition<T>(array: readonly T[], f1: PartitionFilter<T>): [T[], T[]]
 export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>): [T[], T[], T[]]
 export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>, f3: PartitionFilter<T>): [T[], T[], T[], T[]]
-export function partition<T>(array: readonly T[], f1: PartitionFilter<T>, f2: PartitionFilter<T>, f3: PartitionFilter<T>, f4: PartitionFilter<T>): [T[], T[], T[], T[], T[]]
+export function partition<T>(
+  array: readonly T[],
+  f1: PartitionFilter<T>,
+  f2: PartitionFilter<T>,
+  f3: PartitionFilter<T>,
+  f4: PartitionFilter<T>
+): [T[], T[], T[], T[], T[]]
 export function partition<T>(
   array: readonly T[],
   f1: PartitionFilter<T>,

@@ -88,7 +88,11 @@ export function findTreeParents<T extends TreeNode<T>>(nodes: readonly T[], call
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
  * @returns 满足条件的父节点数组
  */
-export function findTreeParent<T extends TreeNode<T>>(nodes: readonly T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T | undefined {
+export function findTreeParent<T extends TreeNode<T>>(
+  nodes: readonly T[],
+  callback: (node: T) => boolean,
+  childrenFieldName: keyof T = 'children'
+): T | undefined {
   const parents: T[] = findTreeParents(nodes, callback, childrenFieldName)
 
   return parents.length > 0 ? parents[parents.length - 1] : undefined

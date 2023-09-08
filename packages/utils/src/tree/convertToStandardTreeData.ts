@@ -28,7 +28,10 @@ export type TreeDataStandard<T = Record<string, any>, P = {}> = {
  * @param config 转换配置
  * @returns 标准的树形数据结构
  */
-export function convertToStandardTreeData<T extends Record<string, any>, P extends Record<string, any> = {}>(treeData: readonly T[], config?: TreeDataStandardConfig<T, P>): TreeDataStandard<T, P>[] {
+export function convertToStandardTreeData<T extends Record<string, any>, P extends Record<string, any> = {}>(
+  treeData: readonly T[],
+  config?: TreeDataStandardConfig<T, P>
+): TreeDataStandard<T, P>[] {
   return convert(treeData, config)
 }
 

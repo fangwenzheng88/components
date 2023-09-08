@@ -106,7 +106,9 @@ export default defineComponent({
       if (thumbRef.value) {
         // eslint-disable-next-line no-underscore-dangle
         const _offset = getLegalOffset(
-          ev[thumbMap.value.client] > thumbRef.value.getBoundingClientRect()[thumbMap.value.direction] ? offset.value + (props.data?.thumbSize ?? 0) : offset.value - (props.data?.thumbSize ?? 0)
+          ev[thumbMap.value.client] > thumbRef.value.getBoundingClientRect()[thumbMap.value.direction]
+            ? offset.value + (props.data?.thumbSize ?? 0)
+            : offset.value - (props.data?.thumbSize ?? 0)
         )
         if (_offset !== offset.value) {
           offset.value = _offset

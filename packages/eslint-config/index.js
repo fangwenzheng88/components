@@ -8,7 +8,7 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    'prettier/prettier': ['error', { printWidth: 200 }],
+    'prettier/prettier': ['error', { printWidth: 160 }],
     // 重置airbnb-base中的规则
     'no-shadow': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],

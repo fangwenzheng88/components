@@ -3,8 +3,22 @@
     <div ref="containerRef" :class="`${prefixCls}-container`" v-bind="$attrs" @scroll="handleScroll">
       <slot ref="resizeRef" />
     </div>
-    <thumb v-if="!hide && hasHorizontalScrollbar" ref="horizontalThumbRef" :data="horizontalData" direction="horizontal" :both="isBoth" @scroll="handleHorizontalScroll" />
-    <thumb v-if="!hide && hasVerticalScrollbar" ref="verticalThumbRef" :data="verticalData" direction="vertical" :both="isBoth" @scroll="handleVerticalScroll" />
+    <thumb
+      v-if="!hide && hasHorizontalScrollbar"
+      ref="horizontalThumbRef"
+      :data="horizontalData"
+      direction="horizontal"
+      :both="isBoth"
+      @scroll="handleHorizontalScroll"
+    />
+    <thumb
+      v-if="!hide && hasVerticalScrollbar"
+      ref="verticalThumbRef"
+      :data="verticalData"
+      direction="vertical"
+      :both="isBoth"
+      @scroll="handleVerticalScroll"
+    />
   </div>
 </template>
 
