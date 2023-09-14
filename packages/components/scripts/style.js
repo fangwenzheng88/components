@@ -16,7 +16,7 @@ const run = async () => {
       cwd: paths.components
     })
     lessFiles.forEach((value) => {
-      lessContent += `@import './${value}';\n`
+      lessContent += `@import './${value.replace(/\\/g, '/')}';\n`
     })
 
     fs.writeFileSync(path.resolve(paths.components, 'index.less'), lessContent)

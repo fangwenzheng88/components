@@ -1,9 +1,11 @@
 import type { App, Plugin } from 'vue'
 
 import Scrollbar from './scrollbar'
+import ResizeObserver from './resize-observer'
 
 const components: Record<string, Plugin> = {
-  Scrollbar
+  Scrollbar,
+  ResizeObserver
 }
 
 const install = (app: App) => {
