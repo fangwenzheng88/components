@@ -2,10 +2,12 @@ import type { App, Plugin } from 'vue'
 
 import Scrollbar from './scrollbar'
 import ResizeObserver from './resize-observer'
+import ExpandText from './expand-text'
 
 const components: Record<string, Plugin> = {
   Scrollbar,
-  ResizeObserver
+  ResizeObserver,
+  ExpandText
 }
 
 const install = (app: App) => {

@@ -3,6 +3,10 @@ import { RouterView } from 'vue-router'
 </script>
 
 <template>
+  <DevopsExpandText :ellipsis="{ rows: 3, suffix: '--Arco Design' }" style="width: 200px; word-break: break-all"
+    >A <b>design</b> is a plan or specification for the construction of an object or system or for the implementation of an activity or process, or the result
+    of that plan or specification in the form of a prototype, product or process. The verb to design expresses the process of</DevopsExpandText
+  >
   <RouterView />
 </template>
 
