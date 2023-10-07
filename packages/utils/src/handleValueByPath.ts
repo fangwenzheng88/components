@@ -1,6 +1,6 @@
 import { isArray, isObject, isUndefined } from './is'
 
-type Data = Record<string, any>
+type Data = Record<string, unknown> | unknown[]
 
 /**
  * 通过路径获取对象中的值
@@ -30,10 +30,11 @@ export const getValueByPath = <T = any>(obj: Data | undefined, path: string | un
     if ((!isObject(temp) && !isArray(temp)) || !keys[i]) {
       return undefined
     }
+    const currentKey = keys[i] as keyof Data
     if (i !== keys.length - 1) {
-      temp = temp[keys[i]] as any
+      temp = temp[currentKey] as any
     } else {
-      return temp[keys[i]] as T
+      return temp[currentKey] as T
     }
   }
 
@@ -81,17 +82,20 @@ export const setValueByPath = (obj: Data | undefined, path: string | undefined, 
     if ((!isObject(temp) && !isArray(temp)) || !keys[i]) {
       return
     }
+    const currentKey = keys[i] as keyof Data
     if (i !== keys.length - 1) {
-      if (addPath && isUndefined(temp[keys[i]])) {
+      if (addPath && isUndefined(temp[currentKey])) {
         if (/^\d+$/.test(keys[i + 1])) {
-          temp[keys[i]] = []
+          // @ts-ignore
+          temp[currentKey] = []
         } else {
-          temp[keys[i]] = {}
+          // @ts-ignore
+          temp[currentKey] = {}
         }
       }
-      temp = temp[keys[i]] as any
+      temp = temp[currentKey] as any
     } else {
-      temp[keys[i]] = value
+      temp[currentKey] = value
     }
   }
 }

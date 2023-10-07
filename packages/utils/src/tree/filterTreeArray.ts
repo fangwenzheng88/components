@@ -1,7 +1,7 @@
 import type { TreeNode } from './types'
 
 /**
- * 递归过滤树形结构数据中的节点，满足条件的节点以及其父节点都会被保留
+ * 递归过滤树形结构数据中的节点，满足条件的节点和其所有字节点和其父节点都会被保留
  * 返回的数据是对treeDataArr数组中每一项的浅拷贝，不会修改原始treeDataArr中的值
  * @category tree/filterTreeArray
  * @param treeDataArr 树形结构数据数组

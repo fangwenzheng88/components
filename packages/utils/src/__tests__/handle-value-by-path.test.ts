@@ -2,7 +2,7 @@ import { test, describe, expect } from 'vitest'
 import { getValueByPath, setValueByPath } from '../handleValueByPath'
 
 describe('getValueByPath', () => {
-  test('getValueByPath', () => {
+  test('对象', () => {
     const obj = {
       a: {
         b: {
@@ -20,6 +20,12 @@ describe('getValueByPath', () => {
     expect(getValueByPath(obj, 'x.y[0]')).toBe(1)
     expect(getValueByPath(obj, 'x.y.0')).toBe(1)
     expect(getValueByPath(obj, 'x.y[2]')).toBe(3)
+  })
+
+  test('数组', () => {
+    const arr = [{ a: 1 }, { a: 2 }]
+
+    expect(getValueByPath(arr, '1.a')).toBe(2)
   })
 })
 
