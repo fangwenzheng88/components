@@ -8,7 +8,7 @@ import type { TreeNode } from './types'
  * @param childrenFieldName 子节点字段名
  * @param executeCallbackAfter callback的执行时机
  */
-export function traverseTreeDFS<T extends TreeNode<T>>(data: T[], callback?: (node: T, parentNodes: T[]) => void, childrenFieldName: keyof T = 'children') {
+export function traverseTreeDFS<T extends TreeNode>(data: T[], callback?: (node: T, parentNodes: T[]) => void, childrenFieldName: keyof T = 'children') {
   traverseDFS(data, callback, childrenFieldName, [], false)
 }
 
@@ -20,7 +20,7 @@ export function traverseTreeDFS<T extends TreeNode<T>>(data: T[], callback?: (no
  * @param childrenFieldName 子节点字段名
  * @param executeCallbackAfter callback的执行时机
  */
-export function traverseTreeDFSCallbackAfter<T extends TreeNode<T>>(
+export function traverseTreeDFSCallbackAfter<T extends TreeNode>(
   data: T[],
   callback?: (node: T, parentNodes: T[]) => void,
   childrenFieldName: keyof T = 'children'
@@ -36,7 +36,7 @@ export function traverseTreeDFSCallbackAfter<T extends TreeNode<T>>(
  * @param parentNodes 父节点数组
  * @param executeCallbackAfter callback的执行时机
  */
-function traverseDFS<T extends TreeNode<T>>(
+function traverseDFS<T extends TreeNode>(
   data: T[],
   callback?: (node: T, parentNodes: T[]) => void,
   childrenFieldName: keyof T = 'children',
@@ -66,7 +66,7 @@ function traverseDFS<T extends TreeNode<T>>(
  * @param callback 回调函数
  * @param childrenFieldName 子节点字段名
  */
-export function traverseTreeBFS<T extends TreeNode<T>>(data: T[], callback?: (node: T, parentNodes: T[]) => void, childrenFieldName: keyof T = 'children') {
+export function traverseTreeBFS<T extends TreeNode>(data: T[], callback?: (node: T, parentNodes: T[]) => void, childrenFieldName: keyof T = 'children') {
   traverseBFS(data, callback, childrenFieldName, [])
 }
 
@@ -77,7 +77,7 @@ export function traverseTreeBFS<T extends TreeNode<T>>(data: T[], callback?: (no
  * @param childrenFieldName 子节点字段名
  * @param parentNodes 父节点数组
  */
-function traverseBFS<T extends TreeNode<T>>(
+function traverseBFS<T extends TreeNode>(
   data: T[],
   callback?: (node: T, parentNodes: T[]) => void,
   childrenFieldName: keyof T = 'children',

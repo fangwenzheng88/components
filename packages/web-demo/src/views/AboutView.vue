@@ -32,7 +32,6 @@ const { columns, changeVisibleByDataIndex, updateColumnByDataIndex, updateColumn
   },
   {
     title: '多层Email',
-    test: '123',
     children: [
       {
         title: 'Email',

@@ -13,10 +13,10 @@ const defaultTreeConfig: Required<TreeConfig<Record<string, any>>> = {
   parentCondition: -1
 }
 
-export function arrayToTree<T extends Record<string, any>>(array: T[], treeConfig?: TreeConfig<T>): TreeNode<T>[] {
+export function arrayToTree<T extends Record<string, any>>(array: T[], treeConfig?: TreeConfig<T>): TreeNode[] {
   const config = { ...defaultTreeConfig, ...treeConfig }
-  const result: TreeNode<T>[] = []
-  const itemMap: Record<string, TreeNode<T>> = {}
+  const result: TreeNode[] = []
+  const itemMap: Record<string, TreeNode> = {}
 
   for (const item of array) {
     const itemId = item[config.key]

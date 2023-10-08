@@ -1,5 +1,6 @@
 export * from './is'
 export * from './array'
+export * as ArrayUtils from './array'
 export * from './omit'
 export * from './pick'
 export * from './pickTransform'

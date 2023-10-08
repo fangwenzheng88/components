@@ -9,7 +9,7 @@ import type { TreeNode } from './types'
  * @param childrenFieldName 子节点的字段名，默认为 'children'
  * @returns 过滤后的节点数组
  */
-export function filterTreeArray<T extends TreeNode<T>>(
+export function filterTreeArray<T extends TreeNode>(
   treeDataArr: readonly T[],
   filterFn: (node: T, parentNodes: T[]) => boolean,
   childrenFieldName: keyof T = 'children'
@@ -25,7 +25,7 @@ export function filterTreeArray<T extends TreeNode<T>>(
  * @param childrenFieldName 子节点的字段名，默认为 'children'
  * @returns 过滤后的节点数组
  */
-function filterTreeDataRecursive<T extends TreeNode<T>>(
+function filterTreeDataRecursive<T extends TreeNode>(
   treeDataArr: readonly T[],
   filterFn: (node: T, parentNodes: T[]) => boolean,
   parentNodes: T[] = [],

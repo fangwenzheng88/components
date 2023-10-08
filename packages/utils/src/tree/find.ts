@@ -8,7 +8,7 @@ import type { TreeNode } from './types'
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
  * @returns 满足条件的节点，如果没有找到，则返回 null
  */
-export function findTreeNode<T extends TreeNode<T>>(nodes: T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T | undefined {
+export function findTreeNode<T extends TreeNode>(nodes: T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T | undefined {
   for (const node of nodes) {
     if (callback(node)) {
       return node
@@ -34,7 +34,7 @@ export function findTreeNode<T extends TreeNode<T>>(nodes: T[], callback: (node:
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
  * @returns 满足条件的节点数组
  */
-export function findTreeNodes<T extends TreeNode<T>>(nodes: T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T[] {
+export function findTreeNodes<T extends TreeNode>(nodes: T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T[] {
   const results: T[] = []
 
   for (const node of nodes) {
@@ -60,7 +60,7 @@ export function findTreeNodes<T extends TreeNode<T>>(nodes: T[], callback: (node
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
  * @returns 满足条件的父节点数组
  */
-export function findTreeParents<T extends TreeNode<T>>(nodes: readonly T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T[] {
+export function findTreeParents<T extends TreeNode>(nodes: readonly T[], callback: (node: T) => boolean, childrenFieldName: keyof T = 'children'): T[] {
   const parents: T[] = []
 
   for (const node of nodes) {
@@ -88,7 +88,7 @@ export function findTreeParents<T extends TreeNode<T>>(nodes: readonly T[], call
  * @param childrenFieldName 子节点数组字段名，默认为 'children'
  * @returns 满足条件的父节点数组
  */
-export function findTreeParent<T extends TreeNode<T>>(
+export function findTreeParent<T extends TreeNode>(
   nodes: readonly T[],
   callback: (node: T) => boolean,
   childrenFieldName: keyof T = 'children'

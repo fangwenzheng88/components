@@ -8,11 +8,7 @@ import type { TreeNode } from './types'
  * @param childrenFieldName 子节点字段名称，默认为 'children'
  * @returns 排序后的新树形数据数组
  */
-export function sortTreeArray<T extends TreeNode<T>>(
-  treeData: readonly T[],
-  sortFunction: (a: T, b: T) => number,
-  childrenFieldName: keyof T = 'children'
-): T[] {
+export function sortTreeArray<T extends TreeNode>(treeData: readonly T[], sortFunction: (a: T, b: T) => number, childrenFieldName: keyof T = 'children'): T[] {
   // 创建新的数组用于保存排序后的结果
   const sortedTreeData: T[] = [...treeData]
 
