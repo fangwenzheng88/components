@@ -1,5 +1,5 @@
 import { test, expect, describe } from 'vitest'
-import { fallbackArray, fallbackString, fallbackNumber } from '../fallback'
+import { fallbackArray, fallbackString, fallbackNumber, fallbackDateStr, fallbackDatetimeStr } from '../fallback'
 
 describe('fallbackArray', () => {
   test('非空数组，返回当前数组', () => {
@@ -93,5 +93,39 @@ describe('fallbackNumber', () => {
     expect(fallbackNumber({} as any, 1)).toBe(1)
     expect(fallbackNumber(new Date() as any, 1)).toBe(1)
     expect(fallbackNumber((() => {}) as any, 1)).toBe(1)
+  })
+})
+
+describe('fallbackDateStr', () => {
+  test('返回具有回退（fallback）行为的字符串', () => {
+    expect(fallbackDateStr(undefined)).toBe('')
+    expect(fallbackDateStr(null)).toBe('')
+    expect(fallbackDateStr('')).toBe('')
+    expect(fallbackDateStr('Date')).toBe('')
+  })
+
+  test('设置全局默认回退字符串', () => {
+    fallbackDateStr.DEFAULT_FALLBACK = '/'
+    expect(fallbackDateStr(undefined)).toBe('/')
+    expect(fallbackDateStr(null)).toBe('/')
+    expect(fallbackDateStr('')).toBe('/')
+    expect(fallbackDateStr('Date')).toBe('/')
+  })
+})
+
+describe('fallbackDatetimeStr', () => {
+  test('返回具有回退（fallback）行为的字符串', () => {
+    expect(fallbackDatetimeStr(undefined)).toBe('')
+    expect(fallbackDatetimeStr(null)).toBe('')
+    expect(fallbackDatetimeStr('')).toBe('')
+    expect(fallbackDatetimeStr('Date')).toBe('')
+  })
+
+  test('设置全局默认回退字符串', () => {
+    fallbackDatetimeStr.DEFAULT_FALLBACK = '/'
+    expect(fallbackDatetimeStr(undefined)).toBe('/')
+    expect(fallbackDatetimeStr(null)).toBe('/')
+    expect(fallbackDatetimeStr('')).toBe('/')
+    expect(fallbackDatetimeStr('Date')).toBe('/')
   })
 })

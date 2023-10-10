@@ -1,0 +1,7 @@
+{
+    "entryPoints": [
+        "./src"
+    ],
+    "includeVersion": true,
+    "out": "docs"
+}

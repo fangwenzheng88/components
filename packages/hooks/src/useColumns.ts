@@ -11,7 +11,7 @@ export interface TableColumnDataPlus extends TableColumnData {
 }
 
 /**
- * 过滤columns，去掉show===false的列，和children为空的列
+ * 过滤columns，去掉visible===false的列，和children为空的列
  */
 function filterColumns<T extends TableColumnDataPlus>(columns: readonly T[]): T[] {
   const filteredNodes: T[] = []

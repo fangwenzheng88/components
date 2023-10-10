@@ -13,7 +13,7 @@ export default [
       {
         format: 'umd',
         file: 'dist/index.umd.js',
-        name: 'DevopsUtils',
+        name: 'DevopsVueUtils',
         globals: {
           dayjs: 'Dayjs'
         }

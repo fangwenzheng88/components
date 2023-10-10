@@ -1,3 +1,4 @@
+import dayjs, { Dayjs } from 'dayjs'
 import { isArray, isNumber, isString, isStringNumber, isUnDef } from './is'
 
 /**
@@ -21,7 +22,7 @@ export function fallbackArray<T>(array: T[] | undefined | null, fallback: T[] = 
 
 /**
  * 返回具有回退（fallback）行为的字符串
- * @category fallback
+ * @category fallback，默认为 fallbackString.DEFAULT_FALLBACK
  * @param str 数字、字符串、null、undefined
  * @param fallback 回退字符串
  * @returns 不为字符串或非NaN的数字，则返回回退字符串
@@ -39,7 +40,7 @@ export function fallbackArray<T>(array: T[] | undefined | null, fallback: T[] = 
  * fallbackString([], 'Fallback Text') // 'Fallback Text'
  * ```
  */
-export function fallbackString(str: string | number | undefined | null, fallback: string = ''): string {
+export function fallbackString(str: string | number | undefined | null, fallback: string = fallbackString.DEFAULT_FALLBACK): string {
   if (isUnDef(str)) {
     return fallback
   }
@@ -51,13 +52,17 @@ export function fallbackString(str: string | number | undefined | null, fallback
   }
   return isString(str) && str.length > 0 ? str : fallback
 }
+/**
+ * fallbackString 全局默认 fallback 值
+ */
+fallbackString.DEFAULT_FALLBACK = ''
 
 /**
  * 返回具有回退（fallback）行为的数字
  * @category fallback
  * @param str 数字、字符串、null、undefined
  * @param fallback 回退数字
- * @returns 不为非NaN的数字或数字格式的字符串，则返回回退字符串
+ * @returns 不为非NaN的数字或数字格式的字符串，则返回回退数字
  *
  * @example
  * ```ts
@@ -85,3 +90,48 @@ export function fallbackNumber(str: string | number | null | undefined, fallback
   }
   return isStringNumber(str) ? Number(str) : fallback
 }
+
+/**
+ * 将日期转换成指定格式的字符串，如果日期无效或为空，返回默认值
+ * @param str 日期字符串、数字、日期对象或 Dayjs 对象
+ * @param fallback 默认值，默认为 fallbackDateStr.DEFAULT_FALLBACK
+ * @param template 格式模板，默认为 fallbackDateStr.DEFAULT_TEMPLATE
+ * @returns 格式化后的日期字符串或默认值
+ */
+export function fallbackDateStr(
+  str: string | number | Date | Dayjs | null | undefined,
+  fallback: string = fallbackDateStr.DEFAULT_FALLBACK,
+  template = fallbackDateStr.DEFAULT_TEMPLATE
+): string {
+  if (isUnDef(str) || str === '') {
+    return fallback
+  }
+  const day = dayjs(str)
+  return day.isValid() ? day.format(template) : fallback
+}
+/**
+ * fallbackDateStr 全局默认 fallback 值和模板
+ */
+fallbackDateStr.DEFAULT_FALLBACK = ''
+fallbackDateStr.DEFAULT_TEMPLATE = 'YYYY-MM-DD'
+
+/**
+ * 将日期时间转换成指定格式的字符串，如果日期时间无效或为空，返回默认值
+ * @param str 日期时间字符串、数字、日期对象或 Dayjs 对象
+ * @param fallback 默认值，默认为 fallbackDatetimeStr.DEFAULT_FALLBACK
+ * @param template 格式模板，默认为 fallbackDatetimeStr.DEFAULT_TEMPLATE
+ * @returns 格式化后的日期时间字符串或默认值
+ */
+export function fallbackDatetimeStr(
+  str: string | number | Date | Dayjs | null | undefined,
+  fallback: string = fallbackDatetimeStr.DEFAULT_FALLBACK,
+  template = fallbackDatetimeStr.DEFAULT_TEMPLATE
+): string {
+  return fallbackDateStr(str, fallback, template)
+}
+
+/**
+ * fallbackDatetimeStr 全局默认 fallback 值和模板
+ */
+fallbackDatetimeStr.DEFAULT_FALLBACK = ''
+fallbackDatetimeStr.DEFAULT_TEMPLATE = 'YYYY-MM-DD HH:mm:ss'

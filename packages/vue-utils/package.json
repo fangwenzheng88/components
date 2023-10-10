@@ -1,7 +1,7 @@
 {
-  "name": "@devops-web/utils",
+  "name": "@devops-web/vue-utils",
   "type": "module",
-  "version": "0.0.12",
+  "version": "0.0.0",
   "description": "",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -30,11 +30,12 @@
   "license": "ISC",
   "devDependencies": {
     "@devops-web/eslint-config": "workspace:*",
+    "@devops-web/utils": "workspace:*",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@vitest/coverage-istanbul": "^0.33.0",
     "@vitest/ui": "^0.33.0",
-    "dayjs": "^1.11.10",
+    "vue": "^3.3.4",
     "eslint": "^8.39.0",
     "rimraf": "^5.0.1",
     "rollup": "^3.26.3",
@@ -46,7 +47,7 @@
     "vitest": "^0.32.0"
   },
   "peerDependencies": {
-    "dayjs": ">=1"
+    "vue": ">=3"
   },
   "publishConfig": {
     "access": "public",
