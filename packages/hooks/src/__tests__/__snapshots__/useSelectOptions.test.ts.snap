@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useSelectOptions > 入参为options数组，value为对象类型 1`] = `
+[
+  {
+    "label": "label-1",
+    "value": {
+      "value": 1,
+    },
+  },
+]
+`;
+
+exports[`useSelectOptions > 入参为options数组，value为对象类型，自定义valueKey 1`] = `
+[
+  {
+    "label": "label-1",
+    "value": {
+      "valueKey": 1,
+    },
+  },
+]
+`;
+
+exports[`useSelectOptions > 入参为函数 1`] = `[]`;
+
+exports[`useSelectOptions > 入参为普通options数组 1`] = `
+[
+  {
+    "label": "label-1",
+    "value": 1,
+  },
+]
+`;
