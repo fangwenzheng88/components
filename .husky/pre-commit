@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm -r run lint-staged
+pnpm -r --workspace-concurrency=1 run lint-staged

@@ -27,7 +27,13 @@ export default (originElement: HTMLElement, ellipsisConfig: Required<EllipsisCon
   const originStyle = window.getComputedStyle(originElement)
   const styleString = styleToString(originStyle)
   const lineHeight = pxToNumber(originStyle.lineHeight)
-  const maxHeight = Math.round(lineHeight * rows + pxToNumber(originStyle.paddingTop) + pxToNumber(originStyle.paddingBottom))
+  const maxHeight = Math.round(
+    lineHeight * rows +
+      pxToNumber(originStyle.paddingTop) +
+      pxToNumber(originStyle.paddingBottom) +
+      pxToNumber(originStyle.borderTop) +
+      pxToNumber(originStyle.borderBottom)
+  )
 
   ellipsisContainer.setAttribute('style', styleString)
   ellipsisContainer.setAttribute('aria-hidden', 'true')

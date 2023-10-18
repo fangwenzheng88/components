@@ -8,6 +8,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "rules": "eslint --config index.js --print-config index.js > rules.json"
+  },
   "dependencies": {
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",

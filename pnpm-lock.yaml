@@ -81,6 +81,54 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4
 
+  packages/dom-utils:
+    devDependencies:
+      '@devops-web/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@devops-web/utils':
+        specifier: workspace:*
+        version: link:../utils
+      '@rollup/plugin-commonjs':
+        specifier: ^25.0.4
+        version: 25.0.4(rollup@3.26.3)
+      '@rollup/plugin-node-resolve':
+        specifier: ^15.1.0
+        version: 15.1.0(rollup@3.26.3)
+      '@vitest/coverage-istanbul':
+        specifier: ^0.33.0
+        version: 0.33.0(vitest@0.32.0)
+      '@vitest/ui':
+        specifier: ^0.33.0
+        version: 0.33.0(vitest@0.32.0)
+      eslint:
+        specifier: ^8.39.0
+        version: 8.39.0
+      rimraf:
+        specifier: ^5.0.1
+        version: 5.0.1
+      rollup:
+        specifier: ^3.26.3
+        version: 3.26.3
+      rollup-plugin-dts:
+        specifier: ^5.3.0
+        version: 5.3.0(rollup@3.26.3)(typescript@5.0.4)
+      rollup-plugin-typescript2:
+        specifier: ^0.35.0
+        version: 0.35.0(rollup@3.26.3)(typescript@5.0.4)
+      tslib:
+        specifier: ^2.6.2
+        version: 2.6.2
+      typedoc:
+        specifier: ^0.24.8
+        version: 0.24.8(typescript@5.0.4)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      vitest:
+        specifier: ^0.32.0
+        version: 0.32.0(@vitest/ui@0.33.0)
+
   packages/eslint-config:
     dependencies:
       '@vue/eslint-config-prettier':
@@ -238,57 +286,6 @@ importers:
       vitest:
         specifier: ^0.32.0
         version: 0.32.0(@vitest/ui@0.33.0)
-
-  packages/vue-utils:
-    devDependencies:
-      '@devops-web/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@devops-web/utils':
-        specifier: workspace:*
-        version: link:../utils
-      '@rollup/plugin-commonjs':
-        specifier: ^25.0.4
-        version: 25.0.4(rollup@3.26.3)
-      '@rollup/plugin-node-resolve':
-        specifier: ^15.1.0
-        version: 15.1.0(rollup@3.26.3)
-      '@vitest/coverage-istanbul':
-        specifier: ^0.33.0
-        version: 0.33.0(vitest@0.32.0)
-      '@vitest/ui':
-        specifier: ^0.33.0
-        version: 0.33.0(vitest@0.32.0)
-      eslint:
-        specifier: ^8.39.0
-        version: 8.39.0
-      rimraf:
-        specifier: ^5.0.1
-        version: 5.0.1
-      rollup:
-        specifier: ^3.26.3
-        version: 3.26.3
-      rollup-plugin-dts:
-        specifier: ^5.3.0
-        version: 5.3.0(rollup@3.26.3)(typescript@5.0.4)
-      rollup-plugin-typescript2:
-        specifier: ^0.35.0
-        version: 0.35.0(rollup@3.26.3)(typescript@5.0.4)
-      tslib:
-        specifier: ^2.6.2
-        version: 2.6.2
-      typedoc:
-        specifier: ^0.24.8
-        version: 0.24.8(typescript@5.0.4)
-      typescript:
-        specifier: ^5.0.4
-        version: 5.0.4
-      vitest:
-        specifier: ^0.32.0
-        version: 0.32.0(@vitest/ui@0.33.0)
-      vue:
-        specifier: ^3.3.4
-        version: 3.3.4
 
   packages/web-demo:
     dependencies:
@@ -1646,7 +1643,7 @@ packages:
       vitest: '>=0.30.1 <1'
     dependencies:
       '@vitest/utils': 0.33.0
-      fast-glob: 3.3.0
+      fast-glob: 3.3.1
       fflate: 0.8.0
       flatted: 3.2.7
       pathe: 1.1.1
@@ -3413,17 +3410,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
-
-  /fast-glob@3.3.0:
-    resolution: {integrity: sha512-ChDuvbOypPuNjO8yIDf36x7BlZX1smcUMTTcyoIjycexOxd6DFsKsg21qVBzEmr3G7fUKIRy2/psii+CIUt7FA==}
-    engines: {node: '>=8.6.0'}
-    dependencies:
-      '@nodelib/fs.stat': 2.0.5
-      '@nodelib/fs.walk': 1.2.8
-      glob-parent: 5.1.2
-      merge2: 1.4.1
-      micromatch: 4.0.5
-    dev: true
 
   /fast-glob@3.3.1:
     resolution: {integrity: sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==}
