@@ -41,6 +41,23 @@ type Config = {
  * // value为object类型
  * const { options, getOptions, getLabels } = useSelectOptions([{ label: 'label-1', value: {value:1} }])
  * getLabels(1) // label-1
+ * getLabels({value:1}) // label-1
+ *
+ *
+ * // 配置fallback，getLabels，getOptions数据来源于fallback
+ * const { options, getOptions, getLabels } = useSelectOptions([], {
+ *      fallback(value) {
+ *        if (value === 1) {
+ *          return { value, label: 'label-1' }
+ *        } else {
+ *          return { value, label: undefined }
+ *        }
+ *       }
+ *    })
+ * getLabels(1) // label-1
+ * getOptions(1) // { value:1, label: 'label-1' }
+ * getLabels(2) // undefined
+ * getOptions(2) // { value:2, label: undefined }
  *
  * ```
  */

@@ -40,4 +40,21 @@ describe('useSelectOptions', () => {
       expect(getLabels(1)).toBe('label-1')
     }, 1000)
   })
+
+  test('配置fallback', () => {
+    const { options, getOptions, getLabels } = useSelectOptions([], {
+      fallback(value) {
+        if (value === 1) {
+          return { value, label: 'label-1' }
+        } else {
+          return { value, label: undefined }
+        }
+      }
+    })
+    expect(getOptions(1)).toEqual({ label: 'label-1', value: 1 })
+    expect(getLabels(1)).toBe('label-1')
+
+    expect(getOptions(2)).toEqual({ label: undefined, value: 2 })
+    expect(getLabels(2)).toBe(undefined)
+  })
 })
