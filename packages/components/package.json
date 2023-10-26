@@ -40,9 +40,9 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "@devops-web/utils": "*",
+    "@devops-web/utils": ">=0",
     "@vueuse/core": ">=10",
-    "vue": "^3.0.0"
+    "vue": ">=3.0.0"
   },
   "devDependencies": {
     "@devops-web/eslint-config": "workspace:*",
