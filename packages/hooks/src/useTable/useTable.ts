@@ -44,7 +44,7 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
     }
   }
 
-  function loadData() {
+  function loadTableData() {
     loading.value = true
     return config
       .fetch()
@@ -61,7 +61,7 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
   return {
     tableData,
     loading,
-    loadData,
+    loadTableData,
     pagination,
     tableInstance: columnsHooks.tableInstance,
     originColumns: columnsHooks.originColumns,

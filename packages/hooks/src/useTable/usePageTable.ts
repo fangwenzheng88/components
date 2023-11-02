@@ -44,19 +44,19 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
   const pagination: Ref<PaginationPropsPlus> = ref(defaultPagination())
   function onPageChange(current: number) {
     pagination.value.current = current
-    return loadData()
+    return getTableData()
   }
 
   function onPageSizeChange(pageSize: number) {
     pagination.value.current = 1
     pagination.value.pageSize = pageSize
-    return loadData()
+    return getTableData()
   }
   if (isObject(config.pagination)) {
     pagination.value = { ...defaultPagination(), ...config.pagination }
   }
 
-  function loadData() {
+  function getTableData() {
     loading.value = true
     return config
       .fetch({ pageNum: pagination.value.current, pageSize: pagination.value.pageSize })
@@ -70,13 +70,17 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
   }
 
   function refreshData() {
+    return getTableData()
+  }
+
+  function loadTableData() {
     pagination.value.current = 1
-    return loadData()
+    return getTableData()
   }
   return {
     tableData,
     loading,
-    loadData,
+    loadTableData,
     refreshData,
     pagination,
     tableInstance: columnsHooks.tableInstance,
