@@ -1,8 +1,6 @@
-export function isWindow(obj: any): obj is Window {
-  return obj !== null && obj !== undefined && obj === obj.window
-}
+import { isWindow } from '@devops-web/utils'
 
-export default function getScroll(target: HTMLElement | Window | Document | null, top: boolean): number {
+export function getScroll(target: HTMLElement | Window | Document | null, top: boolean): number {
   if (typeof window === 'undefined') {
     return 0
   }

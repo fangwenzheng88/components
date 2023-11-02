@@ -1,6 +1,6 @@
 import { isArray, isString, isObject } from '@devops-web/utils'
 
-function classNames(...args: any[]): string {
+export function classNames(...args: any[]): string {
   const classes: string[] = []
   for (let i = 0; i < args.length; i++) {
     const value = args[i]
@@ -25,5 +25,3 @@ function classNames(...args: any[]): string {
   }
   return classes.join(' ')
 }
-
-export default classNames

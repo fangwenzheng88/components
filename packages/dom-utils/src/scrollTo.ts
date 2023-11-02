@@ -1,7 +1,7 @@
-import { raf } from '@devops-web/utils'
-import getScroll, { isWindow } from './getScroll'
+import { isWindow, raf } from '@devops-web/utils'
+import { getScroll } from './getScroll'
 
-export function easeInOutCubic(t: number, b: number, c: number, d: number) {
+function easeInOutCubic(t: number, b: number, c: number, d: number) {
   const cc = c - b
   // eslint-disable-next-line no-param-reassign
   t /= d / 2
@@ -21,7 +21,7 @@ interface ScrollToOptions {
   duration?: number
 }
 
-export default function scrollTo(y: number, options: ScrollToOptions = {}) {
+export function scrollTo(y: number, options: ScrollToOptions = {}) {
   const { getContainer = () => window, callback, duration = 450 } = options
   const container = getContainer()
   const scrollTop = getScroll(container, true)

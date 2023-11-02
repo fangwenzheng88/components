@@ -2,7 +2,7 @@
 
 let cached: number
 
-export default function getScrollBarSize(fresh?: boolean) {
+export function getScrollBarSize(fresh?: boolean) {
   if (typeof document === 'undefined') {
     return 0
   }

@@ -4,7 +4,7 @@ import dts from 'rollup-plugin-dts'
 import commonjs from '@rollup/plugin-commonjs'
 
 const input = 'src/index.ts'
-const external = ['dayjs']
+const external = ['@devops-web/utils']
 export default [
   {
     input,
@@ -13,9 +13,9 @@ export default [
       {
         format: 'umd',
         file: 'dist/index.umd.js',
-        name: 'DevopsVueUtils',
+        name: 'DevopsDomUtils',
         globals: {
-          dayjs: 'Dayjs'
+          '@devops-web/utils': 'DevopsUtils'
         }
       }
     ],

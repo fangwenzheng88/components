@@ -33,10 +33,10 @@
     "dayjs": ">=1"
   },
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
     "dayjs": "^1.11.10",
     "@arco-design/web-vue": "^2.52.0",
     "@devops-web/eslint-config": "workspace:*",
-    "@devops-web/utils": "workspace:*",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@types/lodash-es": "^4.17.9",

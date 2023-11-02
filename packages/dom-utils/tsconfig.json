@@ -4,10 +4,6 @@
     "outDir": "es",
     "declaration": false
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "src/**/__tests__/*"
-  ],
+  "include": ["src/**/*"],
+  "exclude": ["src/**/__tests__/*", "src/copy-to-clipboard/*"]
 }
