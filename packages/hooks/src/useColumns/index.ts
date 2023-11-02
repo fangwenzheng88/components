@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { type TableColumnData, TableInstance } from '@arco-design/web-vue'
 import { nextTick, ref, watchEffect, watch } from 'vue'
-import type { Ref, ComponentPublicInstance } from 'vue'
+import type { Ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import { setValueByPath, traverseTreeBFS } from '@devops-web/utils'
 
@@ -181,7 +181,7 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
   }
 
   return {
-    ref(el: Element | ComponentPublicInstance | null) {
+    ref(el: any) {
       tableInstance.value = el as TableInstance
     },
     tableInstance,

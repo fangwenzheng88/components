@@ -18,7 +18,7 @@ function camelize(str: string) {
   return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''))
 }
 
-export const classNameToArray = (cls = '') => cls.split(' ').filter((item) => !!item.trim())
+const classNameToArray = (cls = '') => cls.split(' ').filter((item) => !!item.trim())
 
 export const hasClass = (el: Element, cls: string): boolean => {
   if (!el || !cls) return false
@@ -70,7 +70,7 @@ export const removeStyle = (element: HTMLElement, style: CSSProperties | keyof C
   }
 }
 
-export function addUnit(value?: string | number, defaultUnit = 'px') {
+export function addStyleUnit(value?: string | number, defaultUnit = 'px') {
   if (!value) return ''
   if (isNumber(value) || isStringNumber(value)) {
     return `${value}${defaultUnit}`
