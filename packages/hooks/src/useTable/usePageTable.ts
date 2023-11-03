@@ -35,6 +35,7 @@ export interface TablePageConfig<T extends Record<string, unknown>> {
   fetch: ({ pageNum, pageSize }: PageParams) => Promise<TablePageData<T>>
   columns: TableColumnDataPlus[]
   pagination?: true | PaginationProps
+  immediate?: boolean
 }
 
 export function useTablePage<T extends Record<string, unknown>>(config: TablePageConfig<T>) {
@@ -69,13 +70,23 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
       })
   }
 
+  /**
+   * 刷新表格数据，pagination.pageNum不会变
+   */
   function refreshData() {
     return getTableData()
   }
 
+  /**
+   * 加载表格数据，pagination.pageNum会设置为1
+   */
   function loadTableData() {
     pagination.value.current = 1
     return getTableData()
+  }
+
+  if (config.immediate === true) {
+    loadTableData()
   }
   return {
     tableData,

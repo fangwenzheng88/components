@@ -1,7 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-import { type TableColumnData, TableInstance } from '@arco-design/web-vue'
-import { nextTick, ref, watchEffect, watch } from 'vue'
-import type { Ref } from 'vue'
+import { type TableColumnData, type TableInstance } from '@arco-design/web-vue'
+import { nextTick, ref, watchEffect, watch, type Ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
 import { setValueByPath, traverseTreeBFS } from '@devops-web/utils'
 
@@ -37,10 +35,15 @@ function filterColumns<T extends TableColumnDataPlus>(columns: readonly T[]): T[
   return filteredNodes
 }
 
+/**
+ * arco-design 扩展表格columns，增加visible，minWidth两个配置项
+ * @param columns
+ * @returns
+ */
 export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
   const originColumns: T[] = cloneDeep(columns)
   const originColumnsRef: Ref<T[]> = ref(columns as any)
-  const tableInstance = ref<TableInstance | null>(null)
+  const tableInstance: Ref<TableInstance | null> = ref(null)
 
   let lastWidth = 0
   const observer = new ResizeObserver((entries) => {

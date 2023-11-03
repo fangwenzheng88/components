@@ -50,7 +50,7 @@ export default [
         preserveModulesRoot: 'src'
       }
     ],
-    plugins: [dts({ respectExternal: true, compilerOptions: { preserveSymlinks: false } })]
+    plugins: [dts({ compilerOptions: { preserveSymlinks: false } })]
   },
   {
     input,
@@ -78,6 +78,6 @@ export default [
         preserveModulesRoot: 'src'
       }
     ],
-    plugins: [dts({ respectExternal: true, compilerOptions: { preserveSymlinks: false } })]
+    plugins: [dts({ compilerOptions: { preserveSymlinks: false } })]
   }
 ]

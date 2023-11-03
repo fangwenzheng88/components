@@ -23,6 +23,7 @@ export interface TableConfig<T> {
   fetch: () => Promise<T>
   columns: TableColumnDataPlus[]
   pagination?: boolean | PaginationProps
+  immediate?: boolean
 }
 
 export function useTable<T extends Record<string, unknown>>(config: TableConfig<T[]>) {
@@ -44,6 +45,9 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
     }
   }
 
+  /**
+   * 加载表格数据
+   */
   function loadTableData() {
     loading.value = true
     return config
@@ -57,6 +61,10 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
       .finally(() => {
         loading.value = false
       })
+  }
+
+  if (config.immediate === true) {
+    loadTableData()
   }
   return {
     tableData,
