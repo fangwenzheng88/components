@@ -7,6 +7,7 @@ export interface TableColumnDataPlus extends TableColumnData {
   [key: string]: unknown
   visible?: boolean
   minWidth?: number
+  _originWidth?: number
   children?: TableColumnDataPlus[]
 }
 
@@ -28,7 +29,7 @@ function filterColumns<T extends TableColumnDataPlus>(columns: readonly T[]): T[
           })
         }
       } else {
-        filteredNodes.push({ ...column })
+        filteredNodes.push({ ...column, _originWidth: column.width })
       }
     }
   }
@@ -95,10 +96,12 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
     let bodyMinWidth = 0
 
     const flattenColumns = getLeafColumns()
-    const flexColumns = flattenColumns.filter((column) => typeof column.width !== 'number')
+    // eslint-disable-next-line no-underscore-dangle
+    const flexColumns = flattenColumns.filter((column) => typeof column._originWidth !== 'number')
     if (flexColumns.length > 0) {
       flattenColumns.forEach((column) => {
-        bodyMinWidth += Number(column.width || column.minWidth || 80)
+        // eslint-disable-next-line no-underscore-dangle
+        bodyMinWidth += Number(column._originWidth || column.minWidth || 80)
       })
       if (bodyMinWidth <= bodyWidth) {
         const totalFlexWidth = bodyWidth - bodyMinWidth
@@ -126,10 +129,12 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
       }
     } else {
       flattenColumns.forEach((column) => {
-        if (!column.width && !column.minWidth) {
+        // eslint-disable-next-line no-underscore-dangle
+        if (!column._originWidth && !column.minWidth) {
           column.width = 80
         } else {
-          column.width = Number(column.width || column.minWidth)
+          // eslint-disable-next-line no-underscore-dangle
+          column.width = Number(column._originWidth || column.minWidth)
         }
       })
     }

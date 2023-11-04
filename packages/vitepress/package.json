@@ -1,0 +1,23 @@
+{
+  "name": "@devops-web/vitepress",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs --base /vitepress/",
+    "docs:serve": "vitepress serve docs",
+    "register:components": "vitepress-rc",
+    "copy":"node scripts/copy.js"
+  },
+  "devDependencies": {
+    "@arco-design/web-vue": "^2.52.0",
+    "@devops-web/hooks": "workspace:*",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "postcss": "^8.4.29",
+    "prettier": "^2.8.8",
+    "vitepress": "^1.0.0-rc.24",
+    "vitepress-theme-demoblock": "^3.0.3"
+  }
+}

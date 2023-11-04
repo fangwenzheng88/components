@@ -1,0 +1,52 @@
+/* .VPDoc > .container {
+  max-width: unset !important;
+}
+
+.VPDoc > .container > .content {
+  max-width: unset !important;
+}
+
+.VPDoc > .container > .content > .content-container {
+  max-width: unset !important;
+}
+
+.VPSidebar {
+  padding-left: 0 !important;
+  width: 300px !important;
+}
+
+.VPSidebar .nav {
+  padding-left: 20px;
+}
+
+.VPContent.has-sidebar {
+  padding-left: 300px !important;
+  padding-right: 0px !important;
+}
+
+.VPNavBar.has-sidebar .title {
+  padding-left: 0px !important;
+  width: 300px;
+}
+
+.VPNavBar.has-sidebar .title a img{
+  margin-left: 20px;
+}
+
+.VPNavBar.has-sidebar .content {
+  padding-left: 300px !important;
+  padding-right: 20px !important;
+}
+
+.VPNavBar>.container{
+  max-width: unset !important;
+}
+ */
+
+:root {
+  --vp-layout-max-width: 100vw;
+}
+
+.VPDoc .content-container {
+  max-width: unset !important;
+}

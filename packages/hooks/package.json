@@ -3,8 +3,8 @@
   "type": "module",
   "version": "0.0.6",
   "description": "",
-  "main": "es/index.ts",
-  "types": "es/index.ts",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
   "scripts": {
     "dev": "rollup --watch -c rollup.config.js",
     "clean": "rimraf ./dist ./es ./lib",
@@ -27,8 +27,7 @@
   "license": "ISC",
   "peerDependencies": {
     "@arco-design/web-vue": ">=2.0.0",
-    "@devops-web/utils": ">=0",
-    "dayjs": ">=1",
+    "@devops-web/utils": ">=1",
     "lodash-es": ">=4.0.0",
     "vue": ">=3.0.0"
   },
