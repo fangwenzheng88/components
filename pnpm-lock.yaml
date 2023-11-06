@@ -170,7 +170,7 @@ importers:
   packages/hooks:
     dependencies:
       '@devops-web/utils':
-        specifier: '>=0'
+        specifier: '>=1'
         version: 1.0.0(dayjs@1.11.10)
     devDependencies:
       '@arco-design/web-vue':

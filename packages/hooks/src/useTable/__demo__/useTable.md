@@ -1,5 +1,9 @@
 # useTable
 
+`a-table` 前端分页、不分页场景的工具函数，简化前端表格的配置
+
+通过 `useColumns` 实现表格列minWidth，visible的功能
+
 :::demo
 
 ```vue

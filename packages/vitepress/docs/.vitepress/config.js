@@ -21,18 +21,21 @@ export default defineConfig({
 
     config: (md) => {
       md.use(demoblockPlugin, {
-        customClass: 'demoblock-custom',
+        customClass: 'demoblock-custom'
       })
-    },
+    }
   },
 
   vite: {
     plugins: [demoblockVitePlugin(), vueJsx()],
     resolve: {
       alias: {
-        '@alias': path.resolve(__dirname, '../'),
-      },
+        '@alias': path.resolve(__dirname, '../')
+      }
     },
+    ssr: {
+      noExternal: ['@arco-design/web-vue']
+    }
   },
 
   themeConfig: {
@@ -41,7 +44,7 @@ export default defineConfig({
     logo: '/logo.svg',
 
     search: {
-      provider: 'local',
+      provider: 'local'
       // provider: 'algolia',
       // options: {
       //   appId: 'X51HWTCQJJ',
@@ -55,5 +58,5 @@ export default defineConfig({
 
     // sidebar
     sidebar
-  },
+  }
 })

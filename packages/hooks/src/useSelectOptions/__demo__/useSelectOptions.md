@@ -1,5 +1,7 @@
 # useSelectOptions
 
+简化 `a-select` options 的定义，并在远程搜索的时候缓存历史 options，避免多选场景下远程搜素时无法展示 label 的情况
+
 ## 简单示例
 
 :::demo
@@ -141,7 +143,7 @@ function handleClick() {
 
 :::
 
-### 远程搜索（多选），表单回显
+## 远程搜索（表单回显）
 
 :::demo
 
