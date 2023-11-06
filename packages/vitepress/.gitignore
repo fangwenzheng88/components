@@ -1,1 +1,3 @@
 docs/.vitepress/cache
+docs/hooks/
+!docs/hooks/index.md
