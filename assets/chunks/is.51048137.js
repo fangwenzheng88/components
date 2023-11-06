@@ -1,0 +1,1 @@
+const t=Object.prototype.toString;function e(n){return t.call(n)==="[object Array]"}function i(n){return t.call(n)==="[object Object]"}function r(n){return typeof n=="function"}function u(n){return n===void 0}function c(n){return n!=null}function o(n){return n==null}export{e as a,c as b,r as c,o as d,u as e,i};
