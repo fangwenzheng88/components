@@ -31,7 +31,7 @@ export default [
       {
         format: 'cjs',
         dir: 'lib',
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].cjs',
         preserveModules: true,
         preserveModulesRoot: 'src'
       }
@@ -59,7 +59,7 @@ export default [
       {
         format: 'es',
         dir: 'es',
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].mjs',
         preserveModules: true,
         preserveModulesRoot: 'src'
       }

@@ -40,7 +40,7 @@
   "author": "",
   "license": "ISC",
   "peerDependencies": {
-    "@devops-web/utils": ">=0",
+    "@devops-web/utils": ">=1",
     "@vueuse/core": ">=10",
     "vue": ">=3.0.0"
   },
@@ -48,6 +48,7 @@
     "@rushstack/eslint-patch": "^1.2.0",
     "@devops-web/eslint-config": "workspace:*",
     "@devops-web/stylelint-config": "workspace:*",
+    "@devops-web/utils": "1.0.1",
     "@types/node": "^18.16.17",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

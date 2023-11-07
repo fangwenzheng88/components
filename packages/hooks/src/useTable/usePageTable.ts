@@ -42,7 +42,7 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
   const loading = ref(false)
   const tableData = ref<T[]>()
   const columnsHooks = useColumns(config.columns)
-  const pagination: Ref<PaginationPropsPlus> = ref(defaultPagination())
+  const pagination = ref(defaultPagination()) as Ref<PaginationPropsPlus>
   function onPageChange(current: number) {
     pagination.value.current = current
     return getTableData()

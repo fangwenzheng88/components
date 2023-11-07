@@ -32,6 +32,7 @@
     "vue": ">=3.0.0"
   },
   "devDependencies": {
+    "@devops-web/utils": "1.0.1",
     "@arco-design/web-vue": "^2.52.0",
     "@devops-web/eslint-config": "workspace:*",
     "@rollup/plugin-commonjs": "^25.0.4",
@@ -57,17 +58,18 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/",
-    "main": "lib/index.js",
-    "module": "es/index.js",
+    "main": "lib/index.cjs",
+    "module": "es/index.mjs",
     "types": "es/index.d.ts",
     "unpkg": "dist/index.umd.js",
     "jsdelivr": "dist/index.umd.js",
     "exports": {
       ".": {
         "types": "./es/index.d.ts",
-        "import": "./es/index.js",
-        "require": "./lib/index.js"
-      }
+        "import": "./es/index.mjs",
+        "require": "./lib/index.cjs"
+      },
+      "./*": "./*"
     }
   },
   "lint-staged": {
