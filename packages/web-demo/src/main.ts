@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import Components from '@devops-web/components'
-import '@devops-web/components/src/index.less'
+import '@devops-web/components/es/index.css'
 import ArcoVue from '@arco-design/web-vue'
 import router from './router'
 import App from './App.vue'

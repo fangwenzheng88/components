@@ -11,32 +11,34 @@ const config: InlineConfig = {
     emptyOutDir: false,
     minify: false,
     rollupOptions: {
-      external: ['vue', '@arco-design/web-vue', '@devops-web/utils', '@vueuse/core'],
+      external: ['vue', /@arco-design\/web-vue/, '@devops-web/utils', '@vueuse/core', 'lodash-es'],
       input: ['src/index.ts'],
       output: [
         {
           format: 'umd',
-          name: 'DevopsWeb',
+          name: 'DevopsComponents',
           dir: 'dist',
-          entryFileNames: `devops-web.js`,
+          entryFileNames: `devops-components.js`,
           globals: {
             vue: 'Vue',
+            'lodash-es': '_',
             '@arco-design/web-vue': 'ArcoVue',
             '@vueuse/core': 'VueUse',
-            '@devops-web/utils': 'DevopsUtils'
+            '@devops-web/utils': 'DevopsUtils',
+            '@devops-web/hooks': 'DevopsHooks'
           }
         },
         {
           format: 'es',
           dir: 'es',
-          entryFileNames: '[name].js',
+          entryFileNames: '[name].mjs',
           preserveModules: true,
           preserveModulesRoot: 'src'
         },
         {
           format: 'commonjs',
           dir: 'lib',
-          entryFileNames: '[name].js',
+          entryFileNames: '[name].cjs',
           preserveModules: true,
           preserveModulesRoot: 'src'
         }

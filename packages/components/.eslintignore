@@ -1,0 +1,6 @@
+/*.json
+/*.js
+dist
+es
+lib
+*.test.ts

@@ -1,9 +1,12 @@
 <template>
   <div>
+    <div style="text-align: right">
+      <devops-columns-setting v-model:columns="originColumns" :disabled-keys="['email']"></devops-columns-setting>
+    </div>
     <a-table column-resizable :bordered="{ headerCell: true }" :columns="columns" :data="data" />
 
-    <a-button @click="changeVisibleByDataIndex('email', false)">隐藏Email列</a-button>
-    <a-button @click="changeVisibleByDataIndex('email', true)">显示Email列</a-button>
+    <a-button @click="changeColumnVisibleByDataIndex('email', false)">隐藏Email列</a-button>
+    <a-button @click="changeColumnVisibleByDataIndex('email', true)">显示Email列</a-button>
     <a-button @click="updateColumnByDataIndex('email', 'title', '1111111111111')">修改Email列</a-button>
     <a-button @click="updateColumnByPath('3.children.0', 'title', '333333333')">修改Email列</a-button>
   </div>
@@ -13,7 +16,7 @@
 import { reactive } from 'vue'
 import { useColumns } from '@devops-web/hooks'
 
-const { columns, changeVisibleByDataIndex, updateColumnByDataIndex, updateColumnByPath } = useColumns([
+const { columns, changeColumnVisibleByDataIndex, updateColumnByDataIndex, updateColumnByPath, originColumns } = useColumns([
   {
     title: 'Name',
     dataIndex: 'name',
@@ -23,22 +26,11 @@ const { columns, changeVisibleByDataIndex, updateColumnByDataIndex, updateColumn
   },
   {
     title: 'Salary',
-    test: 1,
     dataIndex: 'salary'
   },
   {
-    title: 'Address',
+    title: 'AddressAddressAddressAddressAddressAddressAddress',
     dataIndex: 'address'
-  },
-  {
-    title: '多层Email',
-    children: [
-      {
-        title: 'Email',
-        test: '123',
-        dataIndex: 'email'
-      }
-    ]
   }
 ])
 
