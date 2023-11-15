@@ -13,3 +13,10 @@ export function withInstall<T extends Component>(component: T) {
     }
   })
 }
+
+export function getPrefixCls(componentName?: string): string {
+  if (componentName) {
+    return `${Prefix}-${componentName}`
+  }
+  return Prefix
+}

@@ -7,6 +7,9 @@ export interface TableColumnDataPlus extends TableColumnData {
   [key: string]: unknown
   visible?: boolean
   minWidth?: number
+  dataIndex: string
+  title: string
+  group?: string
   _originWidth?: number
   children?: TableColumnDataPlus[]
 }

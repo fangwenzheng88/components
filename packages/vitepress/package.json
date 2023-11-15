@@ -14,6 +14,7 @@
   "devDependencies": {
     "@arco-design/web-vue": "^2.52.0",
     "@devops-web/hooks": "workspace:*",
+    "@devops-web/components": "workspace:*",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "postcss": "^8.4.29",
     "prettier": "^2.8.8",

@@ -1,71 +1,101 @@
 <template>
-  <a-trigger
-    v-model:popup-visible="popupVisible"
-    trigger="click"
-    position="br"
-    auto-fit-position
-    :blur-to-close="false"
-    :click-outside-to-close="false"
-    :click-to-close="false"
-    :unmount-on-close="false"
-    :popup-offset="4"
-    @popup-visible-change="handlePopupVisibleChange"
-  >
-    <icon-settings class="devops-columns-setting-btn" v-bind="$attrs" @click="handleClick" />
-    <template #content>
-      <div class="devops-columns-setting-list" :style="{ width: `${width}px` }">
-        <div class="devops-columns-setting-list-item">
-          <a-checkbox :model-value="isAllChecked" @change="allCheckedChange">全选</a-checkbox>
+  <a-button :class="`${prefixCls}-btn`" @click="handleClick">
+    <template #icon>
+      <icon-settings />
+    </template>
+  </a-button>
+  <a-modal v-model:visible="visible" :width="1000" :mask-closable="false" :esc-to-close="false" title="表头配置">
+    <div :class="`${prefixCls}-content`">
+      <a-scrollbar :outer-class="`${prefixCls}-left`" :outer-style="{ height: '100%' }" style="height: 100%; overflow: auto">
+        <div v-for="item in groupList.filter((el) => el.list.length > 0)" :key="item.group" :class="`${prefixCls}-group-item`">
+          <div :class="`${prefixCls}-group-title-wrap`">
+            <div>{{ item.title }}</div>
+            <a-checkbox
+              :model-value="isCheckAll(item.list)"
+              :indeterminate="isIndeterminate(item.list)"
+              @change="(checked) => handleChangeAll(checked, item.list)"
+              >全选</a-checkbox
+            >
+          </div>
+          <a-grid :cols="4" :col-gap="12" :row-gap="16" :class="`${prefixCls}-group-content`">
+            <a-grid-item v-for="subItem in item.list" :key="subItem.dataIndex">
+              <a-checkbox
+                :disabled="disabledKeys.includes(subItem.dataIndex)"
+                :model-value="checkedKeys.includes(subItem.dataIndex)"
+                @change="(checked) => handleChange(checked, subItem)"
+                >{{ subItem.title }}</a-checkbox
+              >
+            </a-grid-item>
+          </a-grid>
         </div>
-        <a-scrollbar style="height: 260px; overflow-x: hidden; overflow-y: auto">
-          <a-tree
-            ref="treeInstance"
-            v-model:checked-keys="checkedKeys"
-            default-expand-checked
-            size="large"
-            draggable
-            block-node
-            default-expand-all
-            :checkable="true"
-            :data="treeData"
-            @select="handleSelect"
-            @drop="handleDrop"
-          ></a-tree>
+      </a-scrollbar>
+      <div :class="`${prefixCls}-right`">
+        <div :class="`${prefixCls}-right-header`">当前选中字段</div>
+        <a-scrollbar :outer-style="{ minHeight: '0', flexGrow: '1' }" style="height: 100%; overflow: auto">
+          <div :class="`${prefixCls}-sort-wrap`">
+            <div
+              v-for="(column, i) in visibleColumns"
+              :key="column.dataIndex"
+              :draggable="!disableSortKeys.includes(column.dataIndex)"
+              :class="[
+                `${prefixCls}-sort-item`,
+                {
+                  [`${prefixCls}-sort-item-delete-disabled`]: disabledKeys.includes(column.dataIndex),
+                  [`${prefixCls}-sort-item-sort-disabled`]: disableSortKeys.includes(column.dataIndex)
+                }
+              ]"
+              @dragstart="dragstart($event, i)"
+              @dragenter="dragenter($event, i)"
+              @dragend="dragend"
+              @dragover="dragover"
+            >
+              <div :class="`${prefixCls}-sort-item-content`">
+                <icon-drag-dot-vertical />
+                <span :class="`${prefixCls}-sort-item-label`">{{ column.title }}</span>
+              </div>
+              <icon-close @click="handleChange(false, column)"></icon-close>
+            </div>
+          </div>
         </a-scrollbar>
-        <div class="devops-columns-setting-button-layout">
-          <a-button @click="handleReset">恢复默认</a-button>
-          <a-button type="primary" @click="handleComfirm">确认</a-button>
-        </div>
+      </div>
+    </div>
+
+    <template #footer>
+      <div :class="`${prefixCls}-footer`">
+        <a-checkbox :model-value="isCheckAll(copyColumns)" @change="handleCheckedAll">全选</a-checkbox>
+        <span>
+          <a-button @click="handleCancel">取消</a-button>
+          <a-button style="margin-left: 10px" type="primary" @click="handleOk">确认</a-button>
+        </span>
       </div>
     </template>
-  </a-trigger>
+  </a-modal>
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, nextTick, computed } from 'vue'
-import type { PropType, Ref } from 'vue'
-import { IconSettings } from '@arco-design/web-vue/es/icon'
-import { type TreeInstance, type TreeNodeData, Tree, Trigger, Checkbox, Button, Scrollbar } from '@arco-design/web-vue'
+import { ref, defineComponent, computed, reactive, type Ref, type PropType } from 'vue'
+import { IconSettings, IconClose, IconDragDotVertical } from '@arco-design/web-vue/es/icon'
+import { Checkbox, Button, Modal, Grid, GridItem } from '@arco-design/web-vue'
 import { type TableColumnDataPlus } from '@devops-web/hooks'
-import { getValueByPath, setValueByPath, traverseTreeDFS } from '@devops-web/utils'
-import { cloneDeep } from 'lodash-es'
+import { ArrayUtils } from '@devops-web/utils'
+import { getPrefixCls } from '../utils'
 
-type TreeNodeDataPlus = {
-  key: string
-  visible?: boolean
-  dataIndex?: string
-  children?: TreeNodeDataPlus[]
-} & TreeNodeData
+type Group = {
+  title: string
+  group: string
+}
 
 export default defineComponent({
   name: 'ColumnsSetting',
   components: {
     IconSettings,
-    ATree: Tree,
-    ATrigger: Trigger,
+    IconClose,
+    IconDragDotVertical,
     ACheckbox: Checkbox,
     AButton: Button,
-    AScrollbar: Scrollbar
+    AModal: Modal,
+    AGrid: Grid,
+    AGridItem: GridItem
   },
   inheritAttrs: false,
   props: {
@@ -78,12 +108,29 @@ export default defineComponent({
       type: Array as PropType<string[]>,
       required: false,
       default() {
-        return []
+        return ['index']
+      }
+    },
+    disableSortKeys: {
+      type: Array as PropType<string[]>,
+      required: false,
+      default() {
+        return ['index', 'operation']
       }
     },
     columns: {
       type: Array as PropType<TableColumnDataPlus[]>,
       required: true
+    },
+    group: {
+      type: Array as PropType<Group[]>,
+      required: false,
+      default() {
+        return [
+          { title: '人员相关', group: 'user' },
+          { title: '日期相关', group: 'date' }
+        ]
+      }
     }
   },
   emits: {
@@ -91,164 +138,172 @@ export default defineComponent({
     'update:columns': (columns: TableColumnDataPlus[]) => true
   },
   setup(props, { emit }) {
-    let firstColumns: TableColumnDataPlus[] | undefined
-    const popupVisible = ref(false)
-    const treeInstance = ref<TreeInstance | null>(null)
-    const treeData = ref([]) as Ref<TreeNodeDataPlus[]>
+    const prefixCls = getPrefixCls('columns-setting')
+
+    const visible = ref(false)
     const checkedKeys = ref<string[]>([])
-    const isAllChecked = computed(() => {
-      let flag = true
-      traverseTreeDFS(treeData.value as any, (node) => {
-        if (!node.disableCheckbox) {
-          if (!node.children || node.children.length === 0) {
-            if (!checkedKeys.value.includes(node.key as string)) {
-              flag = false
-            }
-          }
-        }
-      })
-      return flag
-    })
-    function handlePopupVisibleChange(visible: boolean) {
-      if (visible) {
-        if (firstColumns === undefined) {
-          firstColumns = cloneDeep(props.columns)
-        }
-        initData(props.columns)
-        nextTick(() => {
-          treeInstance.value?.expandAll()
-        })
-      }
-    }
-
-    function initData(columns: TableColumnDataPlus[]) {
-      checkedKeys.value = []
-      treeData.value = convert(columns)
-      traverseTreeDFS(treeData.value as any, (node) => {
-        if (node.children && node.children.length > 0) {
-          return
-        }
-        if (node.visible !== false) {
-          checkedKeys.value.push(node.key as string)
-        }
-      })
-    }
-
-    function handleSelect(selectedKeys: any, data: any) {
-      treeInstance.value?.checkNode(data.node.key, !checkedKeys.value.includes(data.node.key))
-    }
-
-    function convert<T extends Record<string, any>>(treeData: readonly T[], path: number[] = [], disabled = false): TreeNodeDataPlus[] {
-      return treeData.map((item, index) => {
-        const key = [...path, index].join('.children.')
-        const { title, visible, dataIndex } = item
-        const initialChildren = item.children
-        const disableCheckbox = disabled ? true : props.disabledKeys.includes(item.dataIndex)
-        let children: TreeNodeDataPlus[] | undefined
-        if (initialChildren) {
-          children = convert(initialChildren, [...path, index], disableCheckbox)
-        }
+    const copyColumns: Ref<TableColumnDataPlus[]> = ref([])
+    const groupList: {
+      title: string
+      group: string
+      list: TableColumnDataPlus[]
+    }[] = reactive(
+      [{ title: '基础字段', group: 'base' }, ...props.group].map((el) => {
         return {
-          key,
-          dataIndex,
-          title,
-          visible,
-          disableCheckbox,
-          children
-        } as TreeNodeDataPlus
-      })
-    }
-
-    function allCheckedChange() {
-      treeInstance.value?.checkAll(!isAllChecked.value)
-    }
-
-    function handleDrop({ dragNode, dropNode, dropPosition }: { e: DragEvent; dragNode: TreeNodeData; dropNode: TreeNodeData; dropPosition: number }) {
-      const data = treeData.value
-      function loop(data: TreeNodeData[], key: string | number | undefined, callback: (_: TreeNodeData, index: number, arr: TreeNodeData[]) => void) {
-        data.some((item, index, arr) => {
-          if (item.key === key) {
-            callback(item, index, arr)
-            return true
-          }
-          if (item.children) {
-            return loop(item.children, key, callback)
-          }
-          return false
-        })
-      }
-
-      loop(data, dragNode.key, (_, index, arr) => {
-        arr.splice(index, 1)
-      })
-
-      if (dropPosition === 0) {
-        loop(data, dropNode.key, (item) => {
-          item.children = item.children || []
-          item.children.push(dragNode)
-        })
-      } else {
-        loop(data, dropNode.key, (_, index, arr) => {
-          arr.splice(dropPosition < 0 ? index : index + 1, 0, dragNode)
-        })
-      }
-    }
-
-    function handleReset() {
-      const copyData = cloneDeep(firstColumns)
-      emit('update:columns', copyData || [])
-      initData(copyData || [])
-    }
-
-    function handleComfirm() {
-      popupVisible.value = false
-
-      const nodes: TreeNodeDataPlus[] = (treeInstance.value?.getCheckedNodes({ includeHalfChecked: true }) as TreeNodeDataPlus[]) || []
-      traverseTreeDFS(props.columns, (column) => {
-        if (!(column.dataIndex && props.disabledKeys.includes(column.dataIndex))) {
-          column.visible = false
+          title: el.title,
+          group: el.group,
+          list: []
         }
       })
-      nodes.filter(Boolean).forEach((treeNode) => {
-        setValueByPath(props.columns, `${treeNode.key}.visible`, true)
-      })
+    )
 
-      function loop(list: TreeNodeDataPlus[]) {
-        const result: TableColumnDataPlus[] = []
-        list.forEach((treeNode) => {
-          const column = getValueByPath<TableColumnDataPlus>(props.columns, treeNode.key)
-          if (column) {
-            let children: TableColumnDataPlus[] | undefined
-            if (Array.isArray(treeNode.children) && treeNode.children.length > 0) {
-              children = loop(treeNode.children)
-            }
-            column.children = children
-            result.push(column)
-          }
-        })
-        return result
-      }
-      const newColumns = loop(treeData.value)
-      emit('update:columns', newColumns)
-    }
+    const visibleColumns = computed(() => {
+      return copyColumns.value.filter((col) => checkedKeys.value.includes(col.dataIndex))
+    })
 
     function handleClick() {
-      popupVisible.value = !popupVisible.value
+      visible.value = !visible.value
+      copyColumns.value = [...props.columns]
+      groupList.forEach((el) => {
+        el.list = []
+      })
+      copyColumns.value.forEach((col) => {
+        if (col.visible !== false) {
+          checkedKeys.value.push(col.dataIndex)
+        }
+        addGroupItem(col)
+      })
     }
 
+    function addGroupItem(column: TableColumnDataPlus) {
+      const group = column.group ?? 'base'
+      groupList.forEach((el) => {
+        if (el.group === group) {
+          el.list.push(column)
+        }
+      })
+    }
+
+    function handleOk() {
+      copyColumns.value.forEach((col) => {
+        if (checkedKeys.value.includes(col.dataIndex)) {
+          col.visible = true
+        } else {
+          col.visible = false
+        }
+      })
+      emit('update:columns', copyColumns.value)
+      visible.value = false
+    }
+
+    function handleCancel() {
+      visible.value = false
+    }
+
+    function isCheckAll(list: TableColumnDataPlus[]) {
+      if (list.length === 0) {
+        return false
+      }
+      return list.every((el) => {
+        return props.disabledKeys.includes(el.dataIndex) || checkedKeys.value.includes(el.dataIndex)
+      })
+    }
+    function isIndeterminate(list: TableColumnDataPlus[]) {
+      if (list.length === 0) {
+        return false
+      }
+      return isCheckAll(list)
+        ? false
+        : list.some((el) => {
+            return !props.disabledKeys.includes(el.dataIndex) && checkedKeys.value.includes(el.dataIndex)
+          })
+    }
+
+    function handleChange(checked: boolean | (string | number | boolean)[], column: TableColumnDataPlus) {
+      if (props.disabledKeys.includes(column.dataIndex)) {
+        return
+      }
+      if (checked) {
+        ArrayUtils.addIfNotExists(checkedKeys.value, column.dataIndex)
+      } else {
+        ArrayUtils.removeAll(checkedKeys.value, column.dataIndex)
+      }
+    }
+
+    function handleChangeAll(checked: boolean | (string | number | boolean)[], list: TableColumnDataPlus[]) {
+      if (checked) {
+        list.forEach((column) => {
+          if (props.disabledKeys.includes(column.dataIndex)) {
+            return
+          }
+          ArrayUtils.addIfNotExists(checkedKeys.value, column.dataIndex)
+        })
+      } else {
+        list.forEach((column) => {
+          if (props.disabledKeys.includes(column.dataIndex)) {
+            return
+          }
+          ArrayUtils.removeAll(checkedKeys.value, column.dataIndex)
+        })
+      }
+    }
+
+    function handleCheckedAll(checked: boolean | (string | number | boolean)[]) {
+      copyColumns.value.forEach((column) => {
+        if (props.disabledKeys.includes(column.dataIndex)) {
+          return
+        }
+        if (checked) {
+          ArrayUtils.addIfNotExists(checkedKeys.value, column.dataIndex)
+        } else {
+          ArrayUtils.removeAll(checkedKeys.value, column.dataIndex)
+        }
+      })
+    }
+
+    let dragIndex = 0
+
+    function dragstart(e: DragEvent, index: number) {
+      e.stopPropagation()
+      dragIndex = index
+    }
+    function dragenter(e: DragEvent, index: number) {
+      e.preventDefault()
+      // 拖拽到原位置时不触发
+      if (dragIndex !== index) {
+        const source = copyColumns.value[dragIndex]
+        copyColumns.value.splice(dragIndex, 1)
+        copyColumns.value.splice(index, 0, source)
+
+        // 更新节点位置
+        dragIndex = index
+      }
+    }
+    function dragover(e: DragEvent) {
+      e.preventDefault()
+      e.dataTransfer!.dropEffect = 'move'
+    }
+    function dragend() {}
+
     return {
-      popupVisible,
-      treeInstance,
-      treeData,
+      prefixCls,
+      visible,
       checkedKeys,
-      isAllChecked,
-      allCheckedChange,
-      handleSelect,
-      handlePopupVisibleChange,
-      handleDrop,
-      handleReset,
-      handleComfirm,
-      handleClick
+      groupList,
+      copyColumns,
+      visibleColumns,
+      handleClick,
+      handleOk,
+      handleCancel,
+      isCheckAll,
+      isIndeterminate,
+      handleChange,
+      handleChangeAll,
+      handleCheckedAll,
+      dragstart,
+      dragenter,
+      dragover,
+      dragend
     }
   }
 })

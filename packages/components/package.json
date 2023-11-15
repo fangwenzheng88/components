@@ -1,24 +1,26 @@
 {
   "name": "@devops-web/components",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "",
-  "main": "lib/index.cjs",
-  "module": "es/index.mjs",
-  "types": "es/index.d.ts",
+  "module": "src/index.ts",
+  "types": "src/index.ts",
   "unpkg": "dist/devops-web.js",
   "jsdelivr": "dist/devops-web.js",
-  "exports": {
-    ".": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.mjs",
-      "require": "./lib/index.cjs"
-    },
-    "./*": "./*"
-  },
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "main": "lib/index.cjs",
+    "module": "es/index.mjs",
+    "types": "es/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./es/index.d.ts",
+        "import": "./es/index.mjs",
+        "require": "./lib/index.cjs"
+      },
+      "./*": "./*"
+    }
   },
   "scripts": {
     "build": "npm run clean && pnpm run build:components && pnpm run build:style && pnpm run build:dts",
@@ -56,7 +58,7 @@
   "devDependencies": {
     "@arco-design/web-vue": "^2.52.0",
     "@devops-web/eslint-config": "workspace:*",
-    "@devops-web/hooks": "0.0.5",
+    "@devops-web/hooks": "workspace:*",
     "@devops-web/stylelint-config": "workspace:*",
     "@devops-web/utils": "1.0.1",
     "@rushstack/eslint-patch": "^1.2.0",

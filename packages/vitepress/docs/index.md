@@ -13,9 +13,9 @@ hero:
     alt: vitepress-theme-demoblock  
   actions:
     - theme: brand
-      text: Get Started
-      link: /hooks/
-    - theme: alt
-      text: Learn More
+      text: Components
+      link: /components/
+    - theme: brand
+      text: Hooks
       link: /hooks/
 ---

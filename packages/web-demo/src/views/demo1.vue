@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="text-align: right">
-      <devops-columns-setting v-model:columns="originColumns" :disabled-keys="['email']"></devops-columns-setting>
+      <devops-columns-setting v-model:columns="originColumns" :disabled-keys="['name']"></devops-columns-setting>
     </div>
     <a-table column-resizable :bordered="{ headerCell: true }" :columns="columns" :data="data" />
 
@@ -29,8 +29,16 @@ const { columns, changeColumnVisibleByDataIndex, updateColumnByDataIndex, update
     dataIndex: 'salary'
   },
   {
-    title: 'AddressAddressAddressAddressAddressAddressAddress',
+    title: 'AddressAddressAddressAddressAddress',
     dataIndex: 'address'
+  },
+  {
+    title: 'Address2Address2Address2Address2Address2Address2Address2',
+    dataIndex: 'address2'
+  },
+  {
+    title: 'Address3Address3Address3Address3Address3Address3Address3',
+    dataIndex: 'address3'
   }
 ])
 
