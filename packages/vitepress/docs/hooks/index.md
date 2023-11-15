@@ -13,8 +13,8 @@
 }
 ```
 
-安装 `@devops/hooks`
+安装 `@devops-web/hooks`
 
 ```sh
-pnpm add @devops/hooks
+pnpm add @devops-web/hooks
 ```

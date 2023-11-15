@@ -2,10 +2,10 @@
 
 ## 安装
 
-安装 `@devops/components`
+安装 `@devops-web/components`
 
 ```sh
-pnpm add @devops/components
+pnpm add @devops-web/components
 ```
 
 ## 注册全局组件
