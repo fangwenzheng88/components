@@ -9,6 +9,6 @@ export type ColumnsSettingInstance = InstanceType<typeof ColumnsSetting>
 
 declare module 'vue' {
   export interface GlobalComponents {
-    DevopsColumnsSetting: typeof ColumnsSetting
+    DevopsColumnsSetting: typeof _ColumnsSetting
   }
 }
