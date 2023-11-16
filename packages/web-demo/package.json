@@ -17,6 +17,7 @@
     "@arco-design/web-vue": "^2.52.0",
     "@devops-web/components": "workspace:*",
     "@devops-web/hooks": "workspace:*",
+    "@devops-web/utils": "1.0.1",
     "pinia": "^2.1.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
@@ -24,8 +25,6 @@
   "devDependencies": {
     "@devops-web/eslint-config": "workspace:*",
     "@devops-web/stylelint-config": "workspace:*",
-    "@devops-web/hooks": "workspace:*",
-    "@devops-web/utils": "1.0.1",
     "@rushstack/eslint-patch": "^1.2.0",
     "@tsconfig/node18": "^2.0.1",
     "@types/jsdom": "^21.1.1",

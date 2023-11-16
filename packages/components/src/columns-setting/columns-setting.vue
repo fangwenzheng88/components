@@ -108,7 +108,7 @@ export default defineComponent({
       type: Array as PropType<string[]>,
       required: false,
       default() {
-        return ['index']
+        return ['index', 'operation']
       }
     },
     disableSortKeys: {

@@ -29,10 +29,15 @@ export interface TablePageData<T extends Record<string, unknown> = Record<string
 interface PageParams {
   pageNum: number
   pageSize: number
+  /**
+   * visible=true的dataIndex集合
+   * 当多级表头的时候columnKeys 为最后一级的集合
+   */
+  columnKeys: string[]
 }
 
 export interface TablePageConfig<T extends Record<string, unknown>> {
-  fetch: ({ pageNum, pageSize }: PageParams) => Promise<TablePageData<T>>
+  fetch: (data: PageParams) => Promise<TablePageData<T>>
   columns: TableColumnDataPlus[]
   pagination?: true | PaginationProps
   immediate?: boolean
@@ -60,7 +65,7 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
   function getTableData() {
     loading.value = true
     return config
-      .fetch({ pageNum: pagination.value.current, pageSize: pagination.value.pageSize })
+      .fetch({ pageNum: pagination.value.current, pageSize: pagination.value.pageSize, columnKeys: [...columnsHooks.columnKeys.value] })
       .then((data) => {
         tableData.value = data.records
         pagination.value.total = data.total
@@ -84,7 +89,6 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
     pagination.value.current = 1
     return getTableData()
   }
-
   if (config.immediate === true) {
     loadTableData()
   }
@@ -97,12 +101,10 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
     tableInstance: columnsHooks.tableInstance,
     originColumns: columnsHooks.originColumns,
     columns: columnsHooks.columns,
+    columnKeys: columnsHooks.columnKeys,
     resetColumns: columnsHooks.resetColumns,
-    changeColumnVisibleByPath: columnsHooks.changeColumnVisibleByPath,
     changeColumnVisibleByDataIndex: columnsHooks.changeColumnVisibleByDataIndex,
-    updateColumnByPath: columnsHooks.updateColumnByPath,
     updateColumnByDataIndex: columnsHooks.updateColumnByDataIndex,
-    replaceColumnByPath: columnsHooks.replaceColumnByPath,
     replaceColumnByDataIndex: columnsHooks.replaceColumnByDataIndex,
     tableConfig: reactive({
       loading,

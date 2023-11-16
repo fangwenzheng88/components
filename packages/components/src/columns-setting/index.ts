@@ -1,7 +1,9 @@
-import ColumnsSetting from './columns-setting.vue'
+import _ColumnsSetting from './columns-setting.vue'
 import { withInstall } from '../utils'
 
-export default withInstall(ColumnsSetting)
+const ColumnsSetting = withInstall(_ColumnsSetting)
+
+export default ColumnsSetting
 
 export type ColumnsSettingInstance = InstanceType<typeof ColumnsSetting>
 

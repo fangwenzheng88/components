@@ -9,6 +9,14 @@ type ModifyRequiredKeys<T, K extends keyof T> = Omit<T, K> & {
 
 type PaginationPropsPlus = ModifyRequiredKeys<PaginationProps, 'current' | 'pageSize' | 'total'>
 
+interface Params {
+  /**
+   * visible=true的dataIndex集合
+   * 当多级表头的时候columnKeys 为最后一级的集合
+   */
+  columnKeys: string[]
+}
+
 const defaultPagination = (): PaginationPropsPlus => {
   return {
     current: 1,
@@ -20,7 +28,7 @@ const defaultPagination = (): PaginationPropsPlus => {
 }
 
 export interface TableConfig<T> {
-  fetch: () => Promise<T>
+  fetch: (data: Params) => Promise<T>
   columns: TableColumnDataPlus[]
   pagination?: boolean | PaginationProps
   immediate?: boolean
@@ -51,7 +59,7 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
   function loadTableData() {
     loading.value = true
     return config
-      .fetch()
+      .fetch({ columnKeys: [...columnsHooks.columnKeys.value] })
       .then((data) => {
         tableData.value = data
         if (config.pagination !== false) {
@@ -74,12 +82,10 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
     tableInstance: columnsHooks.tableInstance,
     originColumns: columnsHooks.originColumns,
     columns: columnsHooks.columns,
+    columnKeys: columnsHooks.columnKeys,
     resetColumns: columnsHooks.resetColumns,
-    changeColumnVisibleByPath: columnsHooks.changeColumnVisibleByPath,
     changeColumnVisibleByDataIndex: columnsHooks.changeColumnVisibleByDataIndex,
-    updateColumnByPath: columnsHooks.updateColumnByPath,
     updateColumnByDataIndex: columnsHooks.updateColumnByDataIndex,
-    replaceColumnByPath: columnsHooks.replaceColumnByPath,
     replaceColumnByDataIndex: columnsHooks.replaceColumnByDataIndex,
     tableConfig: reactive({
       loading,

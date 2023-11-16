@@ -1,7 +1,7 @@
 import { type TableColumnData, type TableInstance } from '@arco-design/web-vue'
 import { nextTick, ref, watchEffect, watch, type Ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import { setValueByPath, traverseTreeBFS } from '@devops-web/utils'
+import { traverseTreeBFS } from '@devops-web/utils'
 
 export interface TableColumnDataPlus extends TableColumnData {
   [key: string]: unknown
@@ -48,6 +48,7 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
   const originColumns: T[] = cloneDeep(columns)
   const originColumnsRef: Ref<T[]> = ref(columns as any)
   const tableInstance: Ref<TableInstance | null> = ref(null)
+  const columnKeys = ref<string[]>([])
 
   let lastWidth = 0
   const observer = new ResizeObserver((entries) => {
@@ -69,12 +70,13 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
 
   watchEffect(() => {
     columnsRef.value = filterColumns(originColumnsRef.value)
+    columnKeys.value = doFlattenColumns(columnsRef.value).map((item) => item.dataIndex)
     nextTick(() => {
       updateColumnsWidth()
     })
   })
 
-  const doFlattenColumns = (columns: TableColumnDataPlus[]) => {
+  function doFlattenColumns(columns: TableColumnDataPlus[]) {
     const result: TableColumnDataPlus[] = []
     columns.forEach((column) => {
       if (column.children && column.children.length > 0) {
@@ -147,10 +149,6 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
     originColumnsRef.value = originColumns
   }
 
-  function replaceColumnByPath(path: string, column: T) {
-    setValueByPath(originColumnsRef.value, path, column)
-  }
-
   function replaceColumnByDataIndex(dataIndex: string, column: T) {
     traverseTreeBFS(originColumnsRef.value, (node) => {
       if (node.dataIndex === dataIndex) {
@@ -167,20 +165,12 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
     })
   }
 
-  function updateColumnByPath<K extends keyof T>(path: string, field: K, value: T[K]) {
-    setValueByPath(originColumnsRef.value, `${path}.${String(field)}`, value)
-  }
-
   function updateColumnByDataIndex<K extends keyof T>(dataIndex: string, field: K, value: T[K]) {
     traverseTreeBFS(originColumnsRef.value, (node) => {
       if (node.dataIndex === dataIndex) {
         node[field] = value
       }
     })
-  }
-
-  function changeColumnVisibleByPath(path: string, visible: string) {
-    setValueByPath(originColumnsRef.value, `${path}.visible`, visible)
   }
 
   function changeColumnVisibleByDataIndex(dataIndex: string, visible: boolean) {
@@ -198,12 +188,14 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
     tableInstance,
     originColumns: originColumnsRef,
     columns: columnsRef,
+    /**
+     * visible=true的columns dataIndex集合
+     * 当多级表头的时候columnKeys 为最后一级的集合
+     */
+    columnKeys,
     resetColumns,
-    changeColumnVisibleByPath,
     changeColumnVisibleByDataIndex,
-    updateColumnByPath,
     updateColumnByDataIndex,
-    replaceColumnByPath,
     replaceColumnByDataIndex
   }
 }

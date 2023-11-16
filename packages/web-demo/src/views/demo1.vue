@@ -8,7 +8,6 @@
     <a-button @click="changeColumnVisibleByDataIndex('email', false)">隐藏Email列</a-button>
     <a-button @click="changeColumnVisibleByDataIndex('email', true)">显示Email列</a-button>
     <a-button @click="updateColumnByDataIndex('email', 'title', '1111111111111')">修改Email列</a-button>
-    <a-button @click="updateColumnByPath('3.children.0', 'title', '333333333')">修改Email列</a-button>
   </div>
 </template>
 
@@ -16,7 +15,7 @@
 import { reactive } from 'vue'
 import { useColumns } from '@devops-web/hooks'
 
-const { columns, changeColumnVisibleByDataIndex, updateColumnByDataIndex, updateColumnByPath, originColumns } = useColumns([
+const { columns, changeColumnVisibleByDataIndex, updateColumnByDataIndex, originColumns } = useColumns([
   {
     title: 'Name',
     dataIndex: 'name',
