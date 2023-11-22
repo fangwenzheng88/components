@@ -75,7 +75,7 @@
 <script lang="ts">
 import { ref, defineComponent, computed, reactive, type Ref, type PropType } from 'vue'
 import { IconSettings, IconClose, IconDragDotVertical } from '@arco-design/web-vue/es/icon'
-import { Checkbox, Button, Modal, Grid, GridItem } from '@arco-design/web-vue'
+import { Checkbox, Button, Modal, Grid, GridItem, Scrollbar } from '@arco-design/web-vue'
 import { type TableColumnDataPlus } from '@devops-web/hooks'
 import { ArrayUtils } from '@devops-web/utils'
 import { getPrefixCls } from '../utils'
@@ -95,7 +95,8 @@ export default defineComponent({
     AButton: Button,
     AModal: Modal,
     AGrid: Grid,
-    AGridItem: GridItem
+    AGridItem: GridItem,
+    AScrollbar: Scrollbar
   },
   inheritAttrs: false,
   props: {
