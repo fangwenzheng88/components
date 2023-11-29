@@ -194,6 +194,7 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
      */
     columnKeys,
     resetColumns,
+    updateColumnsWidth,
     changeColumnVisibleByDataIndex,
     updateColumnByDataIndex,
     replaceColumnByDataIndex

@@ -1,7 +1,7 @@
 <template>
   <a-layout style="min-height: 100vh">
     <a-layout-header>
-      <a-menu v-model:selected-keys="selectedKeys" theme="dark" mode="horizontal" @menu-item-click="handleMenuItemClick">
+      <a-menu :selected-keys="selectedKeys" theme="dark" mode="horizontal" @menu-item-click="handleMenuItemClick">
         <a-menu-item v-for="item of appRoutes" :key="(item.name as string)">{{ item.name }}</a-menu-item>
       </a-menu>
     </a-layout-header>
@@ -12,12 +12,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { computed } from 'vue'
 import { appRoutes } from '@/router/routes'
 
+const route = useRoute()
 const router = useRouter()
-const selectedKeys = ref<string[]>([appRoutes[0].name as string])
+
+const selectedKeys = computed(() => {
+  return [route.matched[route.matched.length - 1]?.name as string]
+})
 
 function handleMenuItemClick(key: string) {
   router.push({ name: key })

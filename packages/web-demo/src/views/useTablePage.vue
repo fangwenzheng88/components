@@ -84,7 +84,7 @@
           </a-button>
         </a-col>
       </a-row>
-      <a-table :bordered="false" :scrollbar="false" :sticky-header="true" v-bind="tableConfig">
+      <a-table column-resizable :bordered="{ headerCell: true }" :scrollbar="false" :sticky-header="true" v-bind="tableConfig">
         <template #contentType="{ record }">
           <a-space>
             <a-avatar v-if="record.contentType === 'img'" :size="16" shape="square">

@@ -113,7 +113,11 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
       ref: columnsHooks.ref,
       pagination,
       onPageChange,
-      onPageSizeChange
+      onPageSizeChange,
+      onColumnResize(dataIndex: string, width: number) {
+        columnsHooks.updateColumnByDataIndex(dataIndex, 'width', width)
+        columnsHooks.updateColumnsWidth()
+      }
     })
   }
 }

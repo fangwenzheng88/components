@@ -94,7 +94,11 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
       ref: columnsHooks.ref,
       pagination,
       onPageChange,
-      onPageSizeChange
+      onPageSizeChange,
+      onColumnResize(dataIndex: string, width: number) {
+        columnsHooks.updateColumnByDataIndex(dataIndex, 'width', width)
+        columnsHooks.updateColumnsWidth()
+      }
     })
   }
 }
