@@ -45,7 +45,7 @@ export interface TablePageConfig<T extends Record<string, unknown>> {
 
 export function useTablePage<T extends Record<string, unknown>>(config: TablePageConfig<T>) {
   const loading = ref(false)
-  const tableData = ref<T[]>()
+  const tableData = ref([]) as Ref<T[]>
   const columnsHooks = useColumns(config.columns)
   const pagination = ref(defaultPagination()) as Ref<PaginationPropsPlus>
   function onPageChange(current: number) {

@@ -36,7 +36,7 @@ export interface TableConfig<T> {
 
 export function useTable<T extends Record<string, unknown>>(config: TableConfig<T[]>) {
   const loading = ref(false)
-  const tableData = ref<T[]>()
+  const tableData = ref([]) as Ref<T[]>
   const columnsHooks = useColumns(config.columns)
   const pagination: Ref<PaginationPropsPlus | false> = ref(false)
   let onPageChange: undefined | ((current: number) => void)
