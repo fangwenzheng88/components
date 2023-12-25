@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import '@arco-themes/vue-devops/css/arco.css'
 import Components from '@devops-web/components'
 import '@devops-web/components/src/index.less'
 import ArcoVue from '@arco-design/web-vue'

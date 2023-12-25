@@ -96,8 +96,7 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
     if (!tableInstance.value) {
       return
     }
-    const borderWidth = tableInstance.value.bordered ? 2 : 0
-    const bodyWidth = tableInstance.value.$el.clientWidth - borderWidth
+    const bodyWidth = tableInstance.value.$el.querySelector('.arco-table-content').clientWidth
     let bodyMinWidth = 0
 
     const flattenColumns = getLeafColumns()

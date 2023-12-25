@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.52.0",
+    "@arco-themes/vue-devops": "^0.0.6",
     "@devops-web/components": "workspace:*",
     "@devops-web/hooks": "workspace:*",
     "@devops-web/utils": "1.0.1",

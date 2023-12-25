@@ -1,0 +1,135 @@
+@import './token.less';
+
+@edit-table-prefix-cls: ~'@{prefix}-edit-table';
+
+.@{edit-table-prefix-cls} {
+  &-edit-td {
+    &-active,
+    &:hover {
+      position: relative;
+      z-index: 999;
+      // box-shadow: 0 0 1px 1px rgb(var(--primary-6));
+      &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 10;
+        border: 2px solid rgb(var(--primary-6));
+        content: '';
+        pointer-events: none;
+      }
+    }
+  }
+
+  &-cell-spin {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding-right: 12px;
+    line-height: 1;
+    background-color: var(--color-spin-layer-bg);
+  }
+}
+
+@input-editor-prefix-cls: ~'@{prefix}-input-editor';
+
+.@{input-editor-prefix-cls} {
+  &.arco-input-wrapper,
+  & .arco-input-wrapper {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  &.arco-input-wrapper,
+  &.arco-input-wrapper:hover,
+  &.arco-input-wrapper:focus-within,
+  &.arco-input-wrapper.arco-input-focus {
+    background-color: inherit;
+    border: none;
+  }
+
+  &.arco-input-outer {
+    .arco-input-wrapper,
+    .arco-input-wrapper:hover,
+    .arco-input-wrapper:focus-within,
+    .arco-input-wrapper.arco-input-focus {
+      background-color: inherit;
+      border: none;
+    }
+
+    .arco-input-append,
+    .arco-input-prepend {
+      background-color: inherit;
+      border-right: none;
+      border-left: none;
+    }
+  }
+}
+
+@number-editor-prefix-cls: ~'@{prefix}-number-editor';
+
+.@{number-editor-prefix-cls} {
+  &.arco-input-wrapper,
+  & .arco-input-wrapper {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  &.arco-input-wrapper,
+  &.arco-input-wrapper:hover,
+  &.arco-input-wrapper:focus-within,
+  &.arco-input-wrapper.arco-input-focus {
+    background-color: inherit;
+    border: none;
+  }
+
+  &.arco-input-outer {
+    .arco-input-wrapper,
+    .arco-input-wrapper:hover,
+    .arco-input-wrapper:focus-within,
+    .arco-input-wrapper.arco-input-focus {
+      background-color: inherit;
+      border: none;
+    }
+
+    .arco-input-append,
+    .arco-input-prepend {
+      background-color: inherit;
+      border-right: none;
+      border-left: none;
+    }
+  }
+}
+
+@select-editor-prefix-cls: ~'@{prefix}-select-editor';
+
+.@{select-editor-prefix-cls} {
+  &.arco-select-view-single {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
+
+@date-editor-prefix-cls: ~'@{prefix}-date-editor';
+
+.@{date-editor-prefix-cls} {
+  &.arco-picker-focused,
+  &.arco-picker-focused:hover {
+    background-color: inherit;
+    border: none;
+  }
+  &.arco-picker {
+    width: 100%;
+    input {
+      padding-left: 12px;
+    }
+  }
+}
