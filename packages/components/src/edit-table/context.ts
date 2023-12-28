@@ -1,10 +1,11 @@
 import { ComputedRef, InjectionKey, Ref, inject, provide } from 'vue'
-import type { EditTableCellEditParams, EditTableCellParams } from './interface'
+import type { EditTableCellbegineditParams, EditTableCellendeditParams, EditTableCellParams } from './interface'
 
 type ContextProps = {
   isEditor?: (data: EditTableCellParams) => boolean
   validator?: (data: EditTableCellParams) => boolean
-  cellendedit?: (data: EditTableCellEditParams) => Promise<void> | void
+  cellbeginedit?: (data: EditTableCellbegineditParams) => Promise<void> | void
+  cellendedit?: (data: EditTableCellendeditParams) => Promise<void> | void
   showEditor: Ref<boolean>
   mergedDisabled: ComputedRef<boolean | undefined>
   mergedError: ComputedRef<boolean | undefined>

@@ -9,7 +9,7 @@ export default EditTable
 
 export type EditTableInstance = InstanceType<typeof EditTable>
 
-export type { EditTableColumnData, EditTableCellParams, EditTableCellEditParams } from './interface'
+export type { EditTableColumnData, EditTableCellParams, EditTableCellbegineditParams, EditTableCellendeditParams } from './interface'
 
 declare module 'vue' {
   export interface GlobalComponents {

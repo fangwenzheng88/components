@@ -146,7 +146,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { EditTableCellParams, EditTableCellEditParams } from '@devops-web/components'
+import type { EditTableCellParams, EditTableCellendeditParams } from '@devops-web/components'
 import { useTablePage, useSelectOptions, type TablePageData } from '@devops-web/hooks'
 
 import { ref } from 'vue'
@@ -268,7 +268,7 @@ function isEditor(data: EditTableCellParams) {
   return false
 }
 
-async function handleCellendedit(data: EditTableCellEditParams) {
+async function handleCellendedit(data: EditTableCellendeditParams) {
   console.log('handleCellendedit', data)
 }
 

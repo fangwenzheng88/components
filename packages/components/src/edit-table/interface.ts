@@ -11,7 +11,26 @@ export interface EditTableCellParams {
   rowIndex: number
 }
 
-export interface EditTableCellEditParams {
+export interface EditTableCellbegineditParams {
+  /**
+   * 当前列数据
+   */
+  column: EditTableColumnData
+  /**
+   * 当前行数据
+   */
+  record: TableData
+  /**
+   * 当前行的数组下标
+   */
+  rowIndex: number
+  /**
+   * 是否取消，赋值为true，可以阻止编辑单元格被关闭
+   */
+  cancel: boolean
+}
+
+export interface EditTableCellendeditParams {
   /**
    * 当前列数据
    */

@@ -62,12 +62,26 @@ export default defineComponent({
         })
         return [inputVNode, loading.value ? createVNode(Spin, { class: `${prefixCls}-cell-spin` }) : null]
       }
-      return [slots.default?.()]
+      return [slots.default?.(), loading.value ? createVNode(Spin, { class: `${prefixCls}-cell-spin` }) : null]
     }
 
     let beforeRecord: any = null
 
-    function handleClick() {
+    async function handleClick() {
+      if (tableCtx.cellbeginedit) {
+        const data = {
+          record: props.record,
+          column: props.column,
+          rowIndex: props.rowIndex,
+          cancel: false
+        }
+        loading.value = true
+        await tableCtx.cellbeginedit(data)
+        loading.value = false
+        if (data.cancel) {
+          return
+        }
+      }
       if (isEditor.value) {
         beforeRecord = cloneDeep(props.record)
         isEditing.value = true

@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { EditTableCellParams, EditTableCellEditParams } from '@devops-web/components'
+import type { EditTableCellParams, EditTableCellendeditParams } from '@devops-web/components'
 import { useTablePage, type TablePageData } from '@devops-web/hooks'
 
 import { ref } from 'vue'
@@ -106,7 +106,7 @@ function sleep(timeout = 1000) {
   })
 }
 
-async function handleCellendedit(data: EditTableCellEditParams) {
+async function handleCellendedit(data: EditTableCellendeditParams) {
   // 模拟请求后端
   await sleep()
   console.log('handleCellendedit', data)

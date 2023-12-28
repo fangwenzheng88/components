@@ -1,7 +1,7 @@
 import { Table, TableData, useFormItem } from '@arco-design/web-vue'
 import { PropType, createVNode, defineComponent, toRefs } from 'vue'
 import { getValueByPath } from '@devops-web/utils'
-import type { EditTableCellEditParams, EditTableCellParams, EditTableColumnData } from './interface'
+import type { EditTableCellbegineditParams, EditTableCellendeditParams, EditTableCellParams, EditTableColumnData } from './interface'
 import EditTd from './edit-td'
 import { useProvideEditTableContext } from './context'
 import { getPrefixCls } from '../utils'
@@ -37,8 +37,12 @@ export default defineComponent({
       type: Function as PropType<(data: EditTableCellParams) => boolean>,
       requeired: false
     },
+    cellbeginedit: {
+      type: Function as PropType<(data: EditTableCellbegineditParams) => Promise<void> | void>,
+      requeired: false
+    },
     cellendedit: {
-      type: Function as PropType<(data: EditTableCellEditParams) => Promise<void> | void>,
+      type: Function as PropType<(data: EditTableCellendeditParams) => Promise<void> | void>,
       requeired: false
     }
   },
@@ -52,6 +56,7 @@ export default defineComponent({
     useProvideEditTableContext({
       isEditor: props.isEditor,
       validator: props.validator,
+      cellbeginedit: props.cellbeginedit,
       cellendedit: props.cellendedit,
       showEditor,
       mergedDisabled,
