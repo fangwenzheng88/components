@@ -177,7 +177,8 @@ const { loadTableData, tableConfig } = useTablePage({
     {
       title: '编号',
       dataIndex: 'index',
-      width: 100
+      width: 0,
+      ellipsis: true
     },
     {
       title: '集合编号',

@@ -1,7 +1,5 @@
 # edit-table
 
-可编辑表格的使用示例
-
 :::demo
 
 ```vue
@@ -9,6 +7,7 @@
   <a-card class="vp-raw" :bordered="false" title="查询表格">
     <devops-edit-table
       :is-editor="isEditor"
+      :cellbeginedit="handleCellbeginedit"
       :cellendedit="handleCellendedit"
       column-resizable
       :bordered="true"
@@ -35,8 +34,9 @@
 </template>
 
 <script lang="ts" setup>
-import type { EditTableCellParams, EditTableCellendeditParams } from '@devops-web/components'
+import type { EditTableCellParams, EditTableCellendeditParams, EditTableCellbegineditParams } from '@devops-web/components'
 import { useTablePage, type TablePageData } from '@devops-web/hooks'
+import {Message} from '@arco-design/web-vue'
 
 import { ref } from 'vue'
 
@@ -106,10 +106,30 @@ function sleep(timeout = 1000) {
   })
 }
 
+/**
+ * 编辑单元前钩子函数
+ * 在这个阶段可以取消编辑
+ */
+async function handleCellbeginedit(data: EditTableCellbegineditParams) {
+  console.log('handleCellbeginedit', data)
+  // 模拟请求后端
+  await sleep(300)
+  if (data.column.dataIndex === 'count' || data.column.dataIndex === 'price') {
+    if (data.record.total > 1000) {
+      Message.warning('总价已经超过1000，不可编辑！')
+      data.cancel = true
+    }
+  }
+}
+
+/**
+ * 编辑单元格后钩子函数
+ * 在这个阶段可以取消编辑框关闭
+ */
 async function handleCellendedit(data: EditTableCellendeditParams) {
+  console.log('handleCellendedit', data)
   // 模拟请求后端
   await sleep()
-  console.log('handleCellendedit', data)
   if (data.column.dataIndex === 'count' || data.column.dataIndex === 'price') {
     if (data.record.count !== undefined && data.record.price !== undefined) {
       data.record.total = data.record.count * data.record.price

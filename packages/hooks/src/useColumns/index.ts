@@ -1,7 +1,7 @@
 import { type TableColumnData, type TableInstance } from '@arco-design/web-vue'
 import { nextTick, ref, watchEffect, watch, type Ref } from 'vue'
 import { cloneDeep } from 'lodash-es'
-import { traverseTreeBFS } from '@devops-web/utils'
+import { isUnDef, traverseTreeBFS } from '@devops-web/utils'
 
 export interface TableColumnDataPlus extends TableColumnData {
   [key: string]: unknown
@@ -105,26 +105,26 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
     if (flexColumns.length > 0) {
       flattenColumns.forEach((column) => {
         // eslint-disable-next-line no-underscore-dangle
-        bodyMinWidth += Number(column._originWidth || column.minWidth || 80)
+        bodyMinWidth += Number(column._originWidth ?? column.minWidth ?? 80)
       })
       if (bodyMinWidth <= bodyWidth) {
         const totalFlexWidth = bodyWidth - bodyMinWidth
 
         if (flexColumns.length === 1) {
-          flexColumns[0].width = Number(flexColumns[0].minWidth || 80) + totalFlexWidth
+          flexColumns[0].width = Number(flexColumns[0].minWidth ?? 80) + totalFlexWidth
         } else {
-          const allColumnsWidth = flexColumns.reduce((prev, column) => prev + Number(column.minWidth || 80), 0)
+          const allColumnsWidth = flexColumns.reduce((prev, column) => prev + Number(column.minWidth ?? 80), 0)
           const flexWidthPerPixel = totalFlexWidth / allColumnsWidth
           let noneFirstWidth = 0
 
           flexColumns.forEach((column, index) => {
             if (index === 0) return
-            const flexWidth = Math.floor(Number(column.minWidth || 80) * flexWidthPerPixel)
+            const flexWidth = Math.floor(Number(column.minWidth ?? 80) * flexWidthPerPixel)
             noneFirstWidth += flexWidth
-            column.width = Number(column.minWidth || 80) + flexWidth
+            column.width = Number(column.minWidth ?? 80) + flexWidth
           })
 
-          flexColumns[0].width = Number(flexColumns[0].minWidth || 80) + totalFlexWidth - noneFirstWidth
+          flexColumns[0].width = Number(flexColumns[0].minWidth ?? 80) + totalFlexWidth - noneFirstWidth
         }
       } else {
         flexColumns.forEach((column) => {
@@ -134,11 +134,11 @@ export function useColumns<T extends TableColumnDataPlus>(columns: T[]) {
     } else {
       flattenColumns.forEach((column) => {
         // eslint-disable-next-line no-underscore-dangle
-        if (!column._originWidth && !column.minWidth) {
+        if (isUnDef(column._originWidth) && isUnDef(column.minWidth)) {
           column.width = 80
         } else {
           // eslint-disable-next-line no-underscore-dangle
-          column.width = Number(column._originWidth || column.minWidth)
+          column.width = Number(column._originWidth ?? column.minWidth)
         }
       })
     }
