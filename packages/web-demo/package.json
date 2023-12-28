@@ -14,7 +14,7 @@
     "style": "stylelint --fix \"src/**/*.{vue,less,postcss,css,scss}\""
   },
   "dependencies": {
-    "@arco-design/web-vue": "^2.52.0",
+    "@arco-design/web-vue": "^2.53.3",
     "@arco-themes/vue-devops": "^0.0.6",
     "@devops-web/components": "workspace:*",
     "@devops-web/hooks": "workspace:*",

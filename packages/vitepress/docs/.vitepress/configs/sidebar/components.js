@@ -13,7 +13,7 @@
       {
         text: '功能',
         collapsible: true,
-        items: [{"text":"columns-setting","link":"/components/columns-setting"}]
+        items: [{"text":"columns-setting","link":"/components/columns-setting"},{"text":"edit-table","link":"/components/edit-table"}]
       }
     ]
   

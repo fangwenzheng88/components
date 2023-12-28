@@ -1,10 +1,13 @@
-import { ComputedRef, InjectionKey, computed, inject, provide } from 'vue'
+import { ComputedRef, InjectionKey, Ref, inject, provide } from 'vue'
 import type { EditTableCellEditParams, EditTableCellParams } from './interface'
 
 type ContextProps = {
-  isEditing?: (data: EditTableCellParams) => boolean
+  isEditor?: (data: EditTableCellParams) => boolean
+  validator?: (data: EditTableCellParams) => boolean
   cellendedit?: (data: EditTableCellEditParams) => Promise<void> | void
-  mergedDisabled: ComputedRef<boolean>
+  showEditor: Ref<boolean>
+  mergedDisabled: ComputedRef<boolean | undefined>
+  mergedError: ComputedRef<boolean | undefined>
   slots: any
 }
 
@@ -15,5 +18,5 @@ export const useProvideEditTableContext = (props: ContextProps) => {
 }
 
 export const useInjectEditTableContext = () => {
-  return inject(ContextKey, { slots: {}, mergedDisabled: computed(() => false) })
+  return inject(ContextKey, {} as ContextProps)
 }

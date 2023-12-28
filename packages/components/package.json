@@ -56,7 +56,7 @@
     "vue": ">=3.0.0"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.52.0",
+    "@arco-design/web-vue": "^2.53.3",
     "@devops-web/eslint-config": "workspace:*",
     "@devops-web/hooks": "workspace:*",
     "@devops-web/stylelint-config": "workspace:*",

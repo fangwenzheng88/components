@@ -21,7 +21,19 @@ export default defineComponent({
       type: Boolean,
       default: false
     },
-    isEditing: {
+    showEditor: {
+      type: Boolean,
+      default: false
+    },
+    isEditor: {
+      type: Function as PropType<(data: EditTableCellParams) => boolean>,
+      requeired: false
+    },
+    showError: {
+      type: Boolean,
+      default: false
+    },
+    validator: {
       type: Function as PropType<(data: EditTableCellParams) => boolean>,
       requeired: false
     },
@@ -31,17 +43,19 @@ export default defineComponent({
     }
   },
   setup(props, { slots, attrs }) {
-    const { disabled } = toRefs(props)
+    const { disabled, showEditor, showError } = toRefs(props)
 
     const prefixCls = getPrefixCls('edit-table')
 
-    const { mergedDisabled, mergedError } = useFormItem({ disabled })
-    console.log('------------------->', mergedDisabled, mergedError)
+    const { mergedDisabled, mergedError } = useFormItem({ disabled, error: showError })
 
     useProvideEditTableContext({
-      isEditing: props.isEditing,
+      isEditor: props.isEditor,
+      validator: props.validator,
       cellendedit: props.cellendedit,
+      showEditor,
       mergedDisabled,
+      mergedError,
       slots
     })
 

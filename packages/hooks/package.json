@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@devops-web/utils": "1.0.1",
-    "@arco-design/web-vue": "^2.52.0",
+    "@arco-design/web-vue": "^2.53.3",
     "@devops-web/eslint-config": "workspace:*",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.1.0",

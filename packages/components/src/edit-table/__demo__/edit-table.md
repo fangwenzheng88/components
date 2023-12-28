@@ -1,3 +1,8 @@
+# edit-table
+
+:::demo
+
+```vue
 <template>
   <a-form ref="formRef" class="vp-raw" :model="formData" :auto-label-width="true" :rules="rules" @submit-success="handleSubmit">
     <a-form-item field="name" label="名称">
@@ -181,3 +186,6 @@ function handleDeleteTableData(rowIndex: number) {
   formData.tableData.splice(rowIndex, 1)
 }
 </script>
+```
+
+:::

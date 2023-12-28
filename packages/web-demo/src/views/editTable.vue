@@ -85,7 +85,7 @@
         </a-col>
       </a-row>
       <devops-edit-table
-        :is-editing="isEditing"
+        :is-editor="isEditor"
         :cellendedit="handleCellendedit"
         column-resizable
         :bordered="true"
@@ -261,7 +261,7 @@ const { loadTableData, tableConfig } = useTablePage({
   immediate: true // 传true会自动调用一次loadTableData()
 })
 
-function isEditing(data: EditTableCellParams) {
+function isEditor(data: EditTableCellParams) {
   if (['number', 'name', 'createdTime', 'daterange', 'count'].includes(data.column.dataIndex)) {
     return true
   }

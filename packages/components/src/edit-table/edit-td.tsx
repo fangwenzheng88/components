@@ -29,8 +29,8 @@ export default defineComponent({
     const isEditing = ref(false)
 
     const isEditor = computed(() => {
-      if (tableCtx.isEditing && tableCtx.mergedDisabled.value === false) {
-        return tableCtx.isEditing({
+      if (tableCtx.isEditor && !tableCtx.mergedDisabled.value) {
+        return tableCtx.isEditor({
           record: props.record,
           column: props.column,
           rowIndex: props.rowIndex
@@ -39,6 +39,18 @@ export default defineComponent({
 
       return false
     })
+
+    function isErrorCell() {
+      if (tableCtx.validator && tableCtx.mergedError.value) {
+        return !tableCtx.validator({
+          record: props.record,
+          column: props.column,
+          rowIndex: props.rowIndex
+        })
+      }
+
+      return false
+    }
 
     function renderInput() {
       if (isEditing.value) {
@@ -94,8 +106,15 @@ export default defineComponent({
       if (isEditor.value) {
         className.push(`${prefixCls}-edit-td`)
       }
+      if (tableCtx.showEditor.value) {
+        className.push(`${prefixCls}-edit-td-bg`)
+      }
       if (isEditing.value) {
         className.push(`${prefixCls}-edit-td-active`)
+      }
+      const isError = isErrorCell()
+      if (isError) {
+        className.push(`${prefixCls}-edit-td-is-error`)
       }
       return createVNode('td', { class: className, onClick: handleClick }, { default: () => renderInput() })
     }
