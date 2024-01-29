@@ -1,7 +1,7 @@
 {
   "name": "@devops-web/components",
   "type": "module",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "module": "src/index.ts",
   "types": "src/index.ts",
@@ -58,9 +58,9 @@
   "devDependencies": {
     "@arco-design/web-vue": "^2.53.3",
     "@devops-web/eslint-config": "workspace:*",
-    "@devops-web/hooks": "workspace:*",
+    "@devops-web/hooks": "0.0.12",
     "@devops-web/stylelint-config": "workspace:*",
-    "@devops-web/utils": "1.0.1",
+    "@devops-web/utils": "1.0.3",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/lodash-es": "^4.17.9",
     "@types/node": "^18.16.17",

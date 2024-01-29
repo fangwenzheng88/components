@@ -39,14 +39,14 @@ importers:
         specifier: workspace:*
         version: link:../eslint-config
       '@devops-web/hooks':
-        specifier: workspace:*
-        version: link:../hooks
+        specifier: 0.0.12
+        version: 0.0.12(@arco-design/web-vue@2.53.3)(@devops-web/utils@1.0.3)(lodash-es@4.17.21)(vue@3.3.4)
       '@devops-web/stylelint-config':
         specifier: workspace:*
         version: link:../stylelint-config
       '@devops-web/utils':
-        specifier: 1.0.1
-        version: 1.0.1(dayjs@1.11.10)
+        specifier: 1.0.3
+        version: 1.0.3(dayjs@1.11.10)
       '@rushstack/eslint-patch':
         specifier: ^1.2.0
         version: 1.2.0
@@ -1251,6 +1251,20 @@ packages:
     dependencies:
       postcss-selector-parser: 6.0.13
 
+  /@devops-web/hooks@0.0.12(@arco-design/web-vue@2.53.3)(@devops-web/utils@1.0.3)(lodash-es@4.17.21)(vue@3.3.4):
+    resolution: {integrity: sha512-Ood/AGLm2dBV0fvmiGPdkC3b/3315Do7kOjkdqUZXWPDeXrh6K3B7ZSQgruopzaqkRO722m5KYo9noji2XbMoA==}
+    peerDependencies:
+      '@arco-design/web-vue': '>=2.0.0'
+      '@devops-web/utils': '>=1'
+      lodash-es: '>=4.0.0'
+      vue: '>=3.0.0'
+    dependencies:
+      '@arco-design/web-vue': 2.53.3(vue@3.3.4)
+      '@devops-web/utils': 1.0.3(dayjs@1.11.10)
+      lodash-es: 4.17.21
+      vue: 3.3.4
+    dev: true
+
   /@devops-web/utils@1.0.0(dayjs@1.11.10):
     resolution: {integrity: sha512-/EKFjD/TIR/KxU6QjAkKOISgAE+h689FDHuGE3DHGCGb4H6ctAUSeJ2+ct4H539NknmJVzSsqfHnejHdZXMcqg==}
     peerDependencies:
@@ -1265,6 +1279,14 @@ packages:
       dayjs: '>=1'
     dependencies:
       dayjs: 1.11.10
+
+  /@devops-web/utils@1.0.3(dayjs@1.11.10):
+    resolution: {integrity: sha512-aaUskhAGfnJGVfLypPcmxegWp2yBocRu2VWY2dMf+6b1lju9ww6/51RYE4FkYoE6YGoHLivSG5P/vwpixzIoYw==}
+    peerDependencies:
+      dayjs: '>=1'
+    dependencies:
+      dayjs: 1.11.10
+    dev: true
 
   /@docsearch/css@3.5.2:
     resolution: {integrity: sha512-SPiDHaWKQZpwR2siD0KQUwlStvIAnEyK6tAE2h2Wuoq8ue9skzhlyVQ1ddzOxX6khULnAALDiR/isSF3bnuciA==}
