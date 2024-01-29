@@ -4,6 +4,9 @@ importers:
 
   .:
     devDependencies:
+      '@arco-design/web-vue':
+        specifier: ^2.53.3
+        version: 2.53.3(vue@3.3.4)
       '@changesets/cli':
         specifier: ^2.26.2
         version: 2.26.2
@@ -25,6 +28,9 @@ importers:
       typescript:
         specifier: ~5.0.4
         version: 5.0.4
+      vue:
+        specifier: ^3.3.4
+        version: 3.3.4
 
   packages/components:
     dependencies:
@@ -39,8 +45,8 @@ importers:
         specifier: workspace:*
         version: link:../eslint-config
       '@devops-web/hooks':
-        specifier: 0.0.12
-        version: 0.0.12(@arco-design/web-vue@2.53.3)(@devops-web/utils@1.0.3)(lodash-es@4.17.21)(vue@3.3.4)
+        specifier: workspace:*
+        version: link:../hooks
       '@devops-web/stylelint-config':
         specifier: workspace:*
         version: link:../stylelint-config
@@ -1250,20 +1256,6 @@ packages:
       postcss-selector-parser: ^6.0.13
     dependencies:
       postcss-selector-parser: 6.0.13
-
-  /@devops-web/hooks@0.0.12(@arco-design/web-vue@2.53.3)(@devops-web/utils@1.0.3)(lodash-es@4.17.21)(vue@3.3.4):
-    resolution: {integrity: sha512-Ood/AGLm2dBV0fvmiGPdkC3b/3315Do7kOjkdqUZXWPDeXrh6K3B7ZSQgruopzaqkRO722m5KYo9noji2XbMoA==}
-    peerDependencies:
-      '@arco-design/web-vue': '>=2.0.0'
-      '@devops-web/utils': '>=1'
-      lodash-es: '>=4.0.0'
-      vue: '>=3.0.0'
-    dependencies:
-      '@arco-design/web-vue': 2.53.3(vue@3.3.4)
-      '@devops-web/utils': 1.0.3(dayjs@1.11.10)
-      lodash-es: 4.17.21
-      vue: 3.3.4
-    dev: true
 
   /@devops-web/utils@1.0.0(dayjs@1.11.10):
     resolution: {integrity: sha512-/EKFjD/TIR/KxU6QjAkKOISgAE+h689FDHuGE3DHGCGb4H6ctAUSeJ2+ct4H539NknmJVzSsqfHnejHdZXMcqg==}

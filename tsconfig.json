@@ -9,6 +9,10 @@
     "esModuleInterop": true,
     "moduleResolution": "Node",
     "noImplicitAny": true,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "paths": {
+      "@arco-design/web-vue": ["./node_modules/@arco-design/web-vue"],
+      "vue": ["./node_modules/ vue"]
+    }
   }
 }
