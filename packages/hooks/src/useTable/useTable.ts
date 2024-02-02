@@ -1,4 +1,4 @@
-import { type Ref, reactive, ref } from 'vue'
+import { type Ref, reactive, ref, watchEffect } from 'vue'
 import type { PaginationProps } from '@arco-design/web-vue'
 import { isObject } from '@devops-web/utils'
 import { useColumns, type TableColumnDataPlus } from '../useColumns'
@@ -28,7 +28,7 @@ const defaultPagination = (): PaginationPropsPlus => {
 }
 
 export interface TableConfig<T> {
-  fetch: (data: Params) => Promise<T>
+  fetch?: (data: Params) => Promise<T>
   columns: TableColumnDataPlus[]
   pagination?: boolean | PaginationProps
   immediate?: boolean
@@ -53,18 +53,25 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
     }
   }
 
+  watchEffect(() => {
+    if (pagination.value !== false) {
+      const len = Array.isArray(tableData.value) ? tableData.value.length : 0
+      pagination.value.total = len
+    }
+  })
+
   /**
    * 加载表格数据
    */
   function loadTableData() {
     loading.value = true
+    if (!config.fetch) {
+      throw new Error('useTable请提供fetch配置项')
+    }
     return config
       .fetch({ columnKeys: [...columnsHooks.columnKeys.value] })
       .then((data) => {
-        tableData.value = data
-        if (config.pagination !== false) {
-          ;(pagination.value as PaginationPropsPlus).total = data.length
-        }
+        tableData.value = Array.isArray(data) ? data : []
       })
       .finally(() => {
         loading.value = false

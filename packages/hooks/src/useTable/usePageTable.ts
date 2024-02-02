@@ -67,8 +67,12 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
     return config
       .fetch({ pageNum: pagination.value.current, pageSize: pagination.value.pageSize, columnKeys: [...columnsHooks.columnKeys.value] })
       .then((data) => {
-        tableData.value = data.records
-        pagination.value.total = data.total
+        if (isObject(data)) {
+          tableData.value = Array.isArray(data.records) ? data.records : []
+          pagination.value.total = data.total ?? 0
+        } else {
+          console.warn('useTablePage请求返回结果数据异常!', data)
+        }
       })
       .finally(() => {
         loading.value = false
