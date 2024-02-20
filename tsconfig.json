@@ -12,7 +12,7 @@
     "lib": ["esnext", "dom"],
     "paths": {
       "@arco-design/web-vue": ["./node_modules/@arco-design/web-vue"],
-      "vue": ["./node_modules/ vue"]
+      "vue": ["./node_modules/vue"]
     }
   }
 }

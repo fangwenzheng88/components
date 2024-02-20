@@ -57,6 +57,7 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
       fixed,
       render(data) {
         const operations = config.operations!(data.record).filter((el) => el.visible !== false)
+        // @ts-ignore
         return h(ResizeObserver, { onResize: setOperationWidth }, () => h(OperationColumn, { operations }))
       }
     })

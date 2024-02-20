@@ -1,5 +1,5 @@
-import { type TableColumnDataPlus } from '@devops-web/hooks'
 import { TableData } from '@arco-design/web-vue'
+import { type TableColumnDataPlus } from '../utils/interface'
 
 export interface EditTableColumnData extends TableColumnDataPlus {
   children?: EditTableColumnData[]

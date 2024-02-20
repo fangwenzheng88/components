@@ -11,7 +11,7 @@ const config: InlineConfig = {
     emptyOutDir: false,
     minify: false,
     rollupOptions: {
-      external: ['vue', /@arco-design\/web-vue/, '@devops-web/utils', '@vueuse/core', 'lodash-es'],
+      external: ['vue', /@arco-design\/web-vue/, '@devops-web/utils', 'lodash-es'],
       input: ['src/index.ts'],
       output: [
         {
@@ -23,9 +23,7 @@ const config: InlineConfig = {
             vue: 'Vue',
             'lodash-es': '_',
             '@arco-design/web-vue': 'ArcoVue',
-            '@vueuse/core': 'VueUse',
-            '@devops-web/utils': 'DevopsUtils',
-            '@devops-web/hooks': 'DevopsHooks'
+            '@devops-web/utils': 'DevopsUtils'
           }
         },
         {

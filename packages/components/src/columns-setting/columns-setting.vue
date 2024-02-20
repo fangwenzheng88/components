@@ -76,8 +76,8 @@
 import { ref, defineComponent, computed, reactive, type Ref, type PropType } from 'vue'
 import { IconSettings, IconClose, IconDragDotVertical } from '@arco-design/web-vue/es/icon'
 import { Checkbox, Button, Modal, Grid, GridItem, Scrollbar } from '@arco-design/web-vue'
-import { type TableColumnDataPlus } from '@devops-web/hooks'
 import { ArrayUtils } from '@devops-web/utils'
+import { type TableColumnDataPlus } from '../utils/interface'
 import { getPrefixCls } from '../utils'
 
 type Group = {
@@ -309,3 +309,4 @@ export default defineComponent({
   }
 })
 </script>
+../utils/interface

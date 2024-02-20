@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { PropType, defineComponent, computed, ref, watchEffect } from 'vue'
-import type { OperationItem } from '@devops-web/hooks'
+import type { OperationItem } from '../utils/interface'
 import { getPrefixCls } from '../utils'
 
 export default defineComponent({
@@ -56,3 +56,4 @@ export default defineComponent({
   }
 })
 </script>
+../utils/interface
