@@ -13,7 +13,7 @@
       {
         text: '功能',
         collapsible: true,
-        items: [{"text":"columns-setting","link":"/components/columns-setting"},{"text":"edit-table-form","link":"/components/edit-table-form"},{"text":"edit-table","link":"/components/edit-table"}]
+        items: [{"text":"columns-setting","link":"/components/columns-setting"},{"text":"edit-table-form","link":"/components/edit-table-form"},{"text":"edit-table","link":"/components/edit-table"},{"text":"operation-column","link":"/components/operation-column"}]
       }
     ]
   

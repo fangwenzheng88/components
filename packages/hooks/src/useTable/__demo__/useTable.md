@@ -68,6 +68,16 @@ const { tableConfig } = useTable({
         action: () => {
           console.log('详情')
         }
+      },
+      {
+        label: '编辑',
+        action: (operation) => {
+          operation.loading = true
+          setTimeout(() => {
+            operation.loading = false
+          }, 2000)
+          console.log('编辑')
+        }
       }
     ]
   },
@@ -124,6 +134,16 @@ const { tableData, loading, tableConfig } = useTable<Record<string, any>>({
         label: '详情',
         action: () => {
           console.log('详情')
+        }
+      },
+      {
+        label: '编辑',
+        action: (operation) => {
+          operation.loading = true
+          setTimeout(() => {
+            operation.loading = false
+          }, 2000)
+          console.log('编辑')
         }
       }
     ]

@@ -217,12 +217,42 @@ const { loadTableData, tableConfig } = useTablePage({
       slotName: 'status'
     }
   ],
-  operations() {
+  operations(record) {
+    console.log('--------->', record)
     return [
       {
         label: '详情',
         action: () => {
           console.log('详情')
+        }
+      },
+      {
+        label: '编辑',
+        action: (operation) => {
+          operation.loading = true
+          setTimeout(() => {
+            operation.loading = false
+          }, 2000)
+          console.log('编辑')
+        }
+      },
+      {
+        label: '删除',
+        disabled: true,
+        action: () => {
+          console.log('删除')
+        }
+      },
+      {
+        label: '启动',
+        action: () => {
+          console.log('启动')
+        }
+      },
+      {
+        label: '停止',
+        action: () => {
+          console.log('停止')
         }
       }
     ]
