@@ -16,11 +16,20 @@
 
 <script lang="ts">
 import { PropType, defineComponent, computed, ref, watchEffect } from 'vue'
+import { Doption, Dropdown, Link, Spin } from '@arco-design/web-vue'
+import { IconMoreVertical } from '@arco-design/web-vue/es/icon'
 import type { OperationItem } from '../utils/interface'
 import { getPrefixCls } from '../utils'
 
 export default defineComponent({
   name: 'OperationColumn',
+  components: {
+    ASpin: Spin,
+    ALink: Link,
+    ADropdown: Dropdown,
+    ADoption: Doption,
+    IconMoreVertical
+  },
   props: {
     operations: {
       type: Array as PropType<OperationItem[]>,
