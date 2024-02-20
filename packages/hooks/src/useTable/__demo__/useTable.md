@@ -2,7 +2,7 @@
 
 `a-table` 前端分页、不分页场景的工具函数，简化前端表格的配置
 
-通过 `useColumns` 实现表格列minWidth，visible的功能
+通过 `useColumns` 实现表格列 minWidth，visible 的功能
 
 ## 示例一
 
@@ -61,6 +61,16 @@ const { tableConfig } = useTable({
       dataIndex: 'level'
     }
   ],
+  operations() {
+    return [
+      {
+        label: '详情',
+        action: () => {
+          console.log('详情')
+        }
+      }
+    ]
+  },
   immediate: true,
   pagination: true
 })
@@ -69,10 +79,9 @@ const { tableConfig } = useTable({
 
 :::
 
-
 ## 示例二
 
-省略fetch配置参数，通过其他途径设置tableData
+省略 fetch 配置参数，通过其他途径设置 tableData
 
 :::demo
 
@@ -109,6 +118,16 @@ const { tableData, loading, tableConfig } = useTable<Record<string, any>>({
       dataIndex: 'level'
     }
   ],
+  operations() {
+    return [
+      {
+        label: '详情',
+        action: () => {
+          console.log('详情')
+        }
+      }
+    ]
+  },
   pagination: true
 })
 

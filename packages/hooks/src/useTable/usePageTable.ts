@@ -1,7 +1,9 @@
-import { type Ref, reactive, ref } from 'vue'
-import type { PaginationProps } from '@arco-design/web-vue'
-import { isObject } from '@devops-web/utils'
+import { type Ref, reactive, ref, h, watch } from 'vue'
+import type { PaginationProps, TableData } from '@arco-design/web-vue'
+import { isArray, isObject } from '@devops-web/utils'
+import { OperationColumn, ResizeObserver } from '@devops-web/components'
 import { useColumns, type TableColumnDataPlus } from '../useColumns'
+import type { OperationItem } from './interface'
 
 type ModifyRequiredKeys<T, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: T[P]
@@ -40,13 +42,51 @@ export interface TablePageConfig<T extends Record<string, unknown>> {
   fetch: (data: PageParams) => Promise<TablePageData<T>>
   columns: TableColumnDataPlus[]
   pagination?: true | PaginationProps
+  operationsFixed?: 'left' | 'right' | false
+  operations?: (record: TableData) => OperationItem[]
   immediate?: boolean
 }
 
 export function useTablePage<T extends Record<string, unknown>>(config: TablePageConfig<T>) {
+  const columns = [...config.columns]
+  if (config.operations) {
+    const fixed = config.operationsFixed === false ? undefined : config.operationsFixed ?? 'right'
+    columns.push({
+      title: '操作',
+      dataIndex: 'operation',
+      fixed,
+      render(data) {
+        const operations = config.operations!(data.record).filter((el) => el.visible !== false)
+        return h(ResizeObserver, { onResize: setOperationWidth }, () => h(OperationColumn, { operations }))
+      }
+    })
+  }
+
   const loading = ref(false)
   const tableData = ref([]) as Ref<T[]>
-  const columnsHooks = useColumns(config.columns)
+  const columnsHooks = useColumns(columns)
+
+  watch(tableData, (newVal) => {
+    if (config.operations) {
+      if (isArray(newVal) && newVal.length > 0) {
+        let flag = false
+        for (const rowData of newVal) {
+          const operations = config.operations!(rowData).filter((el) => el.visible !== false)
+          if (operations && operations.length > 0) {
+            flag = true
+            break
+          }
+        }
+        columnsHooks.changeColumnVisibleByDataIndex('operation', flag)
+      }
+    }
+  })
+
+  function setOperationWidth(entry: ResizeObserverEntry) {
+    const { width } = entry.contentRect
+    columnsHooks.updateColumnByDataIndex('operation', 'width', width + 33)
+  }
+
   const pagination = ref(defaultPagination()) as Ref<PaginationPropsPlus>
   function onPageChange(current: number) {
     pagination.value.current = current

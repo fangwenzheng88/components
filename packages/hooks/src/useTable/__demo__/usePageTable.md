@@ -2,7 +2,7 @@
 
 `a-table` 前端页场景的工具函数，简化前端表格的配置
 
-通过 `useColumns` 实现表格列minWidth，visible的功能
+通过 `useColumns` 实现表格列 minWidth，visible 的功能
 
 :::demo
 
@@ -116,9 +116,6 @@
           <span v-else class="circle pass"></span>
           {{ record.status }}
         </template>
-        <template #operations="{ record }">
-          <a-link type="text" size="small">编辑</a-link>
-        </template>
       </a-table>
     </a-card>
   </div>
@@ -218,14 +215,18 @@ const { loadTableData, tableConfig } = useTablePage({
       title: '状态',
       dataIndex: 'status',
       slotName: 'status'
-    },
-    {
-      title: '操作',
-      dataIndex: 'operations',
-      slotName: 'operations',
-      width: 120
     }
   ],
+  operations() {
+    return [
+      {
+        label: '详情',
+        action: () => {
+          console.log('详情')
+        }
+      }
+    ]
+  },
   immediate: true // 传true会自动调用一次loadTableData()
 })
 

@@ -1,0 +1,12 @@
+@import './token.less';
+
+@operation-column-prefix-cls: ~'@{prefix}-operation-column';
+
+.@{operation-column-prefix-cls} {
+  display: inline-flex;
+  margin-left: -2px;
+  white-space: nowrap;
+  .arco-link {
+    cursor: pointer;
+  }
+}

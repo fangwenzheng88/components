@@ -1,7 +1,9 @@
-import { type Ref, reactive, ref, watchEffect } from 'vue'
-import type { PaginationProps } from '@arco-design/web-vue'
-import { isObject } from '@devops-web/utils'
+import { type Ref, reactive, ref, watchEffect, watch, h } from 'vue'
+import type { PaginationProps, TableData } from '@arco-design/web-vue'
+import { isObject, toArray } from '@devops-web/utils'
+import { OperationColumn, ResizeObserver } from '@devops-web/components'
 import { useColumns, type TableColumnDataPlus } from '../useColumns'
+import { OperationItem } from './interface'
 
 type ModifyRequiredKeys<T, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: T[P]
@@ -31,13 +33,30 @@ export interface TableConfig<T> {
   fetch?: (data: Params) => Promise<T>
   columns: TableColumnDataPlus[]
   pagination?: boolean | PaginationProps
+  operationsFixed?: 'left' | 'right' | false
+  operations?: (record: TableData) => OperationItem[]
   immediate?: boolean
 }
 
 export function useTable<T extends Record<string, unknown>>(config: TableConfig<T[]>) {
+  const columns = [...config.columns]
+  if (config.operations) {
+    const fixed = config.operationsFixed === false ? undefined : config.operationsFixed ?? 'right'
+    columns.push({
+      title: '操作',
+      dataIndex: 'operation',
+      fixed,
+      render(data) {
+        const operations = config.operations!(data.record).filter((el) => el.visible !== false)
+        return h(ResizeObserver, { onResize: setOperationWidth }, () => h(OperationColumn, { operations }))
+      }
+    })
+  }
+
   const loading = ref(false)
   const tableData = ref([]) as Ref<T[]>
-  const columnsHooks = useColumns(config.columns)
+  const columnsHooks = useColumns(columns)
+
   const pagination: Ref<PaginationPropsPlus | false> = ref(false)
   let onPageChange: undefined | ((current: number) => void)
   let onPageSizeChange: undefined | ((pageSize: number) => void)
@@ -59,6 +78,33 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
       pagination.value.total = len
     }
   })
+
+  watch(
+    () => {
+      if (isObject(pagination.value)) {
+        return toArray(tableData.value).slice(pagination.value.pageSize * (pagination.value.current - 1), pagination.value.pageSize * pagination.value.current)
+      }
+      return tableData.value ?? []
+    },
+    (newVal) => {
+      if (config.operations && newVal.length > 0) {
+        let flag = false
+        for (const rowData of newVal) {
+          const operations = config.operations!(rowData).filter((el) => el.visible !== false)
+          if (operations && operations.length > 0) {
+            flag = true
+            break
+          }
+        }
+        columnsHooks.changeColumnVisibleByDataIndex('operation', flag)
+      }
+    }
+  )
+
+  function setOperationWidth(entry: ResizeObserverEntry) {
+    const { width } = entry.contentRect
+    columnsHooks.updateColumnByDataIndex('operation', 'width', width + 33)
+  }
 
   /**
    * 加载表格数据

@@ -1,7 +1,7 @@
 {
   "name": "@devops-web/hooks",
   "type": "module",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "",
   "module": "src/index.ts",
   "types": "src/index.ts",
@@ -45,12 +45,14 @@
   "peerDependencies": {
     "@arco-design/web-vue": ">=2.0.0",
     "@devops-web/utils": ">=1",
+    "@devops-web/components": ">1.0.6",
     "lodash-es": ">=4.0.0",
     "vue": ">=3.0.0"
   },
   "devDependencies": {
     "@devops-web/utils": "1.0.1",
     "@arco-design/web-vue": "^2.53.3",
+    "@devops-web/components": "workspace:*",
     "@devops-web/eslint-config": "workspace:*",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.1.0",

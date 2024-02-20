@@ -30,7 +30,50 @@ const { tableData, loading, tableConfig } = useTable<Record<string, any>>({
       dataIndex: 'level'
     }
   ],
-  pagination: true
+  pagination: true,
+  operations(record) {
+    if (record.index > 20) {
+      return []
+    }
+    return [
+      {
+        label: '详情',
+        action: () => {
+          console.log('详情')
+        }
+      },
+      {
+        label: '编辑',
+        action: (operation) => {
+          operation.loading = true
+          setTimeout(() => {
+            operation.loading = false
+          }, 2000)
+          console.log('编辑')
+        }
+      },
+      {
+        label: '删除',
+        disabled: true,
+        action: () => {
+          console.log('删除')
+        }
+      },
+      {
+        label: '启动',
+        disabled: true,
+        action: () => {
+          console.log('启动')
+        }
+      },
+      {
+        label: '停止',
+        action: () => {
+          console.log('停止')
+        }
+      }
+    ]
+  }
 })
 
 onMounted(() => {

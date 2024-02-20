@@ -4,7 +4,7 @@ import dts from 'rollup-plugin-dts'
 import commonjs from '@rollup/plugin-commonjs'
 
 const input = 'src/index.ts'
-const external = ['@devops-web/utils', 'vue', 'lodash-es', /@arco-design\/web-vue/]
+const external = ['@devops-web/utils', '@devops-web/components', 'vue', 'lodash-es', /@arco-design\/web-vue/]
 
 export default [
   {
@@ -19,7 +19,8 @@ export default [
           vue: 'Vue',
           '@arco-design/web-vue': 'ArcoVue',
           'lodash-es': '_',
-          '@devops-web/utils': 'DevopsUtils'
+          '@devops-web/utils': 'DevopsUtils',
+          '@devops-web/components': 'DevopsComponents'
         }
       }
     ],

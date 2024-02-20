@@ -1,89 +1,15 @@
+# operation-column
+
+a-table 操作列单元格组件，配合 useTable/usePageTable 使用
+
+- operations 操作列数组
+
+:::demo
+
+```vue
 <template>
   <div class="vp-raw">
-    <a-card :bordered="false" title="查询表格">
-      <a-row>
-        <a-col :flex="1">
-          <a-form :model="formModel" :label-col-props="{ span: 6 }" :wrapper-col-props="{ span: 18 }" label-align="left">
-            <a-row :gutter="16">
-              <a-col :span="8">
-                <a-form-item field="number" label="集合编号">
-                  <a-input v-model="formModel.number" />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item field="name" label="集合名称">
-                  <a-input v-model="formModel.name" />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item field="contentType" label="内容体裁">
-                  <a-select v-model="formModel.contentType" />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item field="filterType" label="筛选方式">
-                  <a-select v-model="formModel.filterType" />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item field="createdTime" label="创建时间">
-                  <a-range-picker v-model="formModel.createdTime" style="width: 100%" />
-                </a-form-item>
-              </a-col>
-              <a-col :span="8">
-                <a-form-item field="status" label="状态">
-                  <a-select v-model="formModel.status" :options="options" />
-                </a-form-item>
-              </a-col>
-            </a-row>
-          </a-form>
-        </a-col>
-        <a-divider style="height: 84px" direction="vertical" />
-        <a-col :flex="'86px'" style="text-align: right">
-          <a-space direction="vertical" :size="18">
-            <a-button type="primary" @click="loadTableData()">
-              <template #icon>
-                <icon-search />
-              </template>
-              <span>查询</span>
-            </a-button>
-            <a-button @click="reset">
-              <template #icon>
-                <icon-refresh />
-              </template>
-              <span>重置</span>
-            </a-button>
-          </a-space>
-        </a-col>
-      </a-row>
-      <a-divider style="margin-top: 0" />
-      <a-row style="margin-bottom: 16px">
-        <a-col :span="16">
-          <a-space>
-            <a-button type="primary">
-              <template #icon>
-                <icon-plus />
-              </template>
-              <span>新建</span>
-            </a-button>
-            <a-upload action="/">
-              <template #upload-button>
-                <a-button>
-                  <span>批量导入</span>
-                </a-button>
-              </template>
-            </a-upload>
-          </a-space>
-        </a-col>
-        <a-col :span="8" style="text-align: right">
-          <a-button>
-            <template #icon>
-              <icon-download />
-            </template>
-            <span>下载</span>
-          </a-button>
-        </a-col>
-      </a-row>
+    <a-card :bordered="false" title="表格">
       <a-table column-resizable :bordered="{ headerCell: true }" :scrollbar="false" :sticky-header="true" v-bind="tableConfig">
         <template #contentType="{ record }">
           <a-space>
@@ -113,9 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useTablePage, useSelectOptions, type TablePageData } from '@devops-web/hooks'
-
-import { ref } from 'vue'
+import { useTablePage, type TablePageData } from '@devops-web/hooks'
 
 function getPageList(data: { pageSize: number; pageNum: number }) {
   return new Promise<TablePageData>((resolve) => {
@@ -142,32 +66,9 @@ function getPageList(data: { pageSize: number; pageNum: number }) {
   })
 }
 
-const { options } = useSelectOptions(
-  () => {
-    return Promise.resolve([
-      { label: 'label-1', value: 0 },
-      { label: 'label-2', value: 1 }
-    ])
-  },
-  { immediate: true }
-)
-
-const generateFormModel = () => {
-  return {
-    number: '',
-    name: '',
-    contentType: '',
-    filterType: '',
-    createdTime: [],
-    status: ''
-  }
-}
-const formModel = ref(generateFormModel())
-
 const { loadTableData, tableConfig } = useTablePage({
   fetch(pagination) {
     console.log('pagination:', pagination)
-    console.log('查询条件：', formModel.value)
     return getPageList(pagination)
   },
   columns: [
@@ -211,6 +112,7 @@ const { loadTableData, tableConfig } = useTablePage({
     }
   ],
   operations(record) {
+    // 例子: 大于20条不展示操作列
     if (record.index > 20) {
       return []
     }
@@ -252,10 +154,9 @@ const { loadTableData, tableConfig } = useTablePage({
       }
     ]
   },
-  immediate: true // 传true会自动调用一次loadTableData()
+  immediate: true
 })
-
-const reset = () => {
-  formModel.value = generateFormModel()
-}
 </script>
+```
+
+:::

@@ -3,6 +3,7 @@ import type { App, Plugin } from 'vue'
 import ResizeObserver from './resize-observer'
 import ColumnsSetting from './columns-setting'
 import EditTable, { InputEditor, SelectEditor, DateEditor, DateRangeEditor, NumberEditor } from './edit-table'
+import OperationColumn from './operation-column'
 
 const components: Record<string, Plugin> = {
   ResizeObserver,
@@ -12,7 +13,8 @@ const components: Record<string, Plugin> = {
   SelectEditor,
   DateEditor,
   DateRangeEditor,
-  NumberEditor
+  NumberEditor,
+  OperationColumn
 }
 
 const install = (app: App) => {

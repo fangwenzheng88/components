@@ -1,7 +1,9 @@
-import ResizeObserver from './resize-observer'
+import _ResizeObserver from './resize-observer'
 import { withInstall } from '../utils'
 
-export default withInstall(ResizeObserver)
+export const ResizeObserver = withInstall(_ResizeObserver)
+
+export default ResizeObserver
 
 export type ResizeObserverInstance = InstanceType<typeof ResizeObserver>
 
