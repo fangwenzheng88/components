@@ -101,9 +101,12 @@ export function useTable<T extends Record<string, unknown>>(config: TableConfig<
     }
   )
 
+  let maxWdith = 80
+
   function setOperationWidth(entry: ResizeObserverEntry) {
     const { width } = entry.contentRect
-    columnsHooks.updateColumnByDataIndex('operation', 'width', width + 33)
+    maxWdith = Math.max(width, maxWdith)
+    columnsHooks.updateColumnByDataIndex('operation', 'width', maxWdith + 33)
   }
 
   /**

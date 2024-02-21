@@ -83,9 +83,12 @@ export function useTablePage<T extends Record<string, unknown>>(config: TablePag
     }
   })
 
+  let maxWdith = 80
+
   function setOperationWidth(entry: ResizeObserverEntry) {
     const { width } = entry.contentRect
-    columnsHooks.updateColumnByDataIndex('operation', 'width', width + 33)
+    maxWdith = Math.max(width, maxWdith)
+    columnsHooks.updateColumnByDataIndex('operation', 'width', maxWdith + 33)
   }
 
   const pagination = ref(defaultPagination()) as Ref<PaginationPropsPlus>
