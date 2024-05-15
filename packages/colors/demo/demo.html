@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.js"></script>
+  <link rel="stylesheet" href="../src/index.css" />
+  <style>
+    .box-wrap {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .box {
+      width: 150px;
+      height: 50px;
+      border: 1px solid var(--color-border-2);
+      position: relative;
+    }
+
+    .box-tag {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      background-color: var(--color-bg-5);
+      color: var(--color-text-3);
+      padding: 2px 5px;
+      border-top-left-radius: 4px;
+      font-size: 10px;
+    }
+  </style>
+</head>
+
+<body style="background-color: var(--color-bg-1);">
+  <div id="app">
+    <div>
+      <input type="checkbox" v-model="dark" @change="handleChangeTheme" />
+      <span style="color: var(--color-text-1);">黑暗模式</span>
+    </div>
+    <div class="box-wrap" v-for="(value,key) in map" :key="key">
+      <div v-for="color in value" :key="color?.color??color">
+        <div class="box" :style="`background-color: var(${color?.color??color});`">
+          <span class="box-tag">{{getStyle(color?.color??color)}}</span>
+        </div>
+        <div style="color: var(--color-text-1);">
+          <div>
+            <span>{{color?.color??color}}</span>
+          </div>
+          <div v-if="color?.title" style="font-size: 10px;color:var(--color-text-3);">{{color?.title}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  const { createApp } = Vue
+
+  createApp({
+    data() {
+      return {
+        dark: false,
+        map: {
+          '--color-white': [{ title: '白色', color: '--color-white' }, { title: '黑色', color: '--color-black' }, { title: '白色背景', color: '--color-bg-white' }],
+          '--color-bg': ['整体背景色', '一级容器背景', '二级容器背景', '三级容器背景', '下拉弹出框、Tooltip 背景颜色'].map((title, index) => { return { title, color: `--color-bg-${index + 1}` } }),
+          '--color-text': ['强调/正文标题', '次强调/正文标题', '次要信息', '置灰信息'].map((title, index) => { return { title, color: `--color-text-${index + 1}` } }),
+          '--color-border': ['浅色', '一般', '深/悬浮', '重/按钮描边'].map((title, index) => { return { title, color: `--color-border-${index + 1}` } }),
+          '--color-primary': new Array(10).fill(0).map((el, index) => `--color-primary-${index + 1}`),
+          '--color-success': new Array(10).fill(0).map((el, index) => `--color-success-${index + 1}`),
+          '--color-danger': new Array(10).fill(0).map((el, index) => `--color-danger-${index + 1}`),
+          '--color-warning': new Array(10).fill(0).map((el, index) => `--color-warning-${index + 1}`),
+          '--color-link': new Array(10).fill(0).map((el, index) => `--color-link-${index + 1}`),
+          '--brand': new Array(10).fill(0).map((el, index) => `--brand-${index + 1}`),
+          '--red': new Array(10).fill(0).map((el, index) => `--red-${index + 1}`),
+          '--orangered': new Array(10).fill(0).map((el, index) => `--orangered-${index + 1}`),
+          '--orange': new Array(10).fill(0).map((el, index) => `--orange-${index + 1}`),
+          '--gold': new Array(10).fill(0).map((el, index) => `--gold-${index + 1}`),
+          '--yellow': new Array(10).fill(0).map((el, index) => `--yellow-${index + 1}`),
+          '--lime': new Array(10).fill(0).map((el, index) => `--lime-${index + 1}`),
+          '--green': new Array(10).fill(0).map((el, index) => `--green-${index + 1}`),
+          '--cyan': new Array(10).fill(0).map((el, index) => `--cyan-${index + 1}`),
+          '--blue': new Array(10).fill(0).map((el, index) => `--blue-${index + 1}`),
+          '--purple': new Array(10).fill(0).map((el, index) => `--purple-${index + 1}`),
+          '--pinkpurple': new Array(10).fill(0).map((el, index) => `--pinkpurple-${index + 1}`),
+          '--magenta': new Array(10).fill(0).map((el, index) => `--magenta-${index + 1}`),
+          '--gray': new Array(10).fill(0).map((el, index) => `--gray-${index + 1}`)
+        }
+      }
+    },
+    methods: {
+      getStyle(css) {
+        return document.defaultView?.getComputedStyle(document.body).getPropertyValue(css)
+      },
+      handleChangeTheme(value) {
+        console.log('🚀 ~ handleChangeTheme ~ value:', value)
+        document.body.setAttribute('theme', this.dark ? 'dark' : '')
+        this.map = { ...this.map }
+      }
+    }
+  }).mount('#app')
+</script>
+
+</html>

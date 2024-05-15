@@ -1,3 +1,4 @@
+import './index.less'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import '@arco-themes/vue-devops/css/arco.css'
