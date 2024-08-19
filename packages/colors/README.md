@@ -41,39 +41,39 @@ import '@devops-web/colors';
 
 | 变量名         | CSS变量         | 描述                      |
 | :------------- | :-------------- | :------------------------ |
-| --color-text-1 | --color-gray-10 | 标题/正文                 |
-| --color-text-2 | --color-gray-8  | 描述信息                  |
-| --color-text-3 | --color-gray-6  | 次要信息                  |
-| --color-text-4 | --color-gray-4  | 置灰信息/禁用/placeholder |
+| --color-text-1 | --gray-10 | 标题/正文                 |
+| --color-text-2 | --gray-8  | 描述信息                  |
+| --color-text-3 | --gray-6  | 次要信息                  |
+| --color-text-4 | --gray-4  | 置灰信息/禁用/placeholder |
 
 ## 边框颜色
 
 | 变量名           | 变量值         | 描述        |
 | :--------------- | :------------- | :---------- |
-| --color-border-1 | --color-gray-2 | 浅色        |
-| --color-border-2 | --color-gray-3 | 一般        |
-| --color-border-3 | --color-gray-4 | 深/悬浮     |
-| --color-border-4 | --color-gray-6 | 重/按钮描边 |
+| --color-border-1 | --gray-2 | 浅色        |
+| --color-border-2 | --gray-3 | 一般        |
+| --color-border-3 | --gray-4 | 深/悬浮     |
+| --color-border-4 | --gray-6 | 重/按钮描边 |
 
 ## 链接色
 
 | 变量名   | 变量值    | 描述          |
 | :------- | :-------- | :------------ |
-| --link-7 | --brand-7 | 点击（click） |
-| --link-6 | --brand-6 | 常规          |
-| --link-5 | --brand-5 | 悬浮（hover） |
-| --link-4 | --brand-4 | 特殊场景      |
-| --link-3 | --brand-3 | 一般禁用      |
-| --link-2 | --brand-2 | 文字禁用      |
-| --link-1 | --brand-1 | 浅色/白底悬浮 |
+| --color-link-7 | --brand-7 | 点击（click） |
+| --color-link-6 | --brand-6 | 常规          |
+| --color-link-5 | --brand-5 | 悬浮（hover） |
+| --color-link-4 | --brand-4 | 特殊场景      |
+| --color-link-3 | --brand-3 | 一般禁用      |
+| --color-link-2 | --brand-2 | 文字禁用      |
+| --color-link-1 | --brand-1 | 浅色/白底悬浮 |
 
 ## 背景颜色
 
 | 变量名         | 变量值 | CSS变量          | 描述                         |
 | :------------- | :----- | :--------------- | :--------------------------- |
-| color-bg-1     | #FFF   | --color-bg-1     | 整体背景色                   |
-| color-bg-2     | #FFF   | --color-bg-2     | 一级容器背景                 |
-| color-bg-3     | #FFF   | --color-bg-3     | 二级容器背景                 |
-| color-bg-4     | #FFF   | --color-bg-4     | 三级容器背景                 |
-| color-bg-5     | #FFF   | --color-bg-5     | 下拉弹出框、Tooltip 背景颜色 |
-| color-bg-white | #FFF   | --color-bg-white | 白色背景                     |
+| --color-bg-1     | #FFF   | --color-bg-1     | 整体背景色                   |
+| --color-bg-2     | #FFF   | --color-bg-2     | 一级容器背景                 |
+| --color-bg-3     | #FFF   | --color-bg-3     | 二级容器背景                 |
+| --color-bg-4     | #FFF   | --color-bg-4     | 三级容器背景                 |
+| --color-bg-5     | #FFF   | --color-bg-5     | 下拉弹出框、Tooltip 背景颜色 |
+| --color-bg-white | #FFF   | --color-bg-white | 白色背景                     |
